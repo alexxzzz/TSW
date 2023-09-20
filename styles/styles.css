@@ -1,0 +1,422 @@
+:root {
+    --color-azul-principal: #3498db;
+    --color-azul-claro: #7fb3d5;
+    --color-azul-oscuro: #2980b9;
+    --color-gris-claro: #f5f5f5;
+    --color-blanco: #ffffff;
+    --color-acento: #ff6b6b;
+}
+      
+ 
+ 
+ 
+ html {
+    /* 1rem = 10px  */
+    font-size: 62.5%;
+  }
+
+
+body {
+    font-size: 1.6rem;
+    font-family: 'Roboto Slab', serif;
+}
+
+
+.container {
+    display: grid;
+    place-content: center;
+    margin: 0; 
+    padding: 0; 
+    width: 100%;
+    background-size: cover;
+    height: 91.9vh;
+    overflow: hidden;
+}
+
+a {
+    text-decoration: none;
+    color: #000;
+    transition: width .5s, height .5s, transform .3s;
+}
+
+a:hover {
+    transform: scale(1.1);
+}
+
+
+
+
+.registerContainer {
+    display: flex;
+    flex-direction: row;
+    gap: 3rem;
+    justify-content: center;
+    margin-bottom: 1rem;
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+
+.formContainer {
+    display: flex;
+    flex-direction: column;
+    font-size: 2rem;
+    background-color: white;
+    border-radius: 1rem;
+    padding: 5rem 10rem;
+    margin: 5rem;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.formContainer h1 {
+    font-family: 'Oswald', 'sans-serif';
+    margin-top: 1rem;
+}
+
+.logo{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.3rem
+  }
+
+
+  .switchLogo {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+    margin-bottom: 1.05rem;
+  }
+
+  .switchLogo input {
+    display: none;
+  }
+
+.loginForm {
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+    margin: auto;
+    margin-bottom: 2rem;
+    background: transparent;
+}
+
+  .loginForm input {
+    width: 35rem;
+    height: 5rem;
+    font-size: 1.8rem;
+    padding: 0 1.5rem;
+    padding-top: 2rem;
+    border: none;
+    border-bottom: .2rem solid #000;
+    background: transparent;
+    color: #000;
+    outline: none;
+    transition: border-color 0.5s ease;
+  }
+
+  .loginForm input:focus{
+    border-bottom: .2rem solid var(--color-azul-claro);
+  }
+
+
+
+.loginLinks {
+    max-width: 50rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: flex-end;
+}
+
+.submitButton {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 6rem;
+        background-color: var(--color-azul-principal);
+        color: var(--color-blanco);
+        font-family: 'Roboto', sans-serif;
+        font-size: 20px;
+        font-weight: 500;
+        border: none;
+        cursor: pointer;
+        text-transform: uppercase;
+        transition: .3s ease all;
+        border-radius: 5px;
+        position: relative;
+        overflow: hidden;
+        margin-top: 5rem;
+        margin-bottom: 2rem;
+}
+
+.submitButton span {
+	position: relative;
+	z-index: 2;
+	transition: .3s ease all;
+}
+
+.submitButton::after {
+	content: "";
+	width: 100%;
+	position: absolute;
+	z-index: 1;
+	top: 0;
+	left: calc(-100% - 80px);
+	border-bottom: 80px solid var(--color-azul-oscuro);
+	border-right: 80px solid transparent;
+	transition: .4s ease-in-out all;
+}
+
+.submitButton:hover::after {
+	left: 0;
+}
+
+
+
+footer {
+    text-align: end;
+    margin-right: 2rem;
+}
+
+
+/* Dashboard */
+
+.mainContainer{
+    background-image: none;
+}
+
+.sidebar {
+    position: fixed;
+    width: 20rem;
+    height: 100%;
+    background-color: var(--color-azul-claro);
+    
+}
+
+.sidebar img{
+    margin: 1.5rem auto;
+}
+
+
+
+.sidebar a{
+    margin-bottom: 2rem;
+    display: block;
+    font-weight: bold;
+}
+
+
+.logout:hover {
+    color: red;
+}
+
+
+.sidebarFooter {
+    position: absolute;
+    bottom: 1rem;
+}
+
+.dashboardContainer {
+    margin-left: 25rem;
+}
+
+.dashboardNav {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    gap: 3rem;
+    margin-right: 3rem;
+}
+
+.dashboardNav a {
+    margin-top: 3rem;
+}
+
+@media (min-width: 768px) {
+    .switchContainer {
+    grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 1240px) {
+    .switchContainer {
+    grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+.switchContainer {
+    margin-right: 5rem;
+    display: grid;
+    gap: 5rem;
+    margin-top: 5rem;
+}
+
+.switchBox {
+    display: flex;
+    flex-direction: row;
+    gap: 3rem;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    box-shadow: rgba(0, 0, 0, 0.18) 0px 2px 4px;
+    border-radius: 2rem;
+}
+
+.switchBox h3 {
+    font-weight: 300;
+    font-size: 1.4rem;
+}
+
+.switchBox i {
+    align-self: flex-start;
+    background: transparent;
+    border: none;
+    margin: .5rem
+}
+
+
+ /* The switch - the box around the slider */
+ .switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+    margin-left: 3rem;
+  }
+
+  /* Hide default HTML checkbox */
+  .switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+  
+  /* The slider */
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  
+  input:checked + .slider {
+    background-color: var(--color-azul-claro);
+  }
+  
+  input:focus + .slider {
+    box-shadow: 0 0 1px var(--color-azul-claro);
+  }
+  
+  input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+  }
+  
+  /* Rounded sliders */
+  .slider.round {
+    border-radius: 2rem;
+  }
+  
+  .slider.round:before {
+    border-radius: 2rem;
+  } 
+
+
+/* Estilos generales para dispositivos móviles */
+@media (max-width: 480px) {
+    body {
+      font-size: 1.4rem; /* Reduzco el tamaño de fuente para dispositivos móviles */
+    }
+  
+    .container {
+      max-width: 100%
+    }
+  
+    .formContainer {
+        padding: 4rem; /* Reduzco el espacio dentro del contenedor */
+        margin: 2rem auto; /* Centra el contenedor horizontalmente */
+      }
+
+
+    .loginForm input {
+        width: 90%;
+    }
+  
+    .submitButton {
+      width: 100%; /* Hago que el botón ocupe todo el ancho */
+      margin: 2rem 0; /* Reduzco el margen en la parte superior e inferior */
+    }
+  
+    footer {
+      margin-right: 0; /* Elimino el margen en la parte derecha del pie de página */
+      text-align: center; /* Centro el texto del pie de página */
+    }
+  }
+
+  
+
+/* Estilos específicos para dispositivos móviles */
+@media (max-width: 480px) {
+    .sidebar {
+        display: none; 
+    }
+
+    .dashboardContainer {
+        max-width: 95%;
+        margin: 0 auto;
+    }
+
+    .dashboardNav {
+        justify-content: flex-end; 
+        margin-right: 0; 
+        margin-top: 1rem; 
+        margin-right: 1rem;
+    }
+
+    .dashboardNav a {
+        margin-top: 0; 
+    }
+
+    .switchContainer {
+        grid-template-columns: repeat(1, 1fr); 
+        margin-right: 0; 
+        gap: 1rem
+    }
+
+    .switchBox {
+        align-items: center; 
+        padding: 1rem;
+        margin-bottom: 1rem; 
+    }
+
+    .switchBox i {
+        background: transparent;
+        border: none;
+        margin: .5rem;
+    }
+
+    .switch {
+        margin-left: 0; 
+    }
+}
