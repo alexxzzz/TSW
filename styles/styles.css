@@ -175,12 +175,30 @@ a:hover {
 }
 
 
+/* Footer */
 
-footer {
-    text-align: end;
-    margin-right: 2rem;
+.footer{
+    background-color: var(--color-azul-oscuro) ;
+    padding: 1.25rem;
+    color: var(--color-blanco);
 }
 
+
+.footerContainer {
+    display:flex;
+    gap : 2rem;
+    padding: 1rem 0;
+    align-items: center;
+}
+
+.footerContainer p {
+    margin-left: auto;
+}
+
+.fa-brands {
+    font-size: 3rem;
+    color: var(--color-blanco);
+}
 
 /* Dashboard */
 
@@ -368,10 +386,6 @@ footer {
       margin: 2rem 0; /* Reduzco el margen en la parte superior e inferior */
     }
   
-    footer {
-      margin-right: 0; /* Elimino el margen en la parte derecha del pie de página */
-      text-align: center; /* Centro el texto del pie de página */
-    }
   }
 
   
