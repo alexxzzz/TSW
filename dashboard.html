@@ -28,7 +28,7 @@
             <a href="#">Mis switches</a>
             <a href="#">Suscritos</a>
             <div class="sidebarFooter">
-              <a class="logout">Logout</a>
+              <a href="./signIn.html" class="logout">Logout</a>
             <a href="#">Redes sociales</a>
             </div>
         </ul>
@@ -39,7 +39,7 @@
       <a href="#"><i class="fa-regular fa-message fa-spin-pulse"></i></a>
     </nav>
     <nav class="dashboardButtons">
-      <button class="addButton"><span>Crear switch</span></button>
+      <button id="addSwitch" class="GenericButton"><span>Crear switch</span></button>
       <select class="dashboardSelect" name="select">
         <option value="id" selected>Id</option>
         <option value="nombre">Nombre</option>
@@ -99,6 +99,16 @@
     </div>
 </div>
 </div>
+<div class="modalWindow" id="modalWindow">
+  <div class="modal">
+    <i id=close class="fa-solid fa-x fa-spin-pulse fa-xs"></i>
+  <h1>Añadir switch</h1>
+  <input  type="text" placeholder="a">
+  <input type="text" placeholder="a">
+  <button id="createSwitch" type="submit" class="GenericButton"><span>Crear</span></button>
+  </div>
+</div>
 </body>
 <script src="https://kit.fontawesome.com/19c59e2dfc.js" crossorigin="anonymous"></script>
+<script type="text/javascript" src="./js/dashboard.js"></script>
 </html>

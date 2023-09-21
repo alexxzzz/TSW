@@ -263,7 +263,7 @@ a:hover {
   padding-top: 3rem;
 }
 
-.addButton {
+.GenericButton {
   background-color: var(--color-azul-principal);
   border: 1px solid var(--color-azul-principal);
   border-radius: 4px;
@@ -284,7 +284,7 @@ a:hover {
   touch-action: manipulation;
 }
 
-.addButton:hover {
+.GenericButton:hover {
   box-shadow: rgba(0, 0, 0, .15) 0 3px 9px 0;
   transform: translateY(-2px);
 }
@@ -440,7 +440,46 @@ a:hover {
   
   .slider.round:before {
     border-radius: 2rem;
-  } 
+  }
+  
+  /* PopUp */
+
+  .modalWindow {
+    display: flex;
+    background-color: rgba(0, 0, 0, 0.3);
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    pointer-events: none;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+  }
+  .show {
+    pointer-events: auto;
+    opacity: 1;
+  }
+
+  .modal {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    background-color: var(--color-blanco);
+    width: 60rem;
+    max-width: 100%;
+    padding: 3rem 5rem;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    text-align: center;
+  }
+
+
+  .modal i {
+    align-self: flex-end;
+  }
 
 
 /* Estilos generales para dispositivos móviles */
