@@ -74,10 +74,16 @@ a:hover {
 }
 
 .logo{
+  font-family: 'oswald', 'sans-serif';
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: 0.3rem
+    gap: 0.3rem;
+  }
+
+  .logoMod {
+    margin-left: 2.5rem;
+    margin-top: 1rem;
   }
 
 
@@ -87,6 +93,10 @@ a:hover {
     width: 60px;
     height: 34px;
     margin-bottom: 1.05rem;
+  }
+
+  .switchLogoMod {
+    margin-top: 1rem;
   }
 
   .switchLogo input {
@@ -229,7 +239,7 @@ a:hover {
 
 .sidebarFooter {
     position: absolute;
-    bottom: 4%;
+    bottom: 1%;
 }
 
 .dashboardContainer {
@@ -241,7 +251,84 @@ a:hover {
     flex-direction: row;
     justify-content: flex-end;
     gap: 3rem;
-    margin-right: 3rem;
+    margin-right: 5rem;
+}
+
+.dashboardButtons {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  gap: 3rem;
+  margin-right: 5rem;
+  padding-top: 3rem;
+}
+
+.addButton {
+  background-color: var(--color-azul-principal);
+  border: 1px solid var(--color-azul-principal);
+  border-radius: 4px;
+  box-shadow: rgba(0, 0, 0, .1) 0 2px 4px 0;
+  box-sizing: border-box;
+  color: #fff;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 400;
+  outline: none;
+  outline: 0;
+  padding: 10px 25px;
+  text-align: center;
+  transform: translateY(0);
+  transition: transform 150ms, box-shadow 150ms;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.addButton:hover {
+  box-shadow: rgba(0, 0, 0, .15) 0 3px 9px 0;
+  transform: translateY(-2px);
+}
+
+/* Estilo base para el select */
+.dashboardSelect {
+  padding: 10px; /* Espaciado interno */
+  border: 1px solid #ccc; /* Borde con un color gris claro */
+  border-radius: 5px; /* Esquinas redondeadas */
+  background-color: #fff; /* Fondo blanco */
+  color: #333; /* Color de texto */
+  width: 20rem; /* Ancho del select, ajusta según tus necesidades */
+  outline: none; /* Elimina el contorno al hacer clic */
+  cursor: pointer; /* Cambia el cursor al estilo de selección */
+  transition: border-color 0.2s; /* Transición suave para el borde */
+}
+
+/* Estilo al pasar el mouse por encima */
+.dashboardSelect:hover {
+  border-color: #555; /* Cambia el color del borde al pasar el mouse */
+}
+
+/* Estilo cuando está enfocado (haciendo clic en él) */
+.dashboardSelect:focus {
+  border-color: #007bff; /* Cambia el color del borde cuando está enfocado */
+}
+
+/* Estilo para las opciones dentro del select */
+.dashboardSelect option {
+  font-family: 'Roboto Slab', serif;
+  color: #333; /* Color de texto para las opciones */
+  padding: 8px; /* Espaciado interno de las opciones */
+}
+
+.dashboardSelect option:hover {
+  color: #333;
+}
+
+
+
+@media (min-width: 768px) {
+  .addButton {
+    padding: 10px 30px;
+  }
 }
 
 .dashboardNav a {

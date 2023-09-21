@@ -11,13 +11,14 @@
       href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@300;600&display=swap"
       rel="stylesheet"
     />
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@600&display=swap" rel="stylesheet"> 
 </head>
 <body>
     <div class="mainContainer">
     <sidebar class="sidebar">
-        <div class="logo">
+        <div class="logo logoMod">
             <h1 href="./signIn.html">Iam</h1>
-            <label class="switchLogo">
+            <label class="switchLogo switchLogoMod">
               <input type="checkbox">
               <span class="slider round"></span>
             </label>
@@ -25,17 +26,26 @@
           </div>
         <ul>
             <a href="#">Mis switches</a>
-            <a href="#">Subscritos</a>
+            <a href="#">Suscritos</a>
             <div class="sidebarFooter">
-            <a class="logout" href="./signIn.html">Logout</a>
+              <a class="logout">Logout</a>
             <a href="#">Redes sociales</a>
             </div>
         </ul>
     </sidebar>
     <div class="dashboardContainer">
     <nav class="dashboardNav">
-        <a>Usuario</a>
-        <a>Notificaciones</a>
+      <a href="#"><i class="fa-regular fa-user fa-spin-pulse"></i></a>
+      <a href="#"><i class="fa-regular fa-message fa-spin-pulse"></i></a>
+    </nav>
+    <nav class="dashboardButtons">
+      <button class="addButton"><span>Crear switch</span></button>
+      <select class="dashboardSelect" name="select">
+        <option value="id" selected>Id</option>
+        <option value="nombre">Nombre</option>
+        <option value="usuario">Usuario</option>
+        <option value="fecha">Fecha</option>
+      </select>
     </nav>
     <div class="switchContainer">
         <div class="switchBox">
