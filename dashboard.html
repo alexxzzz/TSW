@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="./styles/normalize.css" rel="stylesheet" />
     <link href="./styles/styles.css" rel="stylesheet" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -11,104 +11,114 @@
       href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@300;600&display=swap"
       rel="stylesheet"
     />
-    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@600&display=swap" rel="stylesheet"> 
-</head>
-<body>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Oswald:wght@600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
     <div class="mainContainer">
-    <sidebar class="sidebar">
+      <sidebar class="sidebar">
         <div class="logo logoMod">
-            <h1 href="./signIn.html">Iam</h1>
-            <label class="switchLogo switchLogoMod">
-              <input type="checkbox">
+          <h1 href="./signIn.html">Iam</h1>
+          <label class="switchLogo switchLogoMod">
+            <input type="checkbox" />
+            <span class="slider round"></span>
+          </label>
+          <h1>N</h1>
+        </div>
+        <ul>
+          <a href="#">Mis switches</a>
+          <a href="#">Suscritos</a>
+          <div class="sidebarFooter">
+            <a href="./signIn.html" class="logout">Logout</a>
+            <a href="#">Redes sociales</a>
+          </div>
+        </ul>
+      </sidebar>
+      <div class="dashboardContainer">
+        <nav class="dashboardNav">
+          <a href="#"><i class="fa-regular fa-user"></i></a>
+          <a href="#"><i class="fa-regular fa-message"></i></a>
+        </nav>
+        <nav class="dashboardButtons">
+          <button id="addSwitch" class="GenericButton">
+            <span>Crear switch</span>
+          </button>
+          <select class="dashboardSelect" name="select">
+            <option value="id" selected>Id</option>
+            <option value="nombre">Nombre</option>
+            <option value="usuario">Usuario</option>
+            <option value="fecha">Fecha</option>
+          </select>
+        </nav>
+        <div class="switchContainer">
+          <div class="switchBox">
+            <label class="switch">
+              <input type="checkbox" />
               <span class="slider round"></span>
             </label>
-            <h1>N</h1>
-          </div>
-        <ul>
-            <a href="#">Mis switches</a>
-            <a href="#">Suscritos</a>
-            <div class="sidebarFooter">
-              <a href="./signIn.html" class="logout">Logout</a>
-            <a href="#">Redes sociales</a>
+            <div class="switchText">
+              <h3>Nombre</h3>
+              <h3>Usuario</h3>
+              <h3>Fecha</h3>
             </div>
-        </ul>
-    </sidebar>
-    <div class="dashboardContainer">
-    <nav class="dashboardNav">
-      <a href="#"><i class="fa-regular fa-user fa-spin-pulse"></i></a>
-      <a href="#"><i class="fa-regular fa-message fa-spin-pulse"></i></a>
-    </nav>
-    <nav class="dashboardButtons">
-      <button id="addSwitch" class="GenericButton"><span>Crear switch</span></button>
-      <select class="dashboardSelect" name="select">
-        <option value="id" selected>Id</option>
-        <option value="nombre">Nombre</option>
-        <option value="usuario">Usuario</option>
-        <option value="fecha">Fecha</option>
-      </select>
-    </nav>
-    <div class="switchContainer">
-        <div class="switchBox">
+            <i class="icon fa-solid fa-ellipsis-vertical fa-xl"></i>
+          </div>
+          <div class="switchBox">
             <label class="switch">
-                <input type="checkbox">
-                <span class="slider round"></span>
-              </label>
-        <div class="switchText">
-        <h3>Nombre</h3>
-        <h3>Usuario</h3>
-        <h3>Fecha</h3>
+              <input type="checkbox" />
+              <span class="slider round"></span>
+            </label>
+            <div class="switchText">
+              <h3>Nombre</h3>
+              <h3>Usuario</h3>
+              <h3>Fecha</h3>
+            </div>
+            <i class="icon fa-solid fa-ellipsis-vertical fa-xl"></i>
+          </div>
+          <div class="switchBox">
+            <label class="switch">
+              <input type="checkbox" />
+              <span class="slider round"></span>
+            </label>
+            <div class="switchText">
+              <h3>Nombre</h3>
+              <h3>Usuario</h3>
+              <h3>Fecha</h3>
+            </div>
+            <i class="icon fa-solid fa-ellipsis-vertical fa-xl"></i>
+          </div>
+          <div class="switchBox">
+            <label class="switch">
+              <input type="checkbox" />
+              <span class="slider round"></span>
+            </label>
+            <div class="switchText">
+              <h3>Nombre</h3>
+              <h3>Usuario</h3>
+              <h3>Fecha</h3>
+            </div>
+            <i class="icon fa-solid fa-ellipsis-vertical fa-xl"></i>
+          </div>
+        </div>
+      </div>
     </div>
-    <i class="icon fa-solid fa-ellipsis-vertical fa-spin-pulse fa-xl"></i>
+    <div class="modalWindow" id="modalWindow">
+      <div class="modal">
+        <i id="close" class="fa-solid fa-x fa-m"></i>
+        <h1>Añadir switch</h1>
+        <input type="text" placeholder="a" required />
+        <input type="text" placeholder="a" required />
+        <button id="createSwitch" type="submit" class="GenericButton">
+          <span>Crear</span>
+        </button>
+      </div>
     </div>
-    <div class="switchBox">
-        <label class="switch">
-            <input type="checkbox">
-            <span class="slider round"></span>
-          </label>
-        <div class="switchText">
-        <h3>Nombre</h3>
-        <h3>Usuario</h3>
-        <h3>Fecha</h3>
-    </div>
-    <i class="icon fa-solid fa-ellipsis-vertical fa-spin-pulse fa-xl"></i>
-    </div>
-    <div class="switchBox">
-        <label class="switch">
-            <input type="checkbox">
-            <span class="slider round"></span>
-          </label>
-        <div class="switchText">
-        <h3>Nombre</h3>
-        <h3>Usuario</h3>
-        <h3>Fecha</h3>
-    </div>
-    <i class="icon fa-solid fa-ellipsis-vertical fa-spin-pulse fa-xl"></i>
-    </div>
-    <div class="switchBox">
-        <label class="switch">
-            <input type="checkbox">
-            <span class="slider round"></span>
-          </label>
-        <div class="switchText">
-        <h3>Nombre</h3>
-        <h3>Usuario</h3>
-        <h3>Fecha</h3>
-    </div>
-    <i class="icon fa-solid fa-ellipsis-vertical fa-spin-pulse fa-xl"></i>
-    </div>
-    </div>
-</div>
-</div>
-<div class="modalWindow" id="modalWindow">
-  <div class="modal">
-    <i id=close class="fa-solid fa-x fa-spin-pulse fa-xs"></i>
-  <h1>Añadir switch</h1>
-  <input  type="text" placeholder="a">
-  <input type="text" placeholder="a">
-  <button id="createSwitch" type="submit" class="GenericButton"><span>Crear</span></button>
-  </div>
-</div>
-</body>
-<script src="https://kit.fontawesome.com/19c59e2dfc.js" crossorigin="anonymous"></script>
-<script type="text/javascript" src="./js/dashboard.js"></script>
+  </body>
+  <script
+    src="https://kit.fontawesome.com/19c59e2dfc.js"
+    crossorigin="anonymous"
+  ></script>
+  <script type="text/javascript" src="./js/dashboard.js"></script>
 </html>

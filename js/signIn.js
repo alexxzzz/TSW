@@ -7,7 +7,7 @@ form.addEventListener("submit", function(e) {
     window.location.href = "../dashboard.html";
     }
     else {
-        alert("Para entrar: User: Admin, Contraseña: Admin")
+        alert("Para entrar: User: admin, Contraseña: admin")
     }
 });
 

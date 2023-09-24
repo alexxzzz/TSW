@@ -481,6 +481,8 @@ a:hover {
     align-self: flex-end;
   }
 
+  /* submenus */
+
 
 /* Estilos generales para dispositivos móviles */
 @media (max-width: 480px) {
