@@ -2,7 +2,7 @@
   --color-principal: #1BAFD0;
   --color-azul-claro: #7fb3d5;
   --color-azul-oscuro: #2980b9;
-  --color-gris-claro: #f5f5f5;
+  --color-gris-claro: #007bff2a;
   --color-blanco: #ffffff;
   --color-acento: #ff6b6b;
   --color-negro: #000000;
@@ -11,7 +11,6 @@
 html {
   /* 1rem = 10px  */
   font-size: 62.5%;
-  
 }
 
 body {
@@ -210,18 +209,11 @@ footer {
 
 
 
-
-
-
-
-
-
-
-
 /* Dashboard */
 
 .mainContainer {
-  background-image: none;
+  background-color: var(--color-gris-claro);
+  height: 100vh;
 }
 
 .sidebarIcon {
@@ -247,6 +239,19 @@ footer {
   color: black
 }
 
+.socialNetworks {
+  position: fixed;
+  bottom: 1%;
+  left: 1.1%;
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+}
+
+.socialNetworks i {
+  color:var(--color-negro);
+}
+
 .closeIcon {
   visibility: hidden;
   opacity: 0;
@@ -259,7 +264,7 @@ footer {
 
 .sidebarFooter {
   position: absolute;
-  bottom: 1%;
+  bottom: 5%;
 }
 
 .dashboardContainer {
@@ -392,6 +397,24 @@ footer {
   }
 }
 
+@media (min-width: 1920px) {
+  .switchContainer {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (min-width: 2500px) {
+  .switchContainer {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+
+@media (min-width: 2900px) {
+  .switchContainer {
+    grid-template-columns: repeat(6, 1fr);
+  }
+}
+
 .switchContainer {
   margin-right: 5rem;
   display: grid;
@@ -408,6 +431,7 @@ footer {
   padding: 1rem;
   box-shadow: rgba(0, 0, 0, 0.18) 0px 2px 4px;
   border-radius: 2rem;
+  background-color: var(--color-blanco);
 }
 
 
@@ -572,6 +596,10 @@ input:checked + .slider:before {
 
 /* Estilos dashboard para dispositivos móviles */
 @media (max-width: 548px) {
+  
+  .mainContainer {
+    height: 100%;
+  }
 
   .closeIcon {
     visibility: visible;
