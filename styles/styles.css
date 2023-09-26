@@ -42,7 +42,7 @@ a, i {
   transition: width 0.5s, height 0.5s, transform 0.3s;
 }
 
-a, i:hover {
+a:hover, i:hover {
   transform: scale(1.1);
 }
 
