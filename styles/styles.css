@@ -10,6 +10,7 @@
 html {
   /* 1rem = 10px  */
   font-size: 62.5%;
+  
 }
 
 body {
@@ -35,14 +36,19 @@ input:focus {
   border-bottom: 0.2rem solid var(--color-azul-claro);
 }
 
-a {
+a, i {
   text-decoration: none;
   color: #000;
   transition: width 0.5s, height 0.5s, transform 0.3s;
 }
 
-a:hover {
+a, i:hover {
   transform: scale(1.1);
+}
+
+.signUpIn {
+  height: 100%;
+  width: 100%;
 }
 
 .container {
@@ -50,10 +56,9 @@ a:hover {
   place-content: center;
   margin: 0;
   padding: 0;
-  width: 100%;
-  height: 89vh;
   background-size: cover;
   overflow: hidden;
+  height: 90vh;
 }
 
 .registerContainer {
@@ -179,7 +184,7 @@ a:hover {
 
 /* Footer */
 
-.footer {
+footer {
   background-color: var(--color-azul-oscuro);
   padding: 1.25rem;
   color: var(--color-blanco);
@@ -277,7 +282,6 @@ a:hover {
   transform: translateY(-2px);
 }
 
-/* Estilo base para el select */
 .dashboardSelect {
   padding: 10px; 
   border: 1px solid #ccc; 
@@ -290,9 +294,43 @@ a:hover {
   transition: border-color 0.2s;
 }
 
+.menu{
+  position: absolute;
+  width: 25rem;
+  background-color: var(--color-blanco);
+  top: 7.5rem;
+  right: 1.5rem;
+  border-radius: 1rem;
+  visibility: hidden;
+  opacity: 0;
+  z-index:999;
+  box-shadow: rgba(0, 0, 0, 0.18) 0px 2px 4px;
+}
+
+.active {
+  visibility: visible;
+  opacity: 1;
+}
+
+.menu ul{
+  margin-bottom: 2rem;
+  padding: 0;
+  list-style: none;
+}
+
+.menu ul li{
+  padding: 1.5rem 2rem;
+  transition: 0.5s;
+}
+
+.menu ul li:hover {
+  background: var(--color-gris-claro);
+  transition: 0.5s;
+}
+
 
 .dashboardSelect:hover {
-  border-color: #555; 
+  border-color: #555;
 }
 
 .dashboardSelect:focus {
@@ -315,7 +353,7 @@ a:hover {
   }
 }
 
-.dashboardNav a {
+.dashboardNav i {
   margin-top: 3rem;
 }
 
@@ -355,13 +393,21 @@ a:hover {
   font-size: 1.4rem;
 }
 
-.switchBox i {
+.switchIcons {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.switchIcons i {
   align-self: flex-start;
-  padding: 1rem;
   background: transparent;
   border: none;
   margin: 0.5rem;
 }
+
+
+
 
 /* The switch - the box around the slider */
 .switch {
