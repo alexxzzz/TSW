@@ -207,10 +207,29 @@ footer {
   color: var(--color-blanco);
 }
 
+
+
+
+
+
+
+
+
+
+
+
 /* Dashboard */
 
 .mainContainer {
   background-image: none;
+}
+
+.sidebarIcon {
+  margin-right: auto;
+  padding-top: .5rem;
+  margin-left: 2rem;
+  visibility: hidden;
+  opacity: 0;
 }
 
 .sidebar {
@@ -228,6 +247,12 @@ footer {
   color: black
 }
 
+.closeIcon {
+  visibility: hidden;
+  opacity: 0;
+  margin: 0;
+}
+
 .logout:hover {
   color: red;
 }
@@ -238,7 +263,7 @@ footer {
 }
 
 .dashboardContainer {
-  margin-left: 25rem;
+  margin-left: 23rem;
 }
 
 .dashboardNav {
@@ -492,6 +517,7 @@ input:checked + .slider:before {
   width: 100%;
   opacity: 0;
 }
+
 .show {
   pointer-events: auto;
   opacity: 1;
@@ -549,8 +575,23 @@ input:checked + .slider:before {
 
 /* Estilos dashboard para dispositivos móviles */
 @media (max-width: 548px) {
+
+  .closeIcon {
+    visibility: visible;
+    opacity: 1;
+    margin-left: 17rem;
+    margin-top: 2rem;
+  }
+
   .sidebar {
-    display: none;
+    z-index: 999;
+    visibility: hidden;
+    opacity: 0;
+  }
+
+  .sidebarIcon {
+    visibility: visible;
+    opacity: 1;
   }
 
   .dashboardContainer {
@@ -594,6 +635,11 @@ input:checked + .slider:before {
 
   .switch {
     margin-left: 0;
+  }
+
+  .active {
+    visibility: visible;
+    opacity: 1;
   }
 
 }

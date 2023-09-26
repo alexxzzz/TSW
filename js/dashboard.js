@@ -4,6 +4,10 @@ const close = document.querySelector("#close");
 const createSwitch = document.querySelector("#createSwitch");
 const user = document.querySelector(".userIcon");
 const menu = document.querySelector(".menu");
+const closeIcon = document.querySelector(".closeIcon");
+const sidebarIcon = document.querySelector(".sidebarIcon");
+const sidebar = document.querySelector(".sidebar");
+
 
 addSwitch.addEventListener("click", () => {
   modalWindow.classList.add("show");
@@ -20,4 +24,12 @@ createSwitch.addEventListener("click", () => {
 
 user.addEventListener("click", () =>{
   menu.classList.toggle("active");
+});
+
+sidebarIcon.addEventListener("click", () => {
+  sidebar.classList.add("active");
+});
+
+closeIcon.addEventListener("click", () => {
+  sidebar.classList.remove("active");
 });
