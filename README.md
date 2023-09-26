@@ -1,2 +1,0 @@
-# TSW
-Trabajo de TSW
