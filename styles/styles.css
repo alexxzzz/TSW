@@ -335,11 +335,6 @@ footer {
   box-shadow: rgba(0, 0, 0, 0.18) 0px 2px 4px;
 }
 
-.active {
-  visibility: visible;
-  opacity: 1;
-}
-
 .menu ul{
   margin-bottom: 2rem;
   padding: 0;
@@ -518,8 +513,10 @@ input:checked + .slider:before {
   opacity: 0;
 }
 
-.show {
+
+.active {
   pointer-events: auto;
+  visibility: visible;
   opacity: 1;
 }
 

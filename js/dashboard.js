@@ -10,15 +10,15 @@ const sidebar = document.querySelector(".sidebar");
 
 
 addSwitch.addEventListener("click", () => {
-  modalWindow.classList.add("show");
+  modalWindow.classList.add("active");
 });
 
 close.addEventListener("click", () => {
-  modalWindow.classList.remove("show");
+  modalWindow.classList.remove("active");
 });
 
 createSwitch.addEventListener("click", () => {
-  modalWindow.classList.remove("show");
+  modalWindow.classList.remove("active");
   alert("switch creado");
 });
 
