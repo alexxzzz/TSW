@@ -224,7 +224,7 @@ footer {
   opacity: 0;
 }
 
-.sidebar {
+sidebar {
   position: fixed;
   width: 20rem;
   height: 100%;
@@ -232,7 +232,7 @@ footer {
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
 
-.sidebar a {
+sidebar a {
   margin-bottom: 2rem;
   display: block;
   font-weight: bold;
@@ -612,7 +612,7 @@ input:checked + .slider:before {
     margin-top: 2rem;
   }
 
-  .sidebar {
+  sidebar {
     z-index: 999;
     visibility: hidden;
     opacity: 0;
