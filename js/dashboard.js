@@ -6,7 +6,7 @@ const user = document.querySelector(".userIcon");
 const menu = document.querySelector(".menu");
 const closeIcon = document.querySelector(".closeIcon");
 const sidebarIcon = document.querySelector(".sidebarIcon");
-const sidebar = document.querySelector(".sidebar");
+const sidebar = document.querySelector("#sidebar");
 
 
 addSwitch.addEventListener("click", () => {
