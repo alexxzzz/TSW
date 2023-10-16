@@ -4,7 +4,7 @@ services:
     container_name: db
     image: postgres:12
     ports:
-      - 5432:54321
+      - 5432:5432
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
@@ -12,15 +12,20 @@ services:
     volumes:
       - ./db/data:/var/lib/postgresql/data
       - ./db/init/:/docker-entrypoint-initdb.d
-  spring:
-      container_name: spring
-      image: iamon-spring:1.0.0
-      build: .
-      ports:
-        - 8080:8080
-      environment:
-        - DATABASE_URL=jdbc:postgresql://db:5432/iamon
-        - DATABASE_USERNAME=postgres
-        - DATABASE_PASSWORD=postgres
-      depends_on:
-        - db
+  web-server:
+    container_name: web-server
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:80"
+    volumes:
+      - ./php/src:/var/www/html
+    environment:
+      - DATABASE_HOST=db
+      - DATABASE_PORT=5432
+      - DATABASE_NAME=iamon
+      - DATABASE_USERNAME=postgres
+      - DATABASE_PASSWORD=postgres
+    depends_on:
+      - db
