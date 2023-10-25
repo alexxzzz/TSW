@@ -70,9 +70,7 @@ class UsersController extends BaseController {
 				$_SESSION["currentuser"]=$_POST["username"];
 
 				// send user to the restricted area (HTTP 302 code)
-				$this->view->redirect("posts", "index");
-
-				echo '<script>alert("Sesión iniciada correctamente");</script>';
+				$this->view->redirect("users", "dashboard");
 
 			}else{
 				$errors = array();

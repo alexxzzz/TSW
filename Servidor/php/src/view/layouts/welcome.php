@@ -51,4 +51,8 @@ $view = ViewManager::getInstance();
     </footer>
     </div>
 </body>
+<script
+    src="https://kit.fontawesome.com/19c59e2dfc.js"
+    crossorigin="anonymous"
+  ></script>
 </html>

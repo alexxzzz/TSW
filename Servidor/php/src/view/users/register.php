@@ -7,19 +7,37 @@ $errors = $view->getVariable("errors");
 $user = $view->getVariable("user");
 $view->setVariable("title", "Register");
 ?>
-<h1><?= i18n("Register")?></h1>
-<form action="index.php?controller=users&amp;action=register" method="POST">
-	<?= i18n("Username")?>: <input type="text" name="username"
+
+    <div class="signUpIn">
+      <div class="container">
+        <div class="formContainer">
+          <div class="registerContainer">
+            <div class="logo">
+              <h1 href="./signIn.html">Iam</h1>
+              <label class="switchLogo">
+                <input type="checkbox" />
+                <span class="slider round"></span>
+              </label>
+              <h1>N</h1>
+            </div>
+          </div>
+<form class="loginForm" action="index.php?controller=users&amp;action=register" method="POST">
+	<input type="text" name="username" placeholder="Username" required
 	value="<?= $user->getUsername() ?>">
 	<?= isset($errors["username"])?i18n($errors["username"]):"" ?><br>
 
-	<?= i18n("Password")?>: <input type="password" name="passwd"
+	<input type="password" name="passwd" placeholder="Password" required
 	value="<?= $user->getPasswd() ?>">
 	<?= isset($errors["passwd"])?i18n($errors["passwd"]):"" ?><br>
 
-  <?= i18n("Email")?>: <input type="email" name="email"
+  	<input type="email" name="email" placeholder="Email" required
 	value="<?= $user->getEmail() ?>">
 	<?= isset($errors["email"])?i18n($errors["email"]):"" ?><br>
 
-	<input type="submit" value="<?= i18n("Register")?>">
+	<button class="submitButton" type="submit">
+              <span>Registrarse</span>
+            </button>
+			<a href="index.php?controller=users&amp;action=login">Volver a la pagina principal</a>
 </form>
+</div>
+</div>

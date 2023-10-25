@@ -7,16 +7,32 @@ $view->setVariable("title", "Login");
 $errors = $view->getVariable("errors");
 ?>
 
-<h1><?= i18n("Login") ?></h1>
-<?= isset($errors["general"])?$errors["general"]:"" ?>
-
-<form action="index.php?controller=users&amp;action=login" method="POST">
-	<?= i18n("Username")?>: <input type="text" name="username">
-	<?= i18n("Password")?>: <input type="password" name="passwd">
-	<input type="submit" value="<?= i18n("Login") ?>">
+    <div class="signUpIn">
+      <div class="container">
+        <div class="formContainer">
+          <div class="registerContainer">
+            <div class="logo">
+              <h1 href="index.php?controller=users&amp;action=login">Iam</h1>
+              <label class="switchLogo">
+                <input type="checkbox" />
+                <span class="slider round"></span>
+              </label>
+              <h1>N</h1>
+            </div>
+          </div>
+          <div class="ejemplo">
+<form class="loginForm" action="index.php?controller=users&amp;action=login" method="POST">
+	<input type="text" name="username" placeholder="Usuario"> 
+	<input type="password" name="passwd" placeholder="Contraseña">
+	<button id="btn" class="submitButton" type="submit">
+                <span>Iniciar Sesion</span>
+              </button>
 </form>
-
-<p><?= i18n("Not user?")?> <a href="index.php?controller=users&amp;action=register"><?= i18n("Register here!")?></a></p>
-<?php $view->moveToFragment("css");?>
-<link rel="stylesheet" type="text/css" src="css/style.css">
-<?php $view->moveToDefaultFragment(); ?>
+</div>
+          <div class="loginLinks">
+            <a href="./forgotPassword.html">Contraseña olvidada?</a>
+            <a href="index.php?controller=users&amp;action=register">No tienes cuenta?</a>
+          </div>
+        </div>
+	</div>
+    </div>
