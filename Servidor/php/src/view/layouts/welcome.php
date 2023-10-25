@@ -1,10 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link href="./styles/normalize.css" rel="stylesheet" />
-    <link href="./styles/styles.css" rel="stylesheet" />
+<?php
+// file: view/layouts/welcome.php
+
+$view = ViewManager::getInstance();
+
+?><!DOCTYPE html>
+<html>
+<head>
+	<title><?= $view->getVariable("title", "no title") ?></title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" href="css/style.css" type="text/css">
+	<?= $view->getFragment("css") ?>
+	<?= $view->getFragment("javascript") ?>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -15,33 +21,17 @@
       href="https://fonts.googleapis.com/css2?family=Oswald:wght@600&display=swap"
       rel="stylesheet"
     />
-    <title>TSW</title>
-  </head>
-
-  <body>
+</head>
+<body>
     <div class="signUpIn">
-      <div class="container">
-        <div class="formContainer">
-          <div class="registerContainer">
-            <div class="logo">
-              <h1 href="./signIn.html">Iam</h1>
-              <label class="switchLogo">
-                <input type="checkbox" />
-                <span class="slider round"></span>
-              </label>
-              <h1>N</h1>
-            </div>
-          </div>
-          <form class="loginForm">
-            <input id="email" type="email" placeholder="email" required />
-            <button class="submitButton" type="submit">
-              <span>Recuperar Contraseña</span>
-            </button>
-            <a href="./signIn.html">Volver a la pagina principal</a>
-          </form>
-        </div>
-      </div>
-      <footer class="footer">
+	<main>
+		<!-- flash message -->
+		<div id="flash">
+			<?= $view->popFlash() ?>
+		</div>
+		<?= $view->getFragment(ViewManager::DEFAULT_FRAGMENT) ?>
+	</main>
+	<footer>
         <div class="footerContainer">
           <h4 class="inferior__titulo">Siguenos</h4>
           <a href="https://google.com" target="_blank">
@@ -58,10 +48,10 @@
           ></a>
           <p>Todos los derechos reservados 2023</p>
         </div>
-      </footer>
+    </footer>
     </div>
-  </body>
-  <script
+</body>
+<script
     src="https://kit.fontawesome.com/19c59e2dfc.js"
     crossorigin="anonymous"
   ></script>

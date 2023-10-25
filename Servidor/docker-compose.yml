@@ -1,0 +1,31 @@
+version: "3.8"
+services:
+  db:
+    container_name: db
+    image: postgres:12
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: iamon
+    volumes:
+      - ./db/data:/var/lib/postgresql/data
+      - ./db/init/:/docker-entrypoint-initdb.d
+  web-server:
+    container_name: web-server
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:80"
+    volumes:
+      - ./php/src:/var/www/html
+    environment:
+      - DATABASE_HOST=db
+      - DATABASE_PORT=5432
+      - DATABASE_NAME=iamon
+      - DATABASE_USERNAME=postgres
+      - DATABASE_PASSWORD=postgres
+    depends_on:
+      - db
