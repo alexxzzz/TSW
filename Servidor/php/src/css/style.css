@@ -213,9 +213,7 @@
   /* Dashboard */
   
   .mainContainer {
-    background-color: var(--color-gris-claro);
     min-height: 100vh;
-    
   }
   
   .sidebarIcon {
@@ -596,10 +594,7 @@
   
   /* Estilos dashboard para dispositivos móviles */
   @media (max-width: 548px) {
-  
-    html {
-      background-color: var(--color-gris-claro);
-  }
+    
     body {
       background-color: var(--color-blanco);
   }

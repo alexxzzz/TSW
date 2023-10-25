@@ -16,8 +16,12 @@ class ToggleController extends BaseController {
 
 		$this->toggleMapper = new ToggleMapper();
 
-		$this->view->setLayout("welcome");
+		$this->view->setLayout("auth");
 	}
+
+    public function view() {
+        $this->view->render("dashboard", "dashboard");
+    }
 
     public function add() {
         if (!$this->checkSession()){

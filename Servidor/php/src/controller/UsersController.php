@@ -70,7 +70,8 @@ class UsersController extends BaseController {
 				$_SESSION["currentuser"]=$_POST["username"];
 
 				// send user to the restricted area (HTTP 302 code)
-				$this->view->redirect("users", "dashboard");
+				$this->view->redirect("Toggle", "view");
+
 
 			}else{
 				$errors = array();
@@ -141,6 +142,8 @@ class UsersController extends BaseController {
 					// header("Location: index.php?controller=users&action=login")
 					// die();
 					$this->view->redirect("users", "login");
+
+					
 				} else {
 					$errors = array();
 					$errors["username"] = "Username already exists";
