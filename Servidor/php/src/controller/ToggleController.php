@@ -23,6 +23,29 @@ class ToggleController extends BaseController {
         $this->view->render("dashboard", "dashboard");
     }
 
+    /**
+	* Action to list posts
+	*
+	* Loads all the posts from the database.
+	* No HTTP parameters are needed.
+	*
+	* The views are:
+	* <ul>
+	* <li>posts/index (via include)</li>
+	* </ul>
+	*/
+	public function index() {
+
+		// obtain the data from the database
+		$toggles = $this->toggleMapper->findAll();
+
+		// put the array containing Post object to the view
+		$this->view->setVariable("toggles", $toggles);
+
+		// render the view (/view/posts/index.php)
+		$this->view->render("dashboard", "dashboard");
+	}
+
     public function add() {
         if (!$this->checkSession()){
 		   return;
@@ -47,13 +70,13 @@ class ToggleController extends BaseController {
             $this->toggleMapper->save($toggle);
 
             $this->view->setFlash("Toggle ". $toggle_name ." successfully added.");
-           
-            //$this->view->redirect("toggle", "view");
 
         } catch(ValidationException $ex) {
             $errors = $ex->getErrors();
             print_r($ex);
         }
+
+        $this->view->redirect("toggle", "index");
     }
 
     private function generateUUID(){

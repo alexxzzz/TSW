@@ -29,6 +29,26 @@ class ToggleMapper {
         }
     }
 
+    public function findAll() {
+        $query = "SELECT * FROM toggles, users WHERE toggles.user_id = users.user_id; ";
+        $stmt = $this->db->query($query);
+        $toggles_db = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+		$toggles = array();
+
+		foreach ($toggles_db as $toggle_db) {
+            $toggle = new Toggle();
+            $toggle->setToggleName($toggle_db["toggle_name"]);
+            $toggle->setState($toggle_db["toggle_state"]);
+            $toggle->setShutdownDate($toggle_db["shutdown_date"]);
+            $toggle->setUsername($toggle_db["username"]);
+            $toggle->setDescription($toggle_db["toggle_description"]);
+            array_push($toggles, $toggle);
+		}
+
+		return $toggles;
+    }
+
     public function turnOnUser($toggle) {
         $query = "UPDATE toggles
             SET toggle_state = :toggle_state, shutdown_date = :shutdown_date, turn_on_date = :turn_on_date

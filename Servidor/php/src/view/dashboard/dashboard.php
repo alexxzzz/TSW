@@ -5,7 +5,43 @@ require_once(__DIR__."/../../core/ViewManager.php");
 $view = ViewManager::getInstance();
 $view->setVariable("title", "Dashboard");
 $errors = $view->getVariable("errors");
+$toggles = $view->getVariable("toggles");
+
+// Supongamos que tienes un modelo y funciones para interactuar con la base de datos y obtienes los toggles del usuario de alguna manera.
+
+// Esta función podría estar en tu controlador o en un archivo separado donde gestionas la lógica de los toggles.
+
+function mostrarTogglesDelUsuario($toggles) {
+
+    foreach ($toggles as $toggle) {
+        echo '<div class="switchBox">';
+        echo '<label class="switch">';
+        echo '<input type="checkbox" checked="' . ($toggle->getState() ? 'checked' : '') . '"/>';
+        echo '<span class="slider round"></span>';
+        echo '</label>';
+        echo '<div class="switchText">';
+        echo '<h3> <strong>Nombre: ' . $toggle->getToggleName() . '</strong></h3>';
+        echo '<h3>' . $toggle->getUsername() . '</h3>';
+        echo '<p>' . $toggle->getDescription() . '</p>';
+        echo '</div>';
+        echo '<div class="switchIcons">';
+        echo '<i class="fa-regular fa-trash-can"></i>';
+        echo '<i class="fa-regular fa-pen-to-square"></i>';
+        echo '<i class="fa-regular fa-share-from-square"></i>';
+        echo '</div>';
+        echo '</div>';
+    }
+}
+
+// Supongamos que aquí tienes la lógica para obtener el $userId del usuario actual, por ejemplo, desde la sesión o una variable global.
+
+// Luego, puedes llamar a esta función en tu vista para mostrar los toggles del usuario.
+
+// Por ejemplo:
+// mostrarTogglesDelUsuario($userId);
 ?>
+
+
    
     
     <div class="mainContainer">
@@ -67,210 +103,31 @@ $errors = $view->getVariable("errors");
           </select>
         </nav>
         <div class="switchContainer">
-          <div class="switchBox">
-            <label class="switch">
-              <input type="checkbox" />
-              <span class="slider round"></span>
-            </label>
-            <div class="switchText">
-              <h3>Nombre</h3>
-              <h3>Usuario</h3>
-              <h3>Fecha</h3>
-            </div>
-            <div class="switchIcons">
-            <i class="fa-regular fa-trash-can"></i>
-            <i class="fa-regular fa-pen-to-square"></i>
-            <i class="fa-regular fa-share-from-square"></i>
-          </div>
-          </div>
-          <div class="switchBox">
-            <label class="switch">
-              <input type="checkbox" />
-              <span class="slider round"></span>
-            </label>
-            <div class="switchText">
-              <h3>Nombre</h3>
-              <h3>Usuario</h3>
-              <h3>Fecha</h3>
-            </div>
-            <div class="switchIcons">
-              <i class="fa-regular fa-trash-can"></i>
-              <i class="fa-regular fa-pen-to-square"></i>
-              <i class="fa-regular fa-share-from-square"></i>
-          </div>
-          </div>
-          <div class="switchBox">
-            <label class="switch">
-              <input type="checkbox" />
-              <span class="slider round"></span>
-            </label>
-            <div class="switchText">
-              <h3>Nombre</h3>
-              <h3>Usuario</h3>
-              <h3>Fecha</h3>
-            </div>
-            <div class="switchIcons">
-              <i class="fa-regular fa-trash-can"></i>
-              <i class="fa-regular fa-pen-to-square"></i>
-              <i class="fa-regular fa-share-from-square"></i>
-          </div>
-          </div>
-          <div class="switchBox">
-            <label class="switch">
-              <input type="checkbox" />
-              <span class="slider round"></span>
-            </label>
-            <div class="switchText">
-              <h3>Nombre</h3>
-              <h3>Usuario</h3>
-              <h3>Fecha</h3>
-            </div>
-            <div class="switchIcons">
-              <i class="fa-regular fa-trash-can"></i>
-              <i class="fa-regular fa-pen-to-square"></i>
-              <i class="fa-regular fa-share-from-square"></i>
-          </div>
-          </div>
-          <div class="switchBox">
-            <label class="switch">
-              <input type="checkbox" />
-              <span class="slider round"></span>
-            </label>
-            <div class="switchText">
-              <h3>Nombre</h3>
-              <h3>Usuario</h3>
-              <h3>Fecha</h3>
-            </div>
-            <div class="switchIcons">
-              <i class="fa-regular fa-trash-can"></i>
-              <i class="fa-regular fa-pen-to-square"></i>
-              <i class="fa-regular fa-share-from-square"></i>
-          </div>
-          </div>
-          <div class="switchBox">
-            <label class="switch">
-              <input type="checkbox" />
-              <span class="slider round"></span>
-            </label>
-            <div class="switchText">
-              <h3>Nombre</h3>
-              <h3>Usuario</h3>
-              <h3>Fecha</h3>
-            </div>
-            <div class="switchIcons">
-              <i class="fa-regular fa-trash-can"></i>
-              <i class="fa-regular fa-pen-to-square"></i>
-              <i class="fa-regular fa-share-from-square"></i>
-          </div>
-          </div>
-          <div class="switchBox">
-            <label class="switch">
-              <input type="checkbox" />
-              <span class="slider round"></span>
-            </label>
-            <div class="switchText">
-              <h3>Nombre</h3>
-              <h3>Usuario</h3>
-              <h3>Fecha</h3>
-            </div>
-            <div class="switchIcons">
-              <i class="fa-regular fa-trash-can"></i>
-              <i class="fa-regular fa-pen-to-square"></i>
-              <i class="fa-regular fa-share-from-square"></i>
-          </div>
-          </div>
-          <div class="switchBox">
-            <label class="switch">
-              <input type="checkbox" />
-              <span class="slider round"></span>
-            </label>
-            <div class="switchText">
-              <h3>Nombre</h3>
-              <h3>Usuario</h3>
-              <h3>Fecha</h3>
-            </div>
-            <div class="switchIcons">
-              <i class="fa-regular fa-trash-can"></i>
-              <i class="fa-regular fa-pen-to-square"></i>
-              <i class="fa-regular fa-share-from-square"></i>
-          </div>
-          </div>
-          <div class="switchBox">
-            <label class="switch">
-              <input type="checkbox" />
-              <span class="slider round"></span>
-            </label>
-            <div class="switchText">
-              <h3>Nombre</h3>
-              <h3>Usuario</h3>
-              <h3>Fecha</h3>
-            </div>
-            <div class="switchIcons">
-              <i class="fa-regular fa-trash-can"></i>
-              <i class="fa-regular fa-pen-to-square"></i>
-              <i class="fa-regular fa-share-from-square"></i>
-          </div>
-          </div>
-          <div class="switchBox">
-            <label class="switch">
-              <input type="checkbox" />
-              <span class="slider round"></span>
-            </label>
-            <div class="switchText">
-              <h3>Nombre</h3>
-              <h3>Usuario</h3>
-              <h3>Fecha</h3>
-            </div>
-            <div class="switchIcons">
-              <i class="fa-regular fa-trash-can"></i>
-              <i class="fa-regular fa-pen-to-square"></i>
-              <i class="fa-regular fa-share-from-square"></i>
-          </div>
-          </div>
-          <div class="switchBox">
-            <label class="switch">
-              <input type="checkbox" />
-              <span class="slider round"></span>
-            </label>
-            <div class="switchText">
-              <h3>Nombre</h3>
-              <h3>Usuario</h3>
-              <h3>Fecha</h3>
-            </div>
-            <div class="switchIcons">
-              <i class="fa-regular fa-trash-can"></i>
-              <i class="fa-regular fa-pen-to-square"></i>
-              <i class="fa-regular fa-share-from-square"></i>
-          </div>
-          </div>
-          <div class="switchBox">
-            <label class="switch">
-              <input type="checkbox" />
-              <span class="slider round"></span>
-            </label>
-            <div class="switchText">
-              <h3>Nombre</h3>
-              <h3>Usuario</h3>
-              <h3>Fecha</h3>
-            </div>
-            <div class="switchIcons">
-              <i class="fa-regular fa-trash-can"></i>
-              <i class="fa-regular fa-pen-to-square"></i>
-              <i class="fa-regular fa-share-from-square"></i>
-          </div>
-          </div>
+        <?php
+    // Llama a la función para mostrar los toggles del usuario
+    mostrarTogglesDelUsuario($toggles);
+    ?>
         </div>
+          
+          
       </div>
     </div>
     <div class="modalWindow" id="modalWindow">
-      <div class="modal">
-        <i id="close" class="fa-solid fa-x fa-m"></i>
-        <h1>Añadir switch</h1>
-        <input type="text" placeholder="nombre" required />
-        <input type="text" placeholder="duracion" required />
-        <button id="createSwitch" type="submit" class="GenericButton">
-          <span>Crear</span>
-        </button>
-      </div>
+    <form class="modal" action="index.php?controller=Toggle&amp;action=add" method="POST">
+    <i id="close" class="fa-solid fa-x fa-m"></i>
+    <h1>Añadir switch</h1>
+    <input type="text" name="name" placeholder="Nombre" required />
+    <input type="text" name="description" placeholder="Descripción (opcional)" />
+    <label>Estado</label>
+    <input type="checkbox" name="state" id="stateCheckbox" />
+    <div id="durationField" style="display: none;">
+        <label>Duración (Formato DateTime)</label>
+        <input type="text" name="shutdown_date" placeholder="YYYY-MM-DD HH:MM:SS" />
     </div>
+    <button id="createSwitch" type="submit" class="GenericButton">
+        <span>Crear</span>
+    </button>
+</form>
+    </div>
+    <script type="text/javascript" src="./js/dashboard.js"></script>
 

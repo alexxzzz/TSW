@@ -8,6 +8,7 @@ class Toggle {
     private $toggle_name;
     private $state;
     private $user_id;
+    private $user_name;
     private $shutdown_date;
     private $turn_on_date;
     private $description;
@@ -60,6 +61,14 @@ class Toggle {
 
     public function setUserId($user_id) {
         $this->user_id = $user_id;
+    }
+
+    public function getUsername() {
+        return $this->user_name;
+    }
+
+    public function setUsername($user_name) {
+        $this->user_name = $user_name;
     }
 
     public function getShutdownDate() {
