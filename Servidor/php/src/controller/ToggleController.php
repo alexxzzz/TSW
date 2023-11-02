@@ -36,15 +36,30 @@ class ToggleController extends BaseController {
 	*/
 	public function index() {
 
-		// obtain the data from the database
-		$toggles = $this->toggleMapper->findAll();
+        // Obtain UserID
+        $userID = $this->getCurrentUserId();
+
+		$toggles = $this->toggleMapper->findAll($userID);
 
 		// put the array containing Post object to the view
 		$this->view->setVariable("toggles", $toggles);
 
-		// render the view (/view/posts/index.php)
+		// render the view (/view/dashboard/dashboard.php)
 		$this->view->render("dashboard", "dashboard");
 	}
+
+    public function suscribed() {
+        // Obtain UserID
+        $userID = $this->getCurrentUserId();
+
+		$suscribedToggles = $this->toggleMapper->findSuscribed($userID);
+
+		// put the array containing Post object to the view
+		$this->view->setVariable("suscribedToggles", $suscribedToggles);
+
+		// render the view (/view/dashboard/dashboard.php)
+		$this->view->render("dashboard", "suscritos");
+    }
 
     public function add() {
         if (!$this->checkSession()){
@@ -187,7 +202,12 @@ class ToggleController extends BaseController {
         return true;
     }
 
-    private function getCurrentUserId() {
-        return 1;
-    }
+    public function getCurrentUserId() {
+		
+		if (isset($_SESSION["user_id"])) {
+			return $_SESSION["user_id"];
+		} else {
+			return 1;
+		}
+	}
 }   

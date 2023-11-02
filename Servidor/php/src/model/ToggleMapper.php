@@ -29,26 +29,51 @@ class ToggleMapper {
         }
     }
 
-    public function findAll() {
-        $query = "SELECT * FROM toggles, users WHERE toggles.user_id = users.user_id; ";
-        $stmt = $this->db->query($query);
+    public function findAll($userID) {
+
+        $query = "SELECT * FROM toggles, users WHERE toggles.user_id = users.user_id AND toggles.user_id = :userID";
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(':userID', $userID, PDO::PARAM_INT);
+        $stmt->execute();
         $toggles_db = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-		$toggles = array();
-
-		foreach ($toggles_db as $toggle_db) {
+    
+        $toggles = array();
+    
+        foreach ($toggles_db as $toggle_db) {
             $toggle = new Toggle();
             $toggle->setToggleName($toggle_db["toggle_name"]);
             $toggle->setState($toggle_db["toggle_state"]);
             $toggle->setShutdownDate($toggle_db["shutdown_date"]);
-            $toggle->setUsername($toggle_db["username"]);
             $toggle->setDescription($toggle_db["toggle_description"]);
+            
             array_push($toggles, $toggle);
-		}
-
-		return $toggles;
+        }
+    
+        return $toggles;
     }
 
+    public function findSuscribed($userID) {
+        $query = "SELECT * FROM suscribed WHERE suscribed.user_id = users.user_id; ";
+        $stmt = $this->db->query($query);
+        $suscribedToggles_db = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+		$suscribedToggles = array();
+
+		foreach ($suscribedToggles_db as $suscribedToggle_db) {
+            $suscribedToggle = new Toggle();
+            $suscribedToggle->setToggleName($suscribedToggle_db["toggle_name"]);
+            $suscribedToggle->setState($suscribedToggle_db["toggle_state"]);
+            $suscribedToggle->setShutdownDate($suscribedToggle_db["shutdown_date"]);
+            $suscribedToggle->setUsername($suscribedToggle_db["username"]);
+            $suscribedToggle->setDescription($suscribedToggle_db["toggle_description"]);
+            array_push($suscribedToggles, $suscribedToggle);
+		}
+
+		return $suscribedToggles;
+    }
+
+
+    
     public function turnOnUser($toggle) {
         $query = "UPDATE toggles
             SET toggle_state = :toggle_state, shutdown_date = :shutdown_date, turn_on_date = :turn_on_date
