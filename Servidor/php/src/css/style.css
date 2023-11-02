@@ -457,7 +457,8 @@
   .switch {
     position: relative;
     display: inline-block;
-    min-width: 60px;
+    flex-shrink: 0;
+    width: 60px;
     height: 34px;
     margin-left: 3rem;
   }

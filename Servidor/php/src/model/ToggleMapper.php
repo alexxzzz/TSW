@@ -48,6 +48,8 @@ class ToggleMapper {
         foreach ($toggles_db as $toggle_db) {
             $toggle = new Toggle();
             $toggle->setToggleName($toggle_db["toggle_name"]);
+            $toggle->setPrivateId($toggle_db["private_id"]);
+            $toggle->setPublicId($toggle_db["public_id"]);
             $toggle->setState($toggle_db["toggle_state"]);
             $toggle->setShutdownDate($toggle_db["shutdown_date"]);
             $toggle->setDescription($toggle_db["toggle_description"]);
@@ -79,10 +81,12 @@ class ToggleMapper {
         foreach ($suscribedToggles_db as $suscribedToggle_db) {
             $suscribedToggle = new Toggle();
             $suscribedToggle->setToggleName($suscribedToggle_db["toggle_name"]);
+            $suscribedToggle->setPublicId($suscribedToggle_db["public_id"]);
             $suscribedToggle->setState($suscribedToggle_db["toggle_state"]);
             $suscribedToggle->setShutdownDate($suscribedToggle_db["shutdown_date"]);
             $suscribedToggle->setUsername($suscribedToggle_db["username"]);
             $suscribedToggle->setDescription($suscribedToggle_db["toggle_description"]);
+            $toggle->setToggleId($toggle_db["toggle_id"]);
             array_push($suscribedToggles, $suscribedToggle);
         }
         

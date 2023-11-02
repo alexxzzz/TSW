@@ -30,7 +30,7 @@ $view->setVariable("title", "Register");
 	value="<?= $user->getPasswd() ?>">
 	<?= isset($errors["passwd"])?i18n($errors["passwd"]):"" ?><br>
 
-  	<input type="email" name="email" placeholder="Email" required
+  	<input type="email" name="email" placeholder="Email"
 	value="<?= $user->getEmail() ?>">
 	<?= isset($errors["email"])?i18n($errors["email"]):"" ?><br>
 

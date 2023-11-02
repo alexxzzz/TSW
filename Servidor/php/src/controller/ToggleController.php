@@ -222,22 +222,10 @@ public function delete() {
 
 
 
-    /*
-    public function delete(){
-        if (!$this->checkSession()) return;
 
-        $toggle = new Toggle();
 
-        $toggle->setUserId($this->getCurrentUserId());
-        $toggle->setToggleId($_POST['id']);
-        try{
-            $this->toggleMapper->delete($toggle);
-        } catch(ValidationException $ex) {
-            $errors = $ex->getErrors();
-            print_r($ex);
-        }
-    }
-    */
+
+
     
 
     private function checkSession(){

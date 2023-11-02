@@ -16,13 +16,14 @@ function mostrarTogglesDelUsuario($toggles) {
         echo '<span class="slider round"></span>';
         echo '</label>';
         echo '<div class="switchText">';
-        echo '<h3> <strong>Nombre: ' . $toggle->getToggleName() . '</strong></h3>';
+        echo '<h3> <strong> Nombre: </strong> ' . $toggle->getToggleName() . '</h3>';
         echo '<p>' . $toggle->getDescription() . '</p>';
-        echo '<p>' . $toggle->getToggleId() . '</p>';
+        echo '<p> <strong> URI publica: </strong> ' . $toggle->getPublicId() . '</p>';
+        echo '<p> <strong> URI privada: </strong> ' . $toggle->getPrivateId() . '</p>';
         echo '</div>';
         echo '<div class="switchIcons">';
         echo '<a href="index.php?controller=toggle&amp;action=delete&id=' . $toggle->getToggleId() . '"><i class="fa-regular fa-trash-can"></i></a>';
-        echo '<i class="fa-regular fa-pen-to-square"></i>';
+       /* echo '<i class="fa-regular fa-pen-to-square"></i>'; */
         echo '<i class="fa-regular fa-share-from-square"></i>';
         echo '</div>';
         echo '</div>';

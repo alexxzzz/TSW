@@ -101,33 +101,35 @@ class User {
 
 
 	/**
-	* Checks if the current user instance is valid
-	* for being registered in the database
-	*
-	* @throws ValidationException if the instance is
-	* not valid
-	*
-	* @return void
-	*/
-	public function checkIsValidForRegister() {
-		$errors = array();
-		if (strlen($this->username) < 5) {
-			$errors["username"] = "Username must be at least 5 characters length";
+ * Checks if the current user instance is valid for registration
+ *
+ * @throws ValidationException if the instance is not valid
+ */
+public function checkIsValidForRegister() {
+    $errors = array();
 
-		}
-		if (strlen($this->passwd) < 5) {
-			$errors["passwd"] = "Password must be at least 5 characters length";
-		}
-		if (strlen($this->email) < 5) {
-			$errors["email"] = "email must be at least 5 characters length";
-		}
-		if(!$this->validateEmail($this->email)) {
-			$errors["email"] = "invalid email";
-		}
-		if (sizeof($errors)>0){
-			throw new ValidationException($errors, "user is not valid");
-		}
-	}
+    // Check if the username is valid (at least 5 characters, no spaces)
+    if (strlen($this->username) < 5 || strpos($this->username, ' ') !== false) {
+        $errors["username"] = "Username must be at least 5 characters long and should not contain spaces";
+    }
+
+    // Check if the password is valid (at least 5 characters)
+    if (strlen($this->passwd) < 5) {
+        $errors["passwd"] = "Password must be at least 5 characters long";
+    }
+
+    // Check if the email is provided and, if so, validate it
+    if (!empty($this->email)) {
+        if (strlen($this->email) < 5 || !$this->validateEmail($this->email)) {
+            $errors["email"] = "Invalid email address";
+        }
+    }
+
+    // If there are errors, throw a ValidationException
+    if (!empty($errors)) {
+        throw new ValidationException($errors, "User is not valid for registration");
+    }
+}
 
 	function validateEmail($email) {
 		$pattern = "/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,})$/i";

@@ -20,6 +20,7 @@ function mostrarSuscritos($suscribedToggles) {
         echo '<h3> <strong>Nombre: ' . $suscribedToggle->getToggleName() . '</strong></h3>';
         echo '<h3>' . $suscribedToggle->getUsername() . '</h3>';
         echo '<p>' . $suscribedToggle->getDescription() . '</p>';
+        echo '<p>' . $suscribedToggle->getSubscriptionDate() . '</p>';
         echo '</div>';
         echo '<div class="switchIcons">';
         echo '<i class="fa-regular fa-trash-can"></i>';
