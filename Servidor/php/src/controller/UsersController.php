@@ -69,6 +69,9 @@ class UsersController extends BaseController {
 			if ($this->userMapper->isValidUser($_POST["username"],$_POST["passwd"]) ||$this->userMapper->isValidEmail($_POST["login"], $_POST["passwd"])) {
 				$_SESSION["currentuser"]=$_POST["username"];
 
+				$user_id = $this->userMapper->getUserIdByUsername($_POST["username"]);
+				$_SESSION["user_id"] = $user_id;
+
 				// send user to the restricted area (HTTP 302 code)
 				$this->view->redirect("Toggle", "index");
 
@@ -188,6 +191,10 @@ class UsersController extends BaseController {
 		$this->view->redirect("users", "login");
 
 	}
+
+
+	
+	
 
 
 

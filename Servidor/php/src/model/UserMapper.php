@@ -95,4 +95,30 @@ class UserMapper {
 			return true;
 		}
 	}
+
+	public function getUserIdByUsername($username) {
+		$query = "SELECT user_id FROM users WHERE username = :username";
+		
+		// Preparar la consulta
+		$stmt = $this->db->prepare($query);
+		
+		// Vincular el valor de :userID al parámetro en la consulta
+		$stmt->bindParam(":username", $username);
+		
+		// Ejecutar la consulta
+		$stmt->execute();
+		
+		// Recuperar el resultado de la consulta
+		$result = $stmt->fetch(PDO::FETCH_ASSOC);
+	
+		if ($result) {
+			return $result["user_id"]; // Cambiar "id" a "user_id" para que coincida con la columna de la base de datos
+		} else {
+			// Si no se encuentra el usuario, puedes manejar el error de alguna manera
+			// Por ejemplo, lanzar una excepción, devolver un valor por defecto, etc.
+			return null; // O cualquier otro valor adecuado en tu aplicación
+		}
+	}
+	
+	
 }

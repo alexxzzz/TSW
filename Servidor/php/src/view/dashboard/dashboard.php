@@ -30,13 +30,16 @@ function mostrarTogglesDelUsuario($toggles) {
 }
 ?>
 
-
-   
-  
         <div class="switchContainer">
         <?php
-    mostrarTogglesDelUsuario($toggles);
-    ?>
+        if (!empty($toggles)) {
+            echo '<h1>se encontraron switches para este usuario.</h1>';
+            mostrarTogglesDelUsuario($toggles);
+        } else {
+            echo '<h1>No se encontraron switches para este usuario.</h1>';
+        }
+        ?>
+
         </div>
           
     </div>

@@ -38,6 +38,7 @@ class ToggleController extends BaseController {
 
         // Obtain UserID
         $userID = $this->getCurrentUserId();
+       
 
 		$toggles = $this->toggleMapper->findAll($userID);
 
@@ -203,11 +204,12 @@ class ToggleController extends BaseController {
     }
 
     public function getCurrentUserId() {
-		
+		session_start();
+        
 		if (isset($_SESSION["user_id"])) {
 			return $_SESSION["user_id"];
 		} else {
-			return 1;
+			return 0;
 		}
 	}
 }   

@@ -30,15 +30,21 @@ class ToggleMapper {
     }
 
     public function findAll($userID) {
-
         $query = "SELECT * FROM toggles, users WHERE toggles.user_id = users.user_id AND toggles.user_id = :userID";
+        
+        // Preparar la consulta
         $stmt = $this->db->prepare($query);
+        
+        // Vincular el valor de :userID al parámetro en la consulta
         $stmt->bindParam(':userID', $userID, PDO::PARAM_INT);
+        
+        // Ejecutar la consulta
         $stmt->execute();
+        
         $toggles_db = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    
+        
         $toggles = array();
-    
+        
         foreach ($toggles_db as $toggle_db) {
             $toggle = new Toggle();
             $toggle->setToggleName($toggle_db["toggle_name"]);
@@ -48,18 +54,29 @@ class ToggleMapper {
             
             array_push($toggles, $toggle);
         }
-    
+        
         return $toggles;
     }
-
+    
+    
+    
     public function findSuscribed($userID) {
-        $query = "SELECT * FROM suscribed WHERE suscribed.user_id = users.user_id; ";
-        $stmt = $this->db->query($query);
+        $query = "SELECT * FROM toggles, subscriptions, users WHERE toggles.toggle_id = subscriptions.toggle_id AND users.user_id = subscriptions.user_id AND subscriptions.user_id = :userID";
+        
+        // Preparar la consulta
+        $stmt = $this->db->prepare($query);
+        
+        // Vincular el valor de :userID al parámetro en la consulta
+        $stmt->bindParam(':userID', $userID, PDO::PARAM_INT);
+        
+        // Ejecutar la consulta
+        $stmt->execute();
+        
         $suscribedToggles_db = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-		$suscribedToggles = array();
-
-		foreach ($suscribedToggles_db as $suscribedToggle_db) {
+        
+        $suscribedToggles = array();
+        
+        foreach ($suscribedToggles_db as $suscribedToggle_db) {
             $suscribedToggle = new Toggle();
             $suscribedToggle->setToggleName($suscribedToggle_db["toggle_name"]);
             $suscribedToggle->setState($suscribedToggle_db["toggle_state"]);
@@ -67,10 +84,12 @@ class ToggleMapper {
             $suscribedToggle->setUsername($suscribedToggle_db["username"]);
             $suscribedToggle->setDescription($suscribedToggle_db["toggle_description"]);
             array_push($suscribedToggles, $suscribedToggle);
-		}
-
-		return $suscribedToggles;
+        }
+        
+        return $suscribedToggles;
     }
+    
+    
 
 
     

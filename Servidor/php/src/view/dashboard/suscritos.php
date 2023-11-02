@@ -8,7 +8,7 @@ $errors = $view->getVariable("errors");
 $suscribedToggles = $view->getVariable("suscribedToggles");
 
 
-function mostrarSuscribedTogglesDelUsuario($suscribedToggles) {
+function mostrarSuscritos($suscribedToggles) {
 
     foreach ($suscribedToggles as $suscribedToggle) {
         echo '<div class="switchBox">';
