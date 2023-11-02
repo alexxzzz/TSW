@@ -9,7 +9,6 @@ $toggles = $view->getVariable("toggles");
 
 
 function mostrarTogglesDelUsuario($toggles) {
-
     foreach ($toggles as $toggle) {
         echo '<div class="switchBox">';
         echo '<label class="switch">';
@@ -19,21 +18,22 @@ function mostrarTogglesDelUsuario($toggles) {
         echo '<div class="switchText">';
         echo '<h3> <strong>Nombre: ' . $toggle->getToggleName() . '</strong></h3>';
         echo '<p>' . $toggle->getDescription() . '</p>';
+        echo '<p>' . $toggle->getToggleId() . '</p>';
         echo '</div>';
         echo '<div class="switchIcons">';
-        echo '<i class="fa-regular fa-trash-can"></i>';
+        echo '<a href="index.php?controller=toggle&amp;action=delete&id=' . $toggle->getToggleId() . '"><i class="fa-regular fa-trash-can"></i></a>';
         echo '<i class="fa-regular fa-pen-to-square"></i>';
         echo '<i class="fa-regular fa-share-from-square"></i>';
         echo '</div>';
         echo '</div>';
     }
 }
+
 ?>
 
         <div class="switchContainer">
         <?php
         if (!empty($toggles)) {
-            echo '<h1>se encontraron switches para este usuario.</h1>';
             mostrarTogglesDelUsuario($toggles);
         } else {
             echo '<h1>No se encontraron switches para este usuario.</h1>';

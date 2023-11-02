@@ -180,6 +180,49 @@ class ToggleController extends BaseController {
         }
     }
 
+
+    /**
+ * Action to delete a toggle
+ */
+public function delete() {
+    // Check if the user is logged in
+    if (!$this->checkSession()) {
+        throw new Exception("Not in session. Deleting toggles requires login");
+    }
+
+    // Get the current user from the session or your authentication system
+    $currentUserId = $_SESSION['user_id']; // Adjust this based on your actual session structure
+
+    // Get the ID of the toggle to be deleted
+    $toggleId = (int)$_GET["id"];
+    
+    // Check if a valid toggle ID was provided
+    if (!$toggleId) {
+        throw new Exception("Invalid toggle ID provided");
+    }
+
+    // Get the Toggle object from the database
+    $toggle = $this->toggleMapper->getToggleById($toggleId); // Adjust based on your data retrieval method
+
+    if (!$toggle) {
+        throw new Exception("No such toggle with ID: " . $toggleId);
+    }
+
+    // Check if the Toggle owner is not the current user
+    if ($toggle['user_id'] !== $currentUserId) { // Assuming the user ID is stored in the 'user_id' field
+        throw new Exception("You are not the owner of this toggle. Access denied.");
+    }
+
+    // Delete the Toggle object from the database
+    $this->toggleMapper->delete($toggleId);
+
+    // After deleting the toggle, you can redirect to a suitable location.
+    $this->view->redirect("toggle", "index");
+}
+
+
+
+    /*
     public function delete(){
         if (!$this->checkSession()) return;
 
@@ -194,6 +237,8 @@ class ToggleController extends BaseController {
             print_r($ex);
         }
     }
+    */
+    
 
     private function checkSession(){
         /*if (!isset($_SESSION["user_id"])){

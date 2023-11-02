@@ -1,6 +1,5 @@
 <?php
 // file: view/layouts/welcome.php
-
 $view = ViewManager::getInstance();
 ?>
 
@@ -81,7 +80,7 @@ $view = ViewManager::getInstance();
             <option value="fecha">Fecha</option>
           </select>
         </nav>
-          
+          <?= $view->getFragment(ViewManager::DEFAULT_FRAGMENT) ?>
           <div class="modalWindow" id="modalWindow">
     <form class="modal" action="index.php?controller=Toggle&amp;action=add" method="POST">
     <i id="close" class="fa-solid fa-x fa-m"></i>

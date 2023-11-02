@@ -51,7 +51,7 @@ class ToggleMapper {
             $toggle->setState($toggle_db["toggle_state"]);
             $toggle->setShutdownDate($toggle_db["shutdown_date"]);
             $toggle->setDescription($toggle_db["toggle_description"]);
-            
+            $toggle->setToggleId($toggle_db["toggle_id"]);
             array_push($toggles, $toggle);
         }
         
@@ -88,11 +88,30 @@ class ToggleMapper {
         
         return $suscribedToggles;
     }
+
+    public function getToggleById($toggleId) {
     
+        // Define your database query to retrieve a toggle by ID
+        $query = "SELECT * FROM toggles WHERE toggle_id = :toggle_id";
+    
+        // Prepare the query
+        $stmt = $this->db->prepare($query);
+    
+        // Bind the toggle ID to the query
+        $stmt->bindParam(':toggle_id', $toggleId, PDO::PARAM_INT);
+    
+        // Execute the query
+        $stmt->execute();
+    
+        // Fetch the result as an object or an associative array, depending on your preference
+        $toggle = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+        return $toggle;
+    }
     
 
 
-    
+ 
     public function turnOnUser($toggle) {
         $query = "UPDATE toggles
             SET toggle_state = :toggle_state, shutdown_date = :shutdown_date, turn_on_date = :turn_on_date
@@ -166,21 +185,19 @@ class ToggleMapper {
     }
 
 
-    public function delete($toggle) {
-        $query = "DELETE FROM toggles
-            WHERE toggle_id = :toggle_id AND user_id = :user_id; ";
+    public function delete($toggleId) {
+        $query = "DELETE FROM toggles WHERE toggle_id = :toggleId";
         $stmt = $this->db->prepare($query);
-
-        $stmt->bindParam(':toggle_id', $toggle->getToggleId(), PDO::PARAM_INT);
-        $stmt->bindParam(':user_id', $toggle->getUserId(), PDO::PARAM_INT);
-
+    
+        $stmt->bindParam(':toggleId', $toggleId, PDO::PARAM_INT);
+    
         if ($stmt->execute()) {
             return true;
         } else {
             return false;
         }
     }
-
+    
 
 
 }

@@ -36,7 +36,10 @@ function mostrarSuscritos($suscribedToggles) {
   
         <div class="switchContainer">
         <?php
-    // Llama a la función para mostrar los suscribedToggles del usuario
-    mostrarSuscritos($suscribedToggles);
-    ?>
+        if (!empty($toggles)) {
+            mostrarSuscritos($toggles);
+        } else {
+            echo '<h1>No estas suscrito a ningun switch.</h1>';
+        }
+        ?>
         </div>
