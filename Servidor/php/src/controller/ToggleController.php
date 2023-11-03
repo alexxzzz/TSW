@@ -62,38 +62,50 @@ class ToggleController extends BaseController {
 		$this->view->render("dashboard", "suscritos");
     }
 
+
     public function add() {
-        if (!$this->checkSession()){
-		   return;
-		}
+        if (!$this->checkSession()) {
+            return;
+        }
         
         $toggle = new Toggle();
-
+    
         $toggle->setUserId($this->getCurrentUserId());
         $toggle->setPrivateId($this->generateUUID());
         $toggle->setPublicId($this->generateUUID());
         $toggle->setToggleName($_POST["name"]);
         $toggle->setState(filter_var($_POST['state'], FILTER_VALIDATE_BOOLEAN));
-        $toggle->setShutdownDate(
-            $toggle->getState() ? $_POST['shutdown_date'] : NULL
-        );
+        
+        // Establece la fecha predeterminada si el estado es "encendido" y no se proporciona una fecha en el formulario
+        if ($toggle->getState()) {
+            $shutdownDate = !empty($_POST['shutdown_date']) ? $_POST['shutdown_date'] : $toggle->defaultShutdownDate();
+        } else {
+            $shutdownDate = NULL;
+        }
+
+        
+        $toggle->setShutdownDate($shutdownDate);
+
+        
+    
         $toggle->setDescription($_POST['description']);
-
-
+    
         try {
-            $toggle->isValidToggle();
-            
+             $toggle->isValidToggle();
+
             $this->toggleMapper->save($toggle);
-
-            $this->view->setFlash("Toggle ". $toggle_name ." successfully added.");
-
+    
+            $this->view->setFlash("Toggle " . $toggle_name . " successfully added.");
+    
         } catch(ValidationException $ex) {
             $errors = $ex->getErrors();
             print_r($ex);
         }
-
+    
         $this->view->redirect("toggle", "index");
     }
+    
+
 
     private function generateUUID(){
         return trim(file_get_contents('/proc/sys/kernel/random/uuid'));
@@ -106,7 +118,7 @@ class ToggleController extends BaseController {
 
         $toggle->setUserId($this->getCurrentUserId());
         $toggle->setShutdownDate(
-            isset($_POST['shutdown_date']) ? $_POST['shutdown_date'] : $toggle->defaultShutdownDate()
+            !empty($_POST['shutdown_date']) ? $_POST['shutdown_date'] : $toggle->defaultShutdownDate()
         );
         $toggle->setState(true);
         $toggle->setToggleId($_POST['id']);
@@ -119,6 +131,8 @@ class ToggleController extends BaseController {
             $errors = $ex->getErrors();
             print_r($ex);
         }
+
+        $this->view->redirect("toggle", "index");
     }
 
     private function getActualDateTime(){
@@ -154,6 +168,13 @@ class ToggleController extends BaseController {
         $toggle->setState(false);
         $toggle->setToggleId($_POST['id']);
         $toggle->setShutdownDate(NULL);
+
+        echo $toggle->getShutdownDate();
+        echo $toggle->getToggleId();
+        echo $toggle->getState();
+        echo $toggle->getUserId();
+        return;
+
         try{
             $toggle->canTurnOff();
             $this->toggleMapper->turnOffUser($toggle);
@@ -161,6 +182,8 @@ class ToggleController extends BaseController {
             $errors = $ex->getErrors();
             print_r($ex);
         }
+
+        $this->view->redirect("toggle", "index");
     }
 
     

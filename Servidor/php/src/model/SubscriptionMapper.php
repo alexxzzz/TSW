@@ -22,16 +22,37 @@ class SubscriptionMapper {
         }
     }
 
-    public function unsubscribe($subscription) {
-        $user_id = $subscription->getUserId();
-        $toggle_id = $subscription->getToggleId();
+    public function unsubscribe($toggleId, $currentUserId) {
+        $stmt = $this->db->prepare("DELETE FROM subscriptions WHERE user_id = :currentUserId AND toggle_id = :toggleId");
 
-        $stmt = $this->db->prepare("DELETE FROM subscriptions WHERE user_id = ? AND toggle_id = ?");
+        $stmt->bindParam(':toggleId', $toggleId, PDO::PARAM_INT);
+        $stmt->bindParam(':currentUserId', $currentUserId, PDO::PARAM_INT);
 
-        if ($stmt->execute([$user_id, $toggle_id])) {
+        if ($stmt->execute()) {
             return true;
         } else {
             return false;
         }
     }
+
+    public function getToggleById($toggleId) {
+    
+        // Define your database query to retrieve a toggle by ID
+        $query = "SELECT * FROM toggles WHERE toggle_id = :toggle_id";
+    
+        // Prepare the query
+        $stmt = $this->db->prepare($query);
+    
+        // Bind the toggle ID to the query
+        $stmt->bindParam(':toggle_id', $toggleId, PDO::PARAM_INT);
+    
+        // Execute the query
+        $stmt->execute();
+    
+        // Fetch the result as an object or an associative array, depending on your preference
+        $toggle = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+        return $toggle;
+    }
+    
 }

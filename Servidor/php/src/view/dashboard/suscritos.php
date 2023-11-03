@@ -18,13 +18,12 @@ function mostrarSuscritos($suscribedToggles) {
         echo '</label>';
         echo '<div class="switchText">';
         echo '<h3> <strong>Nombre: ' . $suscribedToggle->getToggleName() . '</strong></h3>';
-        echo '<h3>' . $suscribedToggle->getUsername() . '</h3>';
+        echo '<h3> Usuario: ' . $suscribedToggle->getUsername() . '</h3>';
         echo '<p>' . $suscribedToggle->getDescription() . '</p>';
-        echo '<p>' . $suscribedToggle->getSubscriptionDate() . '</p>';
+        echo '<p>' . $suscribedToggle->getTurnOnDate() . '</p>';
         echo '</div>';
         echo '<div class="switchIcons">';
-        echo '<i class="fa-regular fa-trash-can"></i>';
-        echo '<i class="fa-regular fa-pen-to-square"></i>';
+        echo '<a href="index.php?controller=Subscription&amp;action=unsubscribe&id=' . $suscribedToggle->getToggleId() . '"><i class="fa-regular fa-x"></i></a>';
         echo '<i class="fa-regular fa-share-from-square"></i>';
         echo '</div>';
         echo '</div>';
@@ -37,8 +36,8 @@ function mostrarSuscritos($suscribedToggles) {
   
         <div class="switchContainer">
         <?php
-        if (!empty($toggles)) {
-            mostrarSuscritos($toggles);
+        if (!empty($suscribedToggles)) {
+            mostrarSuscritos($suscribedToggles);
         } else {
             echo '<h1>No estas suscrito a ningun switch.</h1>';
         }

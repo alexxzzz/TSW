@@ -12,6 +12,7 @@ class Toggle {
     private $shutdown_date;
     private $turn_on_date;
     private $description;
+    private $subscription_date;
 
     public function __construct() { }
 
@@ -25,6 +26,14 @@ class Toggle {
 
     public function getPublicId() {
         return $this->public_id;
+    }
+
+    public function getSubscriptionDate() {
+        return $this->subscription_date;
+    }
+
+    public function setSubscriptionDate($subscription_date) {
+        $this->subscription_date = $subscription_date;
     }
 
     public function setPublicId($public_id) {
@@ -146,6 +155,7 @@ class Toggle {
     public function defaultShutdownDate() {
         $dateTime = new DateTime();
         $dateTime->add(new DateInterval('PT1H'));
+        
         return $dateTime->format('Y-m-d H:i:s');
     }
 
