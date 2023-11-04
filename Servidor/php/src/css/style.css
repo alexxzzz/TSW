@@ -382,33 +382,35 @@
     margin-top: 3rem;
   }
   
+  /*
   @media (min-width: 768px) {
     .switchContainer {
       grid-template-columns: repeat(2, 1fr);
     }
   }
+  */
   
   @media (min-width: 1240px) {
     .switchContainer {
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(2, 1fr);
     }
   }
   
   @media (min-width: 1920px) {
     .switchContainer {
-      grid-template-columns: repeat(4, 1fr);
+      grid-template-columns: repeat(3, 1fr);
     }
   }
   
   @media (min-width: 2500px) {
     .switchContainer {
-      grid-template-columns: repeat(5, 1fr);
+      grid-template-columns: repeat(4, 1fr);
     }
   }
   
   @media (min-width: 2900px) {
     .switchContainer {
-      grid-template-columns: repeat(6, 1fr);
+      grid-template-columns: repeat(5, 1fr);
     }
   }
   
@@ -594,7 +596,7 @@
   }
   
   /* Estilos dashboard para dispositivos móviles */
-  @media (max-width: 548px) {
+  @media (max-width: 768px) {
     
     body {
       background-color: var(--color-blanco);
@@ -640,7 +642,7 @@
   
     .dashboardButtons {
       margin: 0;
-      justify-content: center;
+      justify-content: flex-end;
     }
   
     .switchContainer {
@@ -652,7 +654,7 @@
     .switchBox {
       align-items: center;
       padding: 1rem;
-      margin-bottom: 1rem;
+      margin-bottom: 1rem; 
     }
   
     .switchBox i {

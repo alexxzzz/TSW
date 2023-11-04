@@ -9,18 +9,21 @@ class SubscriptionMapper {
 		$this->db = PDOConnection::getInstance();
 	}
 
-    public function subscribe($subscription) {
-        $user_id = $subscription->getUserId();
-        $toggle_id = $subscription->getToggleId();
+    public function subscribe($toggleId, $currentUserId) {
 
-        $stmt = $this->db->prepare("INSERT INTO subscriptions (user_id, toggle_id) VALUES (?, ?)");
+        $stmt = $this->db->prepare("INSERT INTO subscriptions (user_id, toggle_id) VALUES (:currentUserId, :toggleId)");
 
-        if ($stmt->execute([$user_id, $toggle_id])) {
+        $stmt->bindParam(':toggleId', $toggleId, PDO::PARAM_INT);
+        $stmt->bindParam(':currentUserId', $currentUserId, PDO::PARAM_INT);
+
+        if ($stmt->execute()) {
             return true;
         } else {
             return false;
         }
     }
+
+    
 
     public function unsubscribe($toggleId, $currentUserId) {
         $stmt = $this->db->prepare("DELETE FROM subscriptions WHERE user_id = :currentUserId AND toggle_id = :toggleId");

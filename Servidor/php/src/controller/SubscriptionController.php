@@ -19,36 +19,15 @@ class SubscriptionController extends BaseController {
 		$this->view->setLayout("welcome");
 	}
 
-    public function subscribe(){
-        if (!$this->checkSession()){
-            return;
-         }
-         
-         $subscription = new Subscription();
- 
-         $subscription->setUserId($this->getCurrentUserId());
-         $subscription->setToggleId($_POST['toggle_id']);
- 
-         try {  
-             $this->subscriptionMapper->subscribe($subscription);
- 
-             $this->view->setFlash("Subscription successfully added.");
-            
-             //$this->view->redirect("toggle", "view");
- 
-         } catch(ValidationException $ex) {
-             $errors = $ex->getErrors();
-             print_r($ex);
-         }
-    }
 
-        /**
+
+            /**
  * Action to delete a toggle
  */
-public function unsubscribe() {
+public function subscribe() {
     // Check if the user is logged in
     if (!$this->checkSession()) {
-        throw new Exception("Not in session. Deleting toggles requires login");
+        throw new Exception("Not in session. subscribe toggles requires login");
     }
 
     // Get the current user from the session or your authentication system
@@ -69,49 +48,60 @@ public function unsubscribe() {
         throw new Exception("No such toggle with ID: " . $toggleId);
     }
 
-    // Delete the Toggle object from the database
-    $this->subscriptionMapper->unsubscribe($toggleId, $currentUserId);
-
-    // After deleting the toggle, you can redirect to a suitable location.
+    
+    try {
+    $this->subscriptionMapper->subscribe($toggleId, $currentUserId);
+    $this->view->setFlash("toggle subscribed.");
     $this->view->redirect("toggle", "suscribed");
+    }catch(ValidationException $ex) {
+        $errors = $ex->getErrors();
+        print_r($ex);
+}
 }
 
 
-
-    /*
-    public function unsubscribe(){
-        if (!$this->checkSession()){
-            return;
-         }
-         
-         $subscription = new Subscription();
- 
-         $subscription->setUserId($this->getCurrentUserId());
-         $subscription->setToggleId($_POST['toggle_id']);
- 
-         try {  
-             $this->subscriptionMapper->unsubscribe($subscription);
- 
-             $this->view->setFlash("Subscription successfully removed.");
-            
-             //$this->view->redirect("toggle", "view");
- 
-         } catch(ValidationException $ex) {
-             $errors = $ex->getErrors();
-             print_r($ex);
-         }
+public function unsubscribe() {
+    // Check if the user is logged in
+    if (!$this->checkSession()) {
+        throw new Exception("Not in session. unsucribe toggles requires login");
     }
-    */
+
+    // Get the current user from the session or your authentication system
+    $currentUserId = $_SESSION['user_id']; // Adjust this based on your actual session structure
+
+    // Get the ID of the toggle to be deleted
+    $toggleId = (int)$_GET["id"];
+    
+    // Check if a valid toggle ID was provided
+    if (!$toggleId) {
+        throw new Exception("Invalid toggle ID provided");
+    }
+
+    // Get the Toggle object from the database
+    $toggle = $this->subscriptionMapper->getToggleById($toggleId); // Adjust based on your data retrieval method
+
+    if (!$toggle) {
+        throw new Exception("No such toggle with ID: " . $toggleId);
+    }
+
+    try {
+    // Delete the Toggle object from the database
+    $this->subscriptionMapper->unsubscribe($toggleId, $currentUserId);
+    $this->view->setFlash("toggle unsubscribed.");
+    // After deleting the toggle, you can redirect to a suitable location.
+    $this->view->redirect("toggle", "suscribed");
+    }catch(ValidationException $ex) {
+        $errors = $ex->getErrors();
+        print_r($ex);
+}
+}
+
 
     private function checkSession(){
-        /*if (!isset($_SESSION["user_id"])){
+        if (!isset($_SESSION["user_id"])){
 		    $this->view->render("users", "login");
             return false;
-		}*/
+		}
         return true;
-    }
-
-    private function getCurrentUserId() {
-        return 2;
     }
 }

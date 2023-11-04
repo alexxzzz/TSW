@@ -62,6 +62,51 @@ class ToggleController extends BaseController {
 		$this->view->render("dashboard", "suscritos");
     }
 
+/**
+ * Action to view the details of a toggle switch using either public or private URI
+ *
+ * This action should only be called via GET.
+ *
+ * The expected HTTP parameters are:
+ * <ul>
+ * <li>id: ID of the switch (via HTTP GET), which can be either public or private</li>
+ * </ul>
+ *
+ * The views are:
+ * <ul>
+ * <li>toggles/view: If the switch is successfully loaded (via include). Includes these view variables:</li>
+ * <ul>
+ *   <li>switch: The current Switch retrieved</li>
+ * </ul>
+ * </ul>
+ *
+ * @throws Exception If no such switch with the given ID is found
+ * @return void
+ */
+public function toggleInformation(){
+
+    if (!isset($_GET["uri"])) {
+        throw new Exception("URI is mandatory");
+    }
+
+    $toggleURI = $_GET["uri"];
+
+    // Retrieve the switch information using the provided public or private ID
+    $toggle = $this->toggleMapper->findByPublicOrPrivateURI($toggleURI);
+
+    if ($toggle == NULL) {
+        throw new Exception("No switch found with the given URI: ".$toggleURI);
+    }
+
+    // Put the Switch object into the view
+    $this->view->setVariable("toggle", $toggle);
+
+    $this->view->renderWithoutLayout("dashboard", "information");
+}
+
+
+
+
 
     public function add() {
         if (!$this->checkSession()) {
@@ -94,8 +139,8 @@ class ToggleController extends BaseController {
              $toggle->isValidToggle();
 
             $this->toggleMapper->save($toggle);
-    
-            $this->view->setFlash("Toggle " . $toggle_name . " successfully added.");
+            
+            $this->view->setFlash("Toggle successfully added.");
     
         } catch(ValidationException $ex) {
             $errors = $ex->getErrors();
@@ -238,7 +283,7 @@ public function delete() {
 
     // Delete the Toggle object from the database
     $this->toggleMapper->delete($toggleId);
-
+    $this->view->setFlash("toggle " .$toggleId . " deleted");
     // After deleting the toggle, you can redirect to a suitable location.
     $this->view->redirect("toggle", "index");
 }

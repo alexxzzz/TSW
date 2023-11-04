@@ -22,6 +22,9 @@ $view = ViewManager::getInstance();
     />
   </head>
   <body>
+  <div id="flash">
+			<?= $view->popFlash() ?>
+		</div>
     <div class="mainContainer">
       <sidebar>
         <i class="fa-solid fa-x closeIcon"></i>

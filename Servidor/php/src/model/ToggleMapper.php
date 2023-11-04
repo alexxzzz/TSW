@@ -113,10 +113,32 @@ class ToggleMapper {
     
         return $toggle;
     }
+
+
+    public function findByPublicOrPrivateURI($toggleURI) {
     
-
-
- 
+        $query = "SELECT * FROM toggles WHERE public_id = :toggleURI OR private_id = :toggleURI";
+    
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(':toggleURI', $toggleURI);
+        $stmt->execute();
+    
+        // Recupera el resultado de la consulta
+        $toggleData= $stmt->fetch(PDO::FETCH_ASSOC);
+    
+        if ($toggleData) {
+            $toggle = new Toggle();
+            $toggle->setToggleName($toggleData["toggle_name"]);
+            $toggle->setState($toggleData["toggle_state"]);
+            $toggle->setTurnOnDate($toggleData["turn_on_date"]);
+            $toggle->setDescription($toggleData["toggle_description"]);
+            $toggle->setToggleId($toggleData["toggle_id"]);
+            return $toggle;
+        }
+    
+        return null;
+    }
+    
     public function turnOnUser($toggle) {
         $query = "UPDATE toggles
             SET toggle_state = :toggle_state, shutdown_date = :shutdown_date, turn_on_date = :turn_on_date
@@ -202,7 +224,6 @@ class ToggleMapper {
             return false;
         }
     }
-    
 
 
 }

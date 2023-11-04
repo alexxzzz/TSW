@@ -245,6 +245,10 @@ class ViewManager {
 		$this->renderLayout();
 	}
 
+	public function renderWithoutLayout($controller, $viewname) {
+		include(__DIR__."/../view/$controller/$viewname.php");
+	}
+
 	/**
 	* Sends an HTTP 302 redirection to a given action
 	* inside a controller

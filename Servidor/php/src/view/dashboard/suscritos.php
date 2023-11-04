@@ -24,7 +24,7 @@ function mostrarSuscritos($suscribedToggles) {
         echo '</div>';
         echo '<div class="switchIcons">';
         echo '<a href="index.php?controller=Subscription&amp;action=unsubscribe&id=' . $suscribedToggle->getToggleId() . '"><i class="fa-regular fa-x"></i></a>';
-        echo '<i class="fa-regular fa-share-from-square"></i>';
+        echo '<a href="index.php?controller=toggle&amp;action=toggleInformation&uri=' . $suscribedToggle->getPublicId() . '"><i class="fa-regular fa-share-from-square"></i></a>';
         echo '</div>';
         echo '</div>';
     }

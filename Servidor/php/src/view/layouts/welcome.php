@@ -3,7 +3,8 @@
 
 $view = ViewManager::getInstance();
 
-?><!DOCTYPE html>
+?>
+<!DOCTYPE html>
 <html>
 <head>
 	<title><?= $view->getVariable("title", "no title") ?></title>
