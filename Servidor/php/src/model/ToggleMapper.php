@@ -209,41 +209,7 @@ class ToggleMapper {
         }
     }
 
-    public function turnOnLink($toggle) {
-        $query = "UPDATE toggles
-            SET toggle_state = :toggle_state, shutdown_date = :shutdown_date, turn_on_date = :turn_on_date
-            WHERE private_id = :private_id; ";
-        $stmt = $this->db->prepare($query);
-
-        $stmt->bindParam(':toggle_state', $toggle->getState(), PDO::PARAM_BOOL);
-        $stmt->bindParam(':shutdown_date', $toggle->getShutdownDate());
-        $stmt->bindParam(':private_id', $toggle->getPrivateId(), PDO::PARAM_STR);
-        $stmt->bindParam(':turn_on_date', $toggle->getTurnOnDate());
-
-        if ($stmt->execute()) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    public function turnOffLink($toggle) {
-        $query = "UPDATE toggles
-            SET toggle_state = :toggle_state, shutdown_date = :shutdown_date
-            WHERE private_id = :private_id; ";
-        $stmt = $this->db->prepare($query);
-
-        $stmt->bindParam(':toggle_state', $toggle->getState(), PDO::PARAM_BOOL);
-        $stmt->bindParam(':shutdown_date', $toggle->getShutdownDate());
-        $stmt->bindParam(':private_id', $toggle->getPrivateId(), PDO::PARAM_STR);
-
-        if ($stmt->execute()) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
+    
 
     public function delete($toggleId) {
         $query = "DELETE FROM toggles WHERE toggle_id = :toggleId";
