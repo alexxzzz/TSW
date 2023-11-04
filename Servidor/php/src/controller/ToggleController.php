@@ -214,12 +214,6 @@ public function toggleInformation(){
         $toggle->setToggleId($_POST['id']);
         $toggle->setShutdownDate(NULL);
 
-        echo $toggle->getShutdownDate();
-        echo $toggle->getToggleId();
-        echo $toggle->getState();
-        echo $toggle->getUserId();
-        return;
-
         try{
             $toggle->canTurnOff();
             $this->toggleMapper->turnOffUser($toggle);

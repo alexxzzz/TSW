@@ -9,27 +9,28 @@ $toggles = $view->getVariable("toggles");
 
 function mostrarTogglesDelUsuario($toggles) {
         foreach ($toggles as $toggle) {
-        $action=$toggle->getState() ? 'offUser' : 'onUser';
-        echo '<div class="switchBox">';
-        echo '<form id="switchForm' . $toggle->getToggleId() . '" action="index.php?controller=toggle&amp;action='.$action.'" method="POST">';
-        echo '<label class="switch">';
-        echo '<input type="checkbox" name=id value='.$toggle->getToggleId().' data-form-id="' . $toggle->getToggleId() . '" ' . ($toggle->getState() ? 'checked' : '') . '/>';
-        echo '<span class="slider round"></span>';
-        echo '</label>';
-        echo '</form>';
-        echo '<div class="switchText">';
-        echo '<h3> <strong> Nombre: </strong> ' . $toggle->getToggleName() . '</h3>';
-        echo '<p>' . $toggle->getDescription() . '</p>';
-        echo '<p> <strong> URI publica: </strong> ' . $toggle->getPublicId() . '</p>';
-        echo '<p> <strong> URI privada: </strong> ' . $toggle->getPrivateId() . '</p>';
-        echo '</div>';
-        echo '<div class="switchIcons">';
-        echo '<a href="index.php?controller=toggle&amp;action=delete&id=' . $toggle->getToggleId() . '"><i class="fa-regular fa-trash-can"></i></a>';
-        echo '<a href="index.php?controller=toggle&amp;action=toggleInformation&uri=' . $toggle->getPublicId() . '"><i class="fa-regular fa-share-from-square"></i></a>';
-        echo '<a href="index.php?controller=toggle&amp;action=toggleInformation&uri=' . $toggle->getPrivateId() . '"><i class="fa-solid fa-key"></i></a>';
-        echo '</div>';
-        echo '</div>';
-    }
+            $action=$toggle->getState() ? 'offUser' : 'onUser';
+            $checked = $toggle->getState() ? 'checked' : '';
+            echo '<div class="switchBox">';
+            echo '<form id="switchForm' . $toggle->getToggleId() . '" action="index.php?controller=toggle&amp;action='.$action.'" method="POST">';
+            echo '<label class="switch">';
+            echo '<input type="checkbox"  data-form-id="' . $toggle->getToggleId() . '" ' . $checked . '/>';
+            echo '<span class="slider round"></span>';
+            echo '</label>';
+            echo '</form>';
+            echo '<div class="switchText">';
+            echo '<h3> <strong> Nombre: </strong> ' . $toggle->getToggleName() . '</h3>';
+            echo '<p>' . $toggle->getDescription() . '</p>';
+            echo '<p> <strong> URI publica: </strong> ' . $toggle->getPublicId() . '</p>';
+            echo '<p> <strong> URI privada: </strong> ' . $toggle->getPrivateId() . '</p>';
+            echo '</div>';
+            echo '<div class="switchIcons">';
+            echo '<a href="index.php?controller=toggle&amp;action=delete&id=' . $toggle->getToggleId() . '"><i class="fa-regular fa-trash-can"></i></a>';
+            echo '<a href="index.php?controller=toggle&amp;action=toggleInformation&uri=' . $toggle->getPublicId() . '"><i class="fa-regular fa-share-from-square"></i></a>';
+            echo '<a href="index.php?controller=toggle&amp;action=toggleInformation&uri=' . $toggle->getPrivateId() . '"><i class="fa-solid fa-key"></i></a>';
+            echo '</div>';
+            echo '</div>';
+        }
 }
 
 ?>
@@ -53,6 +54,12 @@ function mostrarTogglesDelUsuario($toggles) {
             var formId = this.getAttribute('data-form-id');
             var form = document.getElementById('switchForm' + formId);
 
+            var hiddenElement = document.createElement("input");
+                hiddenElement.type = "hidden";
+                hiddenElement.name = 'id';
+                hiddenElement.value = formId; 
+
+            form.appendChild(hiddenElement);
             if (form) {
                 form.submit();
             }
