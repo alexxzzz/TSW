@@ -177,6 +177,7 @@ public function toggleInformation(){
             print_r($ex);
         }
 
+        $this->view->setFlash("toggle on");
         $this->view->redirect("toggle", "index");
     }
 
@@ -185,6 +186,99 @@ public function toggleInformation(){
         return $dateTime->format('Y-m-d H:i:s');
     }
 
+
+
+    public function onLink() {
+        if (!$this->checkSession()) return;
+    
+        // Obtén la URI pública del toggle desde el formulario
+        $publicUri = isset($_GET['uri']) ? $_GET['uri'] : null;
+        $previousUrl = $_SERVER['HTTP_REFERER'];
+
+        if ($publicUri) {
+            // Realiza una consulta en la base de datos para verificar si la URI es pública
+            $isPublic = $this->toggleMapper->isUriPublic($publicUri);
+    
+            if ($isPublic) {
+                $this->view->setFlash("Error: No puedes encender un toggle desde la URI pública. Si eres el dueño hazlo desde dashboard");
+                header("Location: $previousUrl");
+                exit;
+            } else {
+                // El toggle no es público, puedes continuar con la acción
+                $toggle = new Toggle();
+    
+                $toggle->setUserId($this->getCurrentUserId());
+                $toggle->setShutdownDate(
+                    !empty($_POST['shutdown_date']) ? $_POST['shutdown_date'] : $toggle->defaultShutdownDate()
+                );
+                $toggle->setState(true);
+                $toggle->setToggleId($_POST['id']);
+                $toggle->setTurnOnDate($this->getActualDateTime());
+    
+                try {
+                    $toggle->canTurnOn();
+                    $this->toggleMapper->turnOnUser($toggle);
+                    $this->view->setFlash("Toggle encendido exitosamente.");
+                    header("Location: $previousUrl");
+                    exit;
+                } catch (ValidationException $ex) {
+                    $errors = $ex->getErrors();
+                    print_r($ex);
+                }
+            }
+    
+            
+        }
+    }
+
+
+    public function offLink() {
+        if (!$this->checkSession()) return;
+    
+        // Obtén la URI pública del toggle desde el formulario
+        $publicUri = isset($_GET['uri']) ? $_GET['uri'] : null;
+        $previousUrl = $_SERVER['HTTP_REFERER'];
+
+        if ($publicUri) {
+            // Realiza una consulta en la base de datos para verificar si la URI es pública
+            $isPublic = $this->toggleMapper->isUriPublic($publicUri);
+    
+            if ($isPublic) {
+                $this->view->setFlash("Error: No puedes apagar un toggle desde la URI pública. Si eres el dueño hazlo desde dashboard");
+                header("Location: $previousUrl");
+                exit;
+            } else {
+                // El toggle no es público, puedes continuar con la acción
+                $toggle = new Toggle();
+    
+                $toggle->setUserId($this->getCurrentUserId());
+                $toggle->setShutdownDate(NULL);
+                $toggle->setState(false);
+                $toggle->setToggleId($_POST['id']);
+    
+                try {
+                    $toggle->canTurnOff();
+                    $this->toggleMapper->turnOffUser($toggle);
+                    $this->view->setFlash("Toggle apagado exitosamente.");
+                    header("Location: $previousUrl");
+                    exit;
+                } catch (ValidationException $ex) {
+                    $errors = $ex->getErrors();
+                    print_r($ex);
+                }
+            }
+    
+            
+        }
+    }
+    
+    
+
+
+
+
+
+    /*
     public function onLink(){
         $toggle = new Toggle();
 
@@ -203,6 +297,7 @@ public function toggleInformation(){
             print_r($ex);
         }
     }
+    */
 
     public function offUser(){
         if (!$this->checkSession()) return;
@@ -221,11 +316,12 @@ public function toggleInformation(){
             $errors = $ex->getErrors();
             print_r($ex);
         }
-
+        
+        $this->view->setFlash("toggle on");
         $this->view->redirect("toggle", "index");
     }
 
-    
+    /*
     public function offLink(){
         $toggle = new Toggle();
 
@@ -241,6 +337,7 @@ public function toggleInformation(){
             print_r($ex);
         }
     }
+    */
 
 
     /**
@@ -297,6 +394,25 @@ public function delete() {
 		}*/
         return true;
     }
+
+    public function checkUriAccessibility() {
+        // Obtén la URI de la solicitud (puedes usar $_GET o $_POST según cómo se pasó la URI)
+        $uri = isset($_GET['uri']) ? $_GET['uri'] : null;
+    
+        if ($uri) {
+            // Realiza una consulta en la base de datos para verificar si la URI es pública o no
+            $isPublic = $this->toggleMapper->isUriPublic($uri);
+    
+            if ($isPublic) {
+                echo "La URI es pública.";
+            } else {
+                echo "La URI no es pública.";
+            }
+        } else {
+            echo "URI no especificada.";
+        }
+    }
+    
 
     public function getCurrentUserId() {
 		session_start();

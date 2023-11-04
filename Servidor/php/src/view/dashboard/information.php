@@ -7,14 +7,16 @@ $toggle = $view->getVariable("toggle");
 
 
 function mostrarTogglesDelUsuario($toggle) {
-        $action=$toggle->getState() ? 'offUser' : 'onUser';
+        $action=$toggle->getState() ? 'offLink' : 'onLink';
+        $checked = $toggle->getState() ? 'checked' : '';
+        $uri = isset($_GET['uri']) ? $_GET['uri'] : '';
         echo '<div class="switchBox">';
-        echo '<form id="switchForm' . $toggle->getToggleId() . '" action="index.php?controller=toggle&amp;action='.$action.'" method="POST">';
-        echo '<label class="switch">';
-        echo '<input type="checkbox" name=id value='.$toggle->getToggleId().' data-form-id="' . $toggle->getToggleId() . '" ' . ($toggle->getState() ? 'checked' : '') . '/>';
-        echo '<span class="slider round"></span>';
-        echo '</label>';
-        echo '</form>';
+            echo '<form id="switchForm' . $toggle->getToggleId() . '" action="index.php?controller=toggle&amp;action='.$action. '&uri=' . $uri . '" method="POST">';
+            echo '<label class="switch">';
+            echo '<input type="checkbox"  data-form-id="' . $toggle->getToggleId() . '" ' . $checked . '/>';
+            echo '<span class="slider round"></span>';
+            echo '</label>';
+            echo '</form>';
         echo '<div class="switchText">';
         echo '<h3> <strong> Nombre: </strong> ' . $toggle->getToggleName() . '</h3>';
         echo '<p> Descripcion: ' . $toggle->getDescription() . '</p>';
@@ -40,6 +42,9 @@ function mostrarTogglesDelUsuario($toggle) {
     <title>Switch</title>
 </head>
 <body>
+<div id="flash">
+			<?= $view->popFlash() ?>
+		</div>
     <div class="container">
     <div class="switchContainer">
     <?php
@@ -56,5 +61,26 @@ function mostrarTogglesDelUsuario($toggle) {
 src="https://kit.fontawesome.com/19c59e2dfc.js"
 crossorigin="anonymous"
 ></script>
+<script>
+    // Obtén todos los elementos de entrada de tipo checkbox
+    var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+
+    checkboxes.forEach(function (checkbox) {
+        checkbox.addEventListener('change', function () {
+            var formId = this.getAttribute('data-form-id');
+            var form = document.getElementById('switchForm' + formId);
+
+            var hiddenElement = document.createElement("input");
+                hiddenElement.type = "hidden";
+                hiddenElement.name = 'id';
+                hiddenElement.value = formId; 
+
+            form.appendChild(hiddenElement);
+            if (form) {
+                form.submit();
+            }
+        });
+    });
+</script>
 </html>
         

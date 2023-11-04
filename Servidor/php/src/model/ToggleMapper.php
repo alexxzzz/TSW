@@ -157,6 +157,20 @@ class ToggleMapper {
     
         return null;
     }
+
+
+    public function isUriPublic($publicUri) {
+
+
+        $query = "SELECT COUNT(*) FROM toggles WHERE public_id = :publicUri";
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(':publicUri', $publicUri);
+        $stmt->execute();
+
+        $count = $stmt->fetchColumn();
+
+        return $count > 0; 
+    }
     
     public function turnOnUser($toggle) {
         $query = "UPDATE toggles
