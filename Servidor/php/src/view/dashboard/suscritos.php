@@ -19,8 +19,8 @@ function mostrarSuscritos($suscribedToggles) {
         echo '<div class="switchText">';
         echo '<h3> <strong>Nombre: ' . $suscribedToggle->getToggleName() . '</strong></h3>';
         echo '<h3> Usuario: ' . $suscribedToggle->getUsername() . '</h3>';
-        echo '<p>' . $suscribedToggle->getDescription() . '</p>';
-        echo '<p>' . $suscribedToggle->getTurnOnDate() . '</p>';
+        echo '<p> Descripción: ' . $suscribedToggle->getDescription() . '</p>';
+        echo '<p> Fecha Encendido: ' . $suscribedToggle->getTurnOnDate() . '</p>';
         echo '</div>';
         echo '<div class="switchIcons">';
         echo '<a href="index.php?controller=Subscription&amp;action=unsubscribe&id=' . $suscribedToggle->getToggleId() . '"><i class="fa-regular fa-x"></i></a>';
