@@ -1,6 +1,7 @@
 <?php
 
 require_once(__DIR__."/../core/PDOConnection.php");
+require_once(__DIR__.'/../util/mail.php');
 
 class ToggleMapper {
     private $db;
@@ -185,9 +186,30 @@ class ToggleMapper {
         $stmt->bindParam(':turn_on_date', $toggle->getTurnOnDate());
 
         if ($stmt->execute()) {
+            $this->send_mail($toggle->getToggleId());
             return true;
+            
         } else {
             return false;
+        }
+    }
+
+    private function send_mail($toggleId) {
+        $stmt = $this->db->prepare("SELECT u.email FROM users u
+        JOIN subscriptions s ON u.user_id = s.user_id
+        WHERE s.toggle_id = :toggleId");
+
+        // Asignar valores a los parámetros del prepared statement
+        $stmt->bindParam(':toggleId', $toggleId, PDO::PARAM_INT);
+
+        // Ejecutar la consulta
+        $stmt->execute();
+
+        // Iterar sobre los resultados y mostrar los emails suscritos
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            if($row["email"] != NULL) {
+                send_mail($row["email"], "Notificacion IAMON", "El interruptor " . $toggleId . " ha sido encendido.");
+            }
         }
     }
 
