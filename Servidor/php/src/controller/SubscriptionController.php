@@ -22,7 +22,7 @@ class SubscriptionController extends BaseController {
 
 
             /**
- * Action to delete a toggle
+ * Action to subscribe a toggle
  */
 public function subscribe() {
     // Check if the user is logged in
@@ -51,8 +51,8 @@ public function subscribe() {
     
     try {
     $this->subscriptionMapper->subscribe($toggleId, $currentUserId);
-    $this->view->setFlash("toggle subscribed.");
-    $this->view->redirect("toggle", "suscribed");
+    $this->view->setFlash(i18n("subscribed"));
+    $this->view->redirect("toggle", "subscribed");
     }catch(ValidationException $ex) {
         $errors = $ex->getErrors();
         print_r($ex);
@@ -63,7 +63,7 @@ public function subscribe() {
 public function unsubscribe() {
     // Check if the user is logged in
     if (!$this->checkSession()) {
-        throw new Exception("Not in session. unsucribe toggles requires login");
+        throw new Exception("Not in session. Unsubscribe toggles requires login");
     }
 
     // Get the current user from the session or your authentication system
@@ -87,7 +87,7 @@ public function unsubscribe() {
     try {
     // Delete the Toggle object from the database
     $this->subscriptionMapper->unsubscribe($toggleId, $currentUserId);
-    $this->view->setFlash("toggle unsubscribed.");
+    $this->view->setFlash(i18n("unsubscribed"));
     // After deleting the toggle, you can redirect to a suitable location.
     $this->view->redirect("toggle", "suscribed");
     }catch(ValidationException $ex) {
