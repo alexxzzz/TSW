@@ -17,7 +17,7 @@ function displaySubscribedToggles($suscribedToggles) {
         echo '<div class="switchText">';
         echo '<h3> <strong>' . i18n("Name") . ': ' . $suscribedToggle->getToggleName() . '</strong></h3>';
         echo '<h3>' . i18n("User") . ': ' . $suscribedToggle->getUsername() . '</h3>';
-        echo '<p>' . i18n("Description") . ': ' . $suscribedToggle->getDescription() . '</p>';
+        echo '<p>' . i18n("description") . ' ' . $suscribedToggle->getDescription() . '</p>';
         echo '<p>' . i18n("Turn On Date") . ': ' . $suscribedToggle->getTurnOnDate() . '</p>';
         echo '</div>';
         echo '<div class="switchIcons">';

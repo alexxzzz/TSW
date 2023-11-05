@@ -38,7 +38,7 @@ $view = ViewManager::getInstance();
 	</main>
 	<footer>
         <div class="footerContainer">
-          <h4 class="inferior__titulo">Siguenos</h4>
+          <h4 class="inferior__titulo"><?= i18n("Follow us") ?></h4>
           <a href="https://google.com" target="_blank">
             <i class="fa-brands fa-instagram"></i
           ></a>
@@ -51,7 +51,7 @@ $view = ViewManager::getInstance();
           <a href="https://google.com" target="_blank">
             <i class="fa-brands fa-github"></i
           ></a>
-          <p>Todos los derechos reservados 2023</p>
+          <p><?= i18n("Rights") ?></p>
         </div>
     </footer>
     </div>

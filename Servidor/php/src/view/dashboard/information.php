@@ -17,7 +17,7 @@ function displayUserToggle($toggle) {
     echo '</form>';
     echo '<div class="switchText">';
     echo '<h3> <strong>' . i18n("Name") . ': </strong> ' . $toggle->getToggleName() . '</h3>';
-    echo '<p>' . i18n("Description") . ': ' . $toggle->getDescription() . '</p>';
+    echo '<p>' . i18n("description") . '' . $toggle->getDescription() . '</p>';
     echo '<p>' . i18n("On Time") . ': </p>';
     echo '<p>' . i18n("On Date") . ': ' . $toggle->getTurnOnDate() . '</p>';
     echo '</div>';

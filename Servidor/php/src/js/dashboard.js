@@ -21,7 +21,6 @@ close.addEventListener("click", () => {
 
 createSwitch.addEventListener("click", () => {
   modalWindow.classList.remove("active");
-  alert("switch creado");
 });
 
 user.addEventListener("click", () =>{

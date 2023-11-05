@@ -2,6 +2,7 @@
 //file: /view/messages/messages_es.php
 $i18n_messages = array(
     "Login" => "Login",
+    "Logout" => "Logout",
     "Username" => "Username",
     "Password" => "Password",
     "Forgot Password?" => "Forgot Password?",
@@ -18,7 +19,17 @@ $i18n_messages = array(
     "On Time" => "On Time",
     "On Date" => "On Date",
     "Switch" => "Switch",
-    "You are not subscribed to any switches." => "You are not subscribed to any switches."
+    "Subscribed" => "Subscribed",
+    "You are not subscribed to any switches." => "You are not subscribed to any switches.",
+    "Follow us" => "Follow Us",
+    "Rights" => "All rights reserved 2023",
+    "Description" => "Description (optional)",
+    "State" => "State",
+    "Format" => "Duration (DateTime Format)",
+    "Create" => "Create",
+    "Date" => "date",
+    "Add" => "Add Switch",
+    "MySwitches" => "My Switches",
 );
 
 ?>

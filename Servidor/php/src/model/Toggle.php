@@ -127,9 +127,10 @@ class Toggle {
             $errors["description"] = "Toggle description must have less than 100 characters";
         }
 
-		if (sizeof($errors) > 0){
-			throw new ValidationException($errors, "Toggle is not valid");
-		}
+         // If there are errors, throw a ValidationException
+        if (!empty($errors)) {
+        throw new ValidationException($errors, "toggle is not valid for add");
+    }
     }
 
     public function canTurnOn(){

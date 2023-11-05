@@ -37,13 +37,13 @@ $view = ViewManager::getInstance();
           <h1>N</h1>
         </div>
         <ul>
-          <a href="index.php?controller=toggle&amp;action=index">Mis switches</a>
-          <a href="index.php?controller=toggle&amp;action=suscribed">Suscritos</a>
+          <a href="index.php?controller=toggle&amp;action=index"><?= i18n("MySwitches") ?></a>
+          <a href="index.php?controller=toggle&amp;action=suscribed"><?= i18n("Subscribed") ?></a>
           <div class="sidebarFooter">
             <?php
               include(__DIR__."/language_select_element.php");
             ?>
-            <a href="index.php?controller=users&amp;action=logout" class="logout">Logout</a>
+            <a href="index.php?controller=users&amp;action=logout" class="logout"><?= i18n("Logout") ?></a>
             <div class="socialNetworks">
             <a href="https://google.com" target="_blank">
               <i class="fa-brands fa-instagram"></i
@@ -77,30 +77,30 @@ $view = ViewManager::getInstance();
         </nav>
         <nav class="dashboardButtons">
           <button id="addSwitch" class="GenericButton">
-            <span>Crear switch</span>
+            <span><?= i18n("Add") ?></span>
           </button>
           <select class="dashboardSelect" name="select">
             <option value="id" selected>Id</option>
-            <option value="nombre">Nombre</option>
-            <option value="usuario">Usuario</option>
-            <option value="fecha">Fecha</option>
+            <option value="nombre"><?= i18n("Name") ?></option>
+            <option value="usuario"><?= i18n("Username") ?></option>
+            <option value="fecha"><?= i18n("Date") ?></option>
           </select>
         </nav>
           <?= $view->getFragment(ViewManager::DEFAULT_FRAGMENT) ?>
           <div class="modalWindow" id="modalWindow">
     <form class="modal" action="index.php?controller=Toggle&amp;action=add" method="POST">
     <i id="close" class="fa-solid fa-x fa-m"></i>
-    <h1>Añadir switch</h1>
-    <input type="text" name="name" placeholder="Nombre" required />
-    <input type="text" name="description" placeholder="Descripción (opcional)" />
-    <label>Estado</label>
+    <h1><?= i18n("Add") ?></h1>
+    <input type="text" name="name" placeholder="<?= i18n("Name") ?>" required />
+    <input type="text" name="description" placeholder="<?= i18n("Description") ?>" />
+    <label><?= i18n("State") ?></label>
     <input type="checkbox" name="state" id="stateCheckbox" />
     <div id="durationField">
-        <label>Duración (Formato DateTime)</label>
+        <label><?= i18n("Format") ?></label>
         <input type="text" name="shutdown_date" placeholder="YYYY-MM-DD HH:MM:SS" />
     </div>
     <button id="createSwitch" type="submit" class="GenericButton">
-        <span>Crear</span>
+        <span><?= i18n("Create") ?></span>
     </button>
 </form>
     </div>

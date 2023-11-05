@@ -105,9 +105,6 @@ public function toggleInformation(){
 }
 
 
-
-
-
     public function add() {
         if (!$this->checkSession()) {
             return;
@@ -130,21 +127,15 @@ public function toggleInformation(){
 
         
         $toggle->setShutdownDate($shutdownDate);
-
-        
-    
         $toggle->setDescription($_POST['description']);
     
         try {
-             $toggle->isValidToggle();
-
+            $toggle->isValidToggle();
             $this->toggleMapper->save($toggle);
-            
             $this->view->setFlash("Toggle successfully added.");
-    
         } catch(ValidationException $ex) {
             $errors = $ex->getErrors();
-            print_r($ex);
+            $this->view->setFlash("Error: " . implode(", ", $errors), "error");
         }
     
         $this->view->redirect("toggle", "index");
