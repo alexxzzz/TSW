@@ -26,7 +26,7 @@ $view = ViewManager::getInstance();
 			<?= $view->popFlash() ?>
 		</div>
     <div class="mainContainer">
-      <sidebar>
+      <sidebar class="sidebar">
         <i class="fa-solid fa-x closeIcon"></i>
         <div class="logo logoMod">
           <h1 href="#">Iam</h1>
