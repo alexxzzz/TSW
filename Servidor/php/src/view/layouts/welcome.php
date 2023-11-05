@@ -24,7 +24,11 @@ $view = ViewManager::getInstance();
     />
 </head>
 <body>
+<?php
+        include(__DIR__."/language_select_element.php");
+    ?>
     <div class="signUpIn">
+      
 	<main>
 		<!-- flash message -->
 		<div id="flash">

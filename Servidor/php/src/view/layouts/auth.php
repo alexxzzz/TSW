@@ -40,6 +40,9 @@ $view = ViewManager::getInstance();
           <a href="index.php?controller=toggle&amp;action=index">Mis switches</a>
           <a href="index.php?controller=toggle&amp;action=suscribed">Suscritos</a>
           <div class="sidebarFooter">
+            <?php
+              include(__DIR__."/language_select_element.php");
+            ?>
             <a href="index.php?controller=users&amp;action=logout" class="logout">Logout</a>
             <div class="socialNetworks">
             <a href="https://google.com" target="_blank">

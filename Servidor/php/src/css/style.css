@@ -18,7 +18,8 @@
     font-size: 1.6rem;
     font-family: "Roboto Slab", serif;
   }
-  
+
+
   input {
     width: 35rem;
     height: 5rem;
@@ -671,5 +672,30 @@
       visibility: visible;
       opacity: 1;
     }
+
+    
   
+  }
+
+    
+  #languagechooser {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  #languagechooser li {
+    display: inline;
+    margin-right: 20px;
+  }
+
+  #languagechooser li a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+    transition: color 0.3s ease;
+  }
+
+  #languagechooser li a:hover {
+    color: #007bff; /* Cambia el color al pasar el mouse */
   }
