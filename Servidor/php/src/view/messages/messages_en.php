@@ -12,6 +12,7 @@ $i18n_messages = array(
     "Name" => "Name",
     "Public URI" => "Public URI",
     "Private URI" => "Private URI",
+    "description" => "Description:",
     "No switches found for this user." => "No switches found for this user.",
     "Description" => "Description",
     "On Time" => "On Time",

@@ -19,7 +19,7 @@ function displayUserToggles($toggles) {
         echo '</form>';
         echo '<div class="switchText">';
         echo '<h3> <strong> ' . i18n("Name") . ': </strong> ' . $toggle->getToggleName() . '</h3>';
-        echo '<p>' . $toggle->getDescription() . '</p>';
+        echo '<p> ' .i18n("description") . ' ' . $toggle->getDescription() . '</p>';
         echo '<p> <strong> ' . i18n("Public URI") . ': </strong> ' . $toggle->getPublicId() . '</p>';
         echo '<p> <strong> ' . i18n("Private URI") . ': </strong> ' . $toggle->getPrivateId() . '</p>';
         echo '</div>';

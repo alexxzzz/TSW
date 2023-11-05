@@ -92,9 +92,9 @@ class ToggleMapper {
         foreach ($suscribedToggles_db as $suscribedToggle_db) {
             $suscribedToggle = new Toggle();
 
-            if($toggle_db["shutdown_date"] != NULL) {
+            if($suscribedToggle_db["shutdown_date"] != NULL) {
                 $actual = new DateTime(); 
-                $off = new DateTime($toggle_db["shutdown_date"]);
+                $off = new DateTime($suscribedToggle_db["shutdown_date"]);
                 $state = $actual < $off;
             } else {
                 $state = false;
