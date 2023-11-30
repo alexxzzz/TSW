@@ -31,5 +31,15 @@ $i18n_messages = array(
     "Date" => "fecha",
     "Add" => "Añadir Interruptor",
     "MySwitches" => "Mis Interruptores",
+    "toggleAdded" => "Interruptor añadido con éxito.",
+    "errortoggleOn" => "Error: No puedes encender un toggle desde la URI pública. Si eres el dueño hazlo desde dashboard",
+    "toggleOn" => "Toggle encendido con éxito",
+    "errortoggleOff" => "Error: No puedes apagar un toggle desde la URI pública. Si eres el dueño hazlo desde dashboard",
+    "toggleOff" => "Toggle apagado con éxito",
+    "toggleOn2" => "toggle on",
+    "deleted" => "eliminado",
+    "subscribed" => "Toggle suscrito",
+    "subscribed" => "Toggle desuscrito",
+    "canLogIn" => " añadido con éxito. Por favor inicia sesión ahora",
 );
 ?>

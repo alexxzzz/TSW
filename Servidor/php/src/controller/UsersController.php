@@ -139,7 +139,7 @@ class UsersController extends BaseController {
 					// We want to see a message after redirection, so we establish
 					// a "flash" message (which is simply a Session variable) to be
 					// get in the view after redirection.
-					$this->view->setFlash("Username ".$user->getUsername()." successfully added. Please login now");
+					$this->view->setFlash(i18n("Username") . " " .$user->getUsername(). " " . i18n("canLogIn"));
 
 					// perform the redirection. More or less:
 					// header("Location: index.php?controller=users&action=login")

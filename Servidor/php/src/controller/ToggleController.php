@@ -132,7 +132,7 @@ public function toggleInformation(){
         try {
             $toggle->isValidToggle();
             $this->toggleMapper->save($toggle);
-            $this->view->setFlash("Toggle successfully added.");
+            $this->view->setFlash(i18n("toggleAdded"));
         } catch(ValidationException $ex) {
             $errors = $ex->getErrors();
             $this->view->setFlash("Error: " . implode(", ", $errors), "error");
@@ -191,7 +191,7 @@ public function toggleInformation(){
             $isPublic = $this->toggleMapper->isUriPublic($publicUri);
     
             if ($isPublic) {
-                $this->view->setFlash("Error: No puedes encender un toggle desde la URI pública. Si eres el dueño hazlo desde dashboard");
+                $this->view->setFlash(i18n("errorToggleOn"));
                 header("Location: $previousUrl");
                 exit;
             } else {
@@ -209,7 +209,7 @@ public function toggleInformation(){
                 try {
                     $toggle->canTurnOn();
                     $this->toggleMapper->turnOnUser($toggle);
-                    $this->view->setFlash("Toggle encendido exitosamente.");
+                    $this->view->setFlash(i18n("toggleOn"));
                     header("Location: $previousUrl");
                     exit;
                 } catch (ValidationException $ex) {
@@ -235,7 +235,7 @@ public function toggleInformation(){
             $isPublic = $this->toggleMapper->isUriPublic($publicUri);
     
             if ($isPublic) {
-                $this->view->setFlash("Error: No puedes apagar un toggle desde la URI pública. Si eres el dueño hazlo desde dashboard");
+                $this->view->setFlash(i18n("errorToggleOff"));
                 header("Location: $previousUrl");
                 exit;
             } else {
@@ -250,7 +250,7 @@ public function toggleInformation(){
                 try {
                     $toggle->canTurnOff();
                     $this->toggleMapper->turnOffUser($toggle);
-                    $this->view->setFlash("Toggle apagado exitosamente.");
+                    $this->view->setFlash(i18n("toggleOff"));
                     header("Location: $previousUrl");
                     exit;
                 } catch (ValidationException $ex) {
@@ -308,7 +308,7 @@ public function toggleInformation(){
             print_r($ex);
         }
         
-        $this->view->setFlash("toggle on");
+        $this->view->setFlash(i18n("toggleOn2"));
         $this->view->redirect("toggle", "index");
     }
 
@@ -365,7 +365,7 @@ public function delete() {
 
     // Delete the Toggle object from the database
     $this->toggleMapper->delete($toggleId);
-    $this->view->setFlash("toggle " .$toggleId . " deleted");
+    $this->view->setFlash("toggle " .$toggleId . " " . i18n("deleted"));
     // After deleting the toggle, you can redirect to a suitable location.
     $this->view->redirect("toggle", "index");
 }
