@@ -1,5 +1,4 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTrashAlt, faEdit, faShareSquare } from '@fortawesome/free-regular-svg-icons';
 
 function SwitchBox() {
   return (
@@ -14,9 +13,9 @@ function SwitchBox() {
         <h3>Fecha</h3>
       </div>
       <div className="switchIcons">
-        <FontAwesomeIcon icon={faTrashAlt} className="fa-regular fa-trash-can" />
+        {/* <FontAwesomeIcon icon={faTrashAlt} className="fa-regular fa-trash-can" />
         <FontAwesomeIcon icon={faEdit} className="fa-regular fa-pen-to-square" />
-        <FontAwesomeIcon icon={faShareSquare} className="fa-regular fa-share-from-square" />
+        <FontAwesomeIcon icon={faShareSquare} className="fa-regular fa-share-from-square" /> */}
       </div>
     </div>
   );

@@ -1,5 +1,4 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faInstagram, faTwitter, faLinkedin, faGithub } from '@fortawesome/free-solid-svg-icons'
 import '../styles/styles.css';
 
 function Footer() {
@@ -8,16 +7,16 @@ function Footer() {
       <div className="footerContainer">
         <h4 className="inferior__titulo">Siguenos</h4>
         <a href="https://google.com" target="_blank" rel="noreferrer">
-          <FontAwesomeIcon icon={faInstagram} />
+          <FontAwesomeIcon icon="fa-brands fa-instagram" />
         </a>
         <a href="https://google.com" target="_blank" rel="noreferrer">
-          <FontAwesomeIcon icon={faTwitter} />
+          <FontAwesomeIcon icon="fa-brands fa-twitter" />
         </a>
         <a href="https://google.com" target="_blank" rel="noreferrer">
-          <FontAwesomeIcon icon={faLinkedin} />
+          <FontAwesomeIcon icon="fa-brands fa-linkedin" />
         </a>
         <a href="https://google.com" target="_blank" rel="noreferrer">
-          <FontAwesomeIcon icon={faGithub} />
+          <FontAwesomeIcon icon="fa-brands fa-github" />
         </a>
         <p>Todos los derechos reservados 2023</p>
       </div>

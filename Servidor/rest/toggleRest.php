@@ -1,30 +1,56 @@
 <?php
 require_once(__DIR__."/../model/Toggle.php");
 require_once(__DIR__."/../model/ToggleMapper.php");
+require_once(__DIR__."/BaseRest.php");
 
-class ToggleController {
+class ToggleRest extends BaseRest {
     private $toggleMapper;
 
     public function __construct() {
         $this->toggleMapper = new ToggleMapper();
     }
 
+
+
+
+
     public function index() {
         $userID = $this->getCurrentUserId();
         $toggles = $this->toggleMapper->findAll($userID);
+        
 
+        $toggle_array = array();
+        foreach($toggles as $toggle) {
+            array_push($toggle_array, array(
+                "name" => $toggle->getToggleName(),
+                "date" => $toggle->getTuronOnDate(),
+                "description"=>$toggle->getDescription(),
+                "state"=>$toggle->getState()
+            ));
+        }
         // Transform the toggle data to JSON
-        header('Content-Type: application/json');
-        echo json_encode($toggles);
+        header($_SERVER['SERVER_PROTOCOL'].' 200 Ok');
+		header('Content-Type: application/json');
+		echo(json_encode($toggle_array));
     }
 
     public function suscribed() {
         $userID = $this->getCurrentUserId();
         $suscribedToggles = $this->toggleMapper->findSuscribed($userID);
 
-        // Transform the suscribed toggle data to JSON
-        header('Content-Type: application/json');
-        echo json_encode($suscribedToggles);
+		$toggle_array = array();
+        foreach($toggles as $toggle) {
+            array_push($toggle_array, array(
+                "name" => $toggle->getToggleName(),
+                "date" => $toggle->getTuronOnDate(),
+                "description"=>$toggle->getDescription(),
+                "state"=>$toggle->getState()
+            ));
+        }
+        // Transform the toggle data to JSON
+        header($_SERVER['SERVER_PROTOCOL'].' 200 Ok');
+		header('Content-Type: application/json');
+		echo(json_encode($toggle_array));
     }
 
     public function toggleInformation() {
@@ -45,14 +71,22 @@ class ToggleController {
             return;
         }
 
-        // Transform the toggle information to JSON
+            $toggle_array = array(
+                "name" => $toggle->getToggleName(),
+                "date" => $toggle->getTuronOnDate(),
+                "description"=>$toggle->getDescription(),
+                "state"=>$toggle->getState()
+            );
+
+            // Transform the toggle information to JSON
         header('Content-Type: application/json');
         echo json_encode($toggle);
-    }
+        }
 
-    public function add() {
-        // Assuming data is sent via POST request in JSON format
-        $data = json_decode(file_get_contents('php://input'), true);
+        
+
+    public function add($data) {
+
 
         // Instantiate Toggle object and set its properties using $data
         
@@ -87,13 +121,8 @@ class ToggleController {
         }
     }
 
-    private function generateUUID(){
-        return trim(file_get_contents('/proc/sys/kernel/random/uuid'));
-    }
 
-    public function onUser() {
-        // Assuming data is sent via POST request in JSON format
-        $data = json_decode(file_get_contents('php://input'), true);
+    public function onUser($data) {
 
         // Instantiate Toggle object and set its properties using $data
         $toggle = new Toggle();
@@ -119,9 +148,7 @@ class ToggleController {
         }
     }
 
-    public function onLink() {
-        // Assuming data is sent via POST request in JSON format
-        $data = json_decode(file_get_contents('php://input'), true);
+    public function onLink($data) {
 
         // Retrieve public URI from the request data
         $publicUri = isset($data['uri']) ? $data['uri'] : null;
@@ -165,9 +192,7 @@ class ToggleController {
         }
     }
 
-    public function offLink() {
-        // Assuming data is sent via POST request in JSON format
-        $data = json_decode(file_get_contents('php://input'), true);
+    public function offLink($data) {
 
         // Retrieve public URI from the request data
         $publicUri = isset($data['uri']) ? $data['uri'] : null;
@@ -208,9 +233,7 @@ class ToggleController {
         }
     }
 
-    public function offUser() {
-        // Assuming data is sent via POST request in JSON format
-        $data = json_decode(file_get_contents('php://input'), true);
+    public function offUser($data) {
 
         // Continue with similar logic as offLink but specific to offUser
         if (isset($data['id'])) {
@@ -242,9 +265,9 @@ class ToggleController {
 
 
     public function delete() {
-        // Assuming you receive the toggle ID via GET request
-        $toggleId = isset($_GET['id']) ? $_GET['id'] : null;
 
+        $toggleId = isset($_GET['id']) ? $_GET['id'] : null;
+        
         if ($toggleId) {
             // Retrieve toggle details from the database
             $toggle = $this->toggleMapper->getToggleById($toggleId);
@@ -278,3 +301,16 @@ class ToggleController {
         }
     }
 }
+
+// URI-MAPPING for this Rest endpoint
+$toggleRest = new ToggleRest();
+URIDispatcher::getInstance()
+->map("GET",	"/toggle", array($toggleRest,"index"))
+->map("GET",	"/toggle/$1", array($toggleRest,"getInformation"))
+->map("GET",	"/toggle/subscribed", array($toggleRest,"suscribed"))
+->map("POST", "/toggle", array($toggleRest,"add"))
+->map("PUT",	"/toggle/$1", array($toggleRest,"onLink"))
+->map("PUT",	"/toggle/$1", array($toggleRest,"offLink"))
+->map("PUT",	"/toggle/$1", array($toggleRest,"onUser"))
+->map("PUT",	"/toggle/$1", array($toggleRest,"offUser"))
+->map("DELETE", "/toggle/$1", array($toggleRest,"delete"));

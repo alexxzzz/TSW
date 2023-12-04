@@ -211,6 +211,12 @@
   
   
   /* Dashboard */
+
+  @media (min-width: 768px) {
+    .container {
+      margin-left: 25rem;
+    }
+  }
   
   .mainContainer {
     background-color: var(--color-gris-claro);

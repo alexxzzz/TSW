@@ -5,7 +5,9 @@ require_once(__DIR__."/../core/I18n.php");
 require_once(__DIR__."/../model/Subscription.php");
 require_once(__DIR__."/../model/SubscriptionMapper.php");
 
-class SubscriptionController {
+require_once(__DIR__."/BaseRest.php");
+
+class SubscriptionRest extends BaseRest {    
     private $subscriptionMapper;
 
     public function __construct() {
@@ -66,3 +68,10 @@ class SubscriptionController {
         return isset($currentUserId);
     }
 }
+
+// URI-MAPPING for this Rest endpoint
+$toggleRest = new SubscriptionRest();
+URIDispatcher::getInstance()
+->map("PUT",	"/subscribe/$1", array($toggleRest,"subscribe"))
+->map("PUT",	"/subscribe/$1", array($toggleRest,"unsubscribe"));
+
