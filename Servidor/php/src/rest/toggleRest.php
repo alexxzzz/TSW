@@ -222,6 +222,7 @@ class ToggleRest extends BaseRest {
     function offLink($toggleURI) {
         $isPublic = $this->toggleMapper->isUriPublic($toggleURI);
 
+
         if($isPublic) { 
             header($_SERVER['SERVER_PROTOCOL'] . ' 400 Bad Request.');
             return;
@@ -236,7 +237,7 @@ class ToggleRest extends BaseRest {
         
         $toggle->setState(false);
 
-        $this->toggleMapper->turnOnUser($toggle);
+        $this->toggleMapper->turnOffLink($toggle);
         header($_SERVER['SERVER_PROTOCOL'] . ' 200 OK');
         echo json_encode(array('message' => 'Toggle successfully turned off'));
     }

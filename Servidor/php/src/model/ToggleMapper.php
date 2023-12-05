@@ -29,8 +29,6 @@ class ToggleMapper {
         }
     }
 
-<<<<<<< Updated upstream
-=======
     public function findAll($userID) {
         $query = "SELECT * FROM toggles, users WHERE toggles.user_id = users.user_id AND toggles.user_id = :userID";
         
@@ -162,8 +160,6 @@ class ToggleMapper {
 
 
     public function isUriPublic($publicUri) {
-
-
         $query = "SELECT COUNT(*) FROM toggles WHERE public_id = :publicUri";
         $stmt = $this->db->prepare($query);
         $stmt->bindParam(':publicUri', $publicUri);
@@ -174,7 +170,6 @@ class ToggleMapper {
         return $count > 0; 
     }
     
->>>>>>> Stashed changes
     public function turnOnUser($toggle) {
         $query = "UPDATE toggles
             SET toggle_state = :toggle_state, shutdown_date = :shutdown_date, turn_on_date = :turn_on_date
