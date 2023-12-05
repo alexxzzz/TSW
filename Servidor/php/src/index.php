@@ -1,91 +1,37 @@
 <?php
-// file: index.php
+// Simple REST router
 
-/**
-* Default controller if any controller is passed in the URL
-*/
-define("DEFAULT_CONTROLLER", "users");
+try{
+	require_once(dirname(__FILE__)."/rest/URIDispatcher.php");
 
-/**
-* Default action if any action is passed in the URL
-*/
-define("DEFAULT_ACTION", "login");
+	// dinamically include Rest files (*Rest.php) in this directory
+	$files_in_script_dir = scandir(__DIR__ . '/rest/');
 
-/**
-* Main router (single entry-point for all requests)
-* of the MVC implementation.
-*
-* This router will create an instance of the corresponding
-* controller, based on the "controller" parameter and call
-* the corresponding method, based on the "action" parameter.
-*
-* The rest of GET or POST parameters should be handled by
-* the controller itself.
-*
-* Parameters:
-* <ul>
-* <li>controller: The controller name (via HTTP GET)
-* <li>action: The name inside the controller (via HTTP GET)
-* </ul>
-*
-* @return void
-*
-* @author lipido <lipido@gmail.com>
-*/
-function run() {
-	// invoke action!
-	try {
+	foreach($files_in_script_dir as $filename) {
+		// if filename ends with *Rest.php
 
-		if (!isset($_GET["controller"])) {
-			$_GET["controller"] = DEFAULT_CONTROLLER;
+		if (preg_match('/.*REST\\.PHP/', strtoupper($filename))) {
+			include_once(__DIR__ . "/rest/" . $filename);
 		}
-
-		if (!isset($_GET["action"])) {
-			$_GET["action"] = DEFAULT_ACTION;
-		}
-
-		// Here is where the "magic" occurs.
-		// URLs like: index.php?controller=posts&action=add
-		// will provoke a call to: new PostsController()->add()
-
-		// Instantiate the corresponding controller
-		$controller = loadController($_GET["controller"]);
-
-		// Call the corresponding action
-		$actionName = $_GET["action"];
-		$controller->$actionName();
-	} catch(Exception $ex) {
-		//uniform treatment of exceptions
-		die("An exception occured: ".$ex->getMessage());
 	}
+
+	
+
+	//	error_reporting(E_ERROR);
+	$dispatcher = URIDispatcher::getInstance();
+	
+	// enable CORS (allow other sites to use your API)
+	$dispatcher->enableCORS('*','origin, content-type, accept, authorization');
+	
+	$dispatched = $dispatcher->dispatchRequest();
+
+	if (!$dispatched) {
+		header($_SERVER['SERVER_PROTOCOL'].' 400 Bad request');
+		die("no dispatcher found for this request");
+	}
+
+} catch(Throwable $ex) {
+	header($_SERVER['SERVER_PROTOCOL'].' 500 Internal server error');
+	header("Content-Type: application/json");
+	die(json_encode(array("error" => $ex->getMessage())));
 }
-
-/**
-* Load the required controller file and create the controller instance
-*
-* @param string $controllerName The controller name found in the URL
-* @return Object A Controller instance
-*/
-function loadController($controllerName) {
-	$controllerClassName = getControllerClassName($controllerName);
-
-	require_once(__DIR__."/controller/".$controllerClassName.".php");
-	return new $controllerClassName();
-}
-
-/**
-* Obtain the class name for a controller name in the URL
-*
-* For example $controllerName = "users" will return "UsersController"
-*
-* @param $controllerName The name of the controller found in the URL
-* @return string The controller class name
-*/
-function getControllerClassName($controllerName) {
-	return strToUpper(substr($controllerName, 0, 1)).substr($controllerName, 1)."Controller";
-}
-
-//run!
-run();
-
-?>
