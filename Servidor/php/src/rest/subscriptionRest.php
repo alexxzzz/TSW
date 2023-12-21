@@ -6,29 +6,40 @@ require_once(__DIR__."/../model/Subscription.php");
 require_once(__DIR__."/../model/SubscriptionMapper.php");
 
 require_once(__DIR__."/../model/UserMapper.php");
+require_once(__DIR__."/../model/ToggleMapper.php");
+
+require_once(__DIR__."/../util/util.php");
 
 class SubscriptionRest extends BaseRest {    
     private $subscriptionMapper;
     private $userMapper;
+    private $toggleMapper;
 
     public function __construct() {
         $this->subscriptionMapper = new SubscriptionMapper();
         $this->userMapper = new UserMapper();
+        $this->toggleMapper = new ToggleMapper();
     }
 
-    public function subscribe($toggleId) {
+    public function subscribe($toggleURI) {
         $currentUser = parent::authenticateUser();
         $currentUserId = $this->userMapper->getUserIdByUsername($currentUser->getUsername());
         
-        $toogle = $this->subscriptionMapper->getToggleById($toggleId);
+        if(!isUuidValid($toggleURI)) {
+            header($_SERVER['SERVER_PROTOCOL'].' 400 Bad Request');
+            return;
+        }
+        
+        $toggle = $this->toggleMapper->findByPublicOrPrivateURI($toggleURI);
 
-        if($toogle == NULL){ 
+        if($toggle == NULL){ 
             header($_SERVER['SERVER_PROTOCOL'].' 400 Bad Request');
             return;
         }
 
         try {
-            $this->subscriptionMapper->subscribe($toggleId, $currentUserId);
+            $id = $toggle->getToggleId();
+            $this->subscriptionMapper->subscribe($id, $currentUserId);
             // Return HTTP status 201
             header($_SERVER['SERVER_PROTOCOL'].' 201 Created');
 
@@ -42,19 +53,24 @@ class SubscriptionRest extends BaseRest {
        
     }
 
-    public function unsubscribe($toggleId) {
+    public function unsubscribe($toggleURI) {
         $currentUser = parent::authenticateUser();
         $currentUserId = $this->userMapper->getUserIdByUsername($currentUser->getUsername());
-        
-        $toogle = $this->subscriptionMapper->getToggleById($toggleId);
 
-        if($toogle == NULL){ 
+        if(!isUuidValid($toggleURI)) {
+            header($_SERVER['SERVER_PROTOCOL'].' 400 Bad Request');
+            return;
+        }
+
+        $toggle = $this->toggleMapper->findByPublicOrPrivateURI($toggleURI);
+
+        if($toggle == NULL){ 
             header($_SERVER['SERVER_PROTOCOL'].' 400 Bad Request');
             return;
         }
 
         try {
-            $this->subscriptionMapper->unsubscribe($toggleId, $currentUserId);
+            $this->subscriptionMapper->unsubscribe($toggle->getToggleId(), $currentUserId);
             // Return HTTP status 201            
             header($_SERVER['SERVER_PROTOCOL'].' 201 Created');
 
@@ -66,16 +82,11 @@ class SubscriptionRest extends BaseRest {
         }
     }
 
-    private function checkSession($currentUserId) {
-        // Perform your session checks based on $currentUserId
-        // Return true if the session is valid; otherwise, return false
-        return isset($currentUserId);
-    }
 }
 
 // URI-MAPPING for this Rest endpoint
 $toggleRest = new SubscriptionRest();
 URIDispatcher::getInstance()
-->map("PUT",	"/subscribe/$1", array($toggleRest,"subscribe"))
-->map("PUT",	"/unsubscribe/$1", array($toggleRest,"unsubscribe"));
+->map("POST",	"/subscription/$1", array($toggleRest,"subscribe"))
+->map("DELETE",	"/subscription/$1", array($toggleRest,"unsubscribe"));
 

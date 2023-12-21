@@ -12,7 +12,7 @@ class SubscriptionMapper {
     public function subscribe($toggleId, $currentUserId) {
         $stmt = $this->db->prepare("INSERT INTO subscriptions (user_id, toggle_id) VALUES (:currentUserId, :toggleId)");
 
-        if ($stmt->execute([$user_id, $toggle_id])) {
+        if ($stmt->execute([$currentUserId, $toggleId])) {
             return true;
         } else {
             return false;
@@ -23,7 +23,7 @@ class SubscriptionMapper {
     public function unsubscribe($toggleId, $currentUserId) {
         $stmt = $this->db->prepare("DELETE FROM subscriptions WHERE user_id = :currentUserId AND toggle_id = :toggleId");
 
-        if ($stmt->execute([$user_id, $toggle_id])) {
+        if ($stmt->execute([$currentUserId, $toggleId])) {
             return true;
         } else {
             return false;

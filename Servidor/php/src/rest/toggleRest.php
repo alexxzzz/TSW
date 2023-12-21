@@ -74,11 +74,18 @@ class ToggleRest extends BaseRest {
         }
     }
 
-    function delete($toggleId) {
+    function delete($toggleURI) {
         $currentUser = parent::authenticateUser();
         $currentUserId = $this->userMapper->getUserIdByUsername($currentUser->getUsername());
 
-        $toggle = $this->toggleMapper->getToggleById($toggleId);
+        $toggle = $this->toggleMapper->findByPublicOrPrivateURI($toggleURI);
+        
+        if($toggle == NULL) {
+            header($_SERVER['SERVER_PROTOCOL'] . ' 404 Not found.');
+            return;
+        }
+        
+        $toggle = $this->toggleMapper->getToggleById($toggle->getToggleId());
 
         if ($toggle['user_id'] !== $currentUserId) { 
             header($_SERVER['SERVER_PROTOCOL'] . ' 400 Bad Request');
@@ -86,7 +93,10 @@ class ToggleRest extends BaseRest {
             return;
         }
 
-        $this->toggleMapper->delete($toggleId);
+        $toggle = $this->toggleMapper->findByPublicOrPrivateURI($toggleURI);
+        $toggle->setUserId($currentUserId);
+
+        $this->toggleMapper->delete($toggle);
         header($_SERVER['SERVER_PROTOCOL'] . ' 200 OK');
         echo json_encode(array('message' => 'Successful delete.'));
     }
@@ -117,23 +127,25 @@ class ToggleRest extends BaseRest {
 
     }
 
-    function getInformation($toggleId) {
+    function getInformation($toggleURI) {
         $currentUser = parent::authenticateUser();
         $currentUserId = $this->userMapper->getUserIdByUsername($currentUser->getUsername());
 
-        $toggle = $this->toggleMapper->findByPublicOrPrivateURI($toggleId);
+        $toggle = $this->toggleMapper->findByPublicOrPrivateURI($toggleURI);
 
-        if ($toggle == NULL) {
+        if($toggle == NULL) {
             header($_SERVER['SERVER_PROTOCOL'] . ' 404 Not found.');
             return;
         }
 
+        $toggle = $this->toggleMapper->getToggleById($toggle->getToggleId());
+
         $response = array(
-            "toggle_name" => $toggle->getToggleName(),
-            "toggle_state" => $toggle->getState(),
-            "turn_on_date" => $toggle->getTurnOnDate(),
-            "toggle_description" => $toggle->getDescription(),
-            "toggle_id" => $toggle->getToggleId()
+            "toggle_name" => $toggle['toggle_name'],
+            "toggle_state" => $toggle['toggle_state'],
+            "turn_on_date" => $toggle['turn_on_date'],
+            "toggle_description" => $toggle['toggle_description'],
+            "public_id" => $toggle['public_id']
         );
 
         header($_SERVER['SERVER_PROTOCOL'] . ' 200 OK');
@@ -168,22 +180,24 @@ class ToggleRest extends BaseRest {
         echo json_encode(array('message' => 'Toggle successfully turned on.'));
     }
 
-    function onUser($toggleId) {
+    function onUser($toggleURI) {
         $currentUser = parent::authenticateUser();
         $currentUserId = $this->userMapper->getUserIdByUsername($currentUser->getUsername());
         
-        $toggle = $this->toggleMapper->getToggleById($toggleId);
-    
+        $toggle = $this->toggleMapper->findByPublicOrPrivateURI($toggleURI);
+
         if($toggle == NULL) {
             header($_SERVER['SERVER_PROTOCOL'] . ' 404 Not found.');
             return;
         }
+
+        $toggle = $this->toggleMapper->getToggleById($toggle->getToggleId());
         
         if($toggle['user_id'] != $currentUserId) { 
             header($_SERVER['SERVER_PROTOCOL'] . ' 400 Bad Request.');
             return;
         }
-        
+
         $toggle = $this->toggleMapper->findByPublicOrPrivateURI($toggle['public_id']);
 
         $toggle->setState(true);
@@ -194,17 +208,19 @@ class ToggleRest extends BaseRest {
         echo json_encode(array('message' => 'Toggle successfully turned on.'));
     }
 
-    function offUser($toggleId) {
+    function offUser($toggleURI) {
         $currentUser = parent::authenticateUser();
         $currentUserId = $this->userMapper->getUserIdByUsername($currentUser->getUsername());
         
-        $toggle = $this->toggleMapper->getToggleById($toggleId);
-    
+        $toggle = $this->toggleMapper->findByPublicOrPrivateURI($toggleURI);
+        
         if($toggle == NULL) {
             header($_SERVER['SERVER_PROTOCOL'] . ' 404 Not found.');
             return;
         }
         
+        $toggle = $this->toggleMapper->getToggleById($toggle->getToggleId());
+
         if($toggle['user_id'] != $currentUserId) { 
             header($_SERVER['SERVER_PROTOCOL'] . ' 400 Bad Request.');
             return;
