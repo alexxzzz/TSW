@@ -2,12 +2,12 @@ import { AiOutlineDelete, AiOutlineEdit, AiOutlineShareAlt } from 'react-icons/a
 
 
 
-function Switch({ name, date, description, deleteCallback, shareCallback }) {
+function Switch({ name, date, description, deleteCallback, shareCallback, state }) {
 
   return (
     <div className="switchBox">
       <label className="switch">
-        <input type="checkbox" />
+        <input type="checkbox"  checked={state} />
         <span className="slider round"></span>
       </label>
       <div className="switchText">
