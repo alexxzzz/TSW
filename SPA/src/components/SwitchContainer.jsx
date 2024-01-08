@@ -24,6 +24,9 @@ function SwitchContainer() {
       });
 
       if (!response.ok) {
+        if (response.status === 401) {
+          window.location.href = '/'; // Utiliza window.location.href para redirigir
+        }
         throw new Error('Error al obtener los switches');
       }
 
