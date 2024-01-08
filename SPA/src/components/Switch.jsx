@@ -1,3 +1,5 @@
+import { AiOutlineDelete, AiOutlineEdit, AiOutlineShareAlt } from 'react-icons/ai';
+
 function Switch({ name, date, description }) {
   return (
     <div className="switchBox">
@@ -11,9 +13,9 @@ function Switch({ name, date, description }) {
         <p>{description}</p>
       </div>
       <div className="switchIcons">
-         {/* <FontAwesomeIcon icon={faTrashAlt} className="fa-regular fa-trash-can" />
-        <FontAwesomeIcon icon={faEdit} className="fa-regular fa-pen-to-square" />
-        <FontAwesomeIcon icon={faShareSquare} className="fa-regular fa-share-from-square" /> */}
+        <AiOutlineDelete className="fa-regular fa-trash-can" size={24} />
+        <AiOutlineEdit className="fa-regular fa-pen-to-square" size={24} />
+        <AiOutlineShareAlt className="fa-regular fa-share-from-square" size={24} />
       </div>
     </div>
   );

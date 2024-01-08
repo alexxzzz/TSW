@@ -1,11 +1,11 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faX } from '@fortawesome/free-solid-svg-icons';
+import { AiOutlineCloseCircle } from 'react-icons/ai';
+import '../styles/styles.css';
 
 function ModalWindow() {
   return (
     <div className="modalWindow" id="modalWindow">
       <div className="modal">
-        <FontAwesomeIcon icon={faX} id="close" className="fa-m" />
+        <AiOutlineCloseCircle id="close" className="fa-m" />
         <h1>Añadir switch</h1>
         <input type="text" placeholder="nombre" required />
         <input type="text" placeholder="duracion" required />

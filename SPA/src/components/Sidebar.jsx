@@ -1,5 +1,4 @@
-/*import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faInstagram, faTwitter, faLinkedin, faGithub } from '@fortawesome/free-brands-svg-icons';*/
+import { FaInstagram, FaTwitter, FaLinkedin, FaGithub } from 'react-icons/fa';
 
 function Sidebar() {
   return (
@@ -19,17 +18,17 @@ function Sidebar() {
         <div className="sidebarFooter">
           <a href="./signIn.html" className="logout">Logout</a>
           <div className="socialNetworks">
-            <a href="https://google.com" target="_blank" rel="noreferrer">
-              {/*<FontAwesomeIcon icon={faInstagram} />
+            <a href="https://instagram.com" target="_blank" rel="noreferrer">
+              <FaInstagram size={24} />
             </a>
-            <a href="https://google.com" target="_blank" rel="noreferrer">
-              <FontAwesomeIcon icon={faTwitter} />
+            <a href="https://twitter.com" target="_blank" rel="noreferrer">
+              <FaTwitter size={24} />
             </a>
-            <a href="https://google.com" target="_blank" rel="noreferrer">
-              <FontAwesomeIcon icon={faLinkedin} />
+            <a href="https://linkedin.com" target="_blank" rel="noreferrer">
+              <FaLinkedin size={24} />
             </a>
-            <a href="https://google.com" target="_blank" rel="noreferrer">
-  <FontAwesomeIcon icon={faGithub} />*/}
+            <a href="https://github.com" target="_blank" rel="noreferrer">
+              <FaGithub size={24} />
             </a>
           </div>
         </div>

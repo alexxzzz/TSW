@@ -8,7 +8,7 @@ function SwitchContainer() {
 
   useEffect(() => {
     fetchSwitches();
-  }, []);
+  },);
 
   const fetchSwitches = async () => {
     try {

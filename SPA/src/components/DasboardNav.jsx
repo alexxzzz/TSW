@@ -1,12 +1,11 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBars, faMessage, faUser } from '@fortawesome/free-solid-svg-icons';
+import { FaBars, FaRegComment, FaUser } from 'react-icons/fa';
 
 function DashboardNav() {
   return (
     <nav className="dashboardNav">
-      <FontAwesomeIcon icon={faBars} className="sidebarIcon" size="2x" />
-      <FontAwesomeIcon icon={faMessage} className="fa-regular fa-message" size="2x" />
-      <FontAwesomeIcon icon={faUser} className="userIcon" size="2x" />
+      <FaBars className="sidebarIcon" size={24} />
+      <FaRegComment className="fa-regular fa-message" size={24} />
+      <FaUser className="userIcon" size={24} />
       <div className="menu">
         <ul>
           <li><a href="#">Example</a></li>
@@ -20,3 +19,4 @@ function DashboardNav() {
 }
 
 export default DashboardNav;
+
