@@ -1,13 +1,13 @@
 import { AiOutlineDelete, AiOutlineEdit, AiOutlineShareAlt } from 'react-icons/ai';
+import switchService from '../services/switchService';
 
 
 
-function Switch({ name, date, description, deleteCallback, shareCallback, state }) {
-
+function Switch({ name, date, description, deleteCallback, shareCallback, state, turnOnCallback, turnOffCallback }) {
   return (
     <div className="switchBox">
       <label className="switch">
-        <input type="checkbox"  checked={state} />
+        <input type="checkbox"  checked={state} onChange={!state ? turnOnCallback : turnOffCallback} />
         <span className="slider round"></span>
       </label>
       <div className="switchText">

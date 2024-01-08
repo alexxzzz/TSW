@@ -18,6 +18,16 @@ function SwitchContainer() {
     setSwitches((switches) => switches.filter((sw) => sw.id !== id));
   }
 
+  const turnOnSwitch = async (id) => {
+    await switchService.turnOnSwitch(id, getAuthCredentials());
+    fetchSwitches();
+  }
+
+  const turnOffSwitch = async (id) => {
+    await switchService.turnOffSwitch(id, getAuthCredentials());
+    fetchSwitches();
+  }
+
   const fetchSwitches = async () => {
     try {
       const response = await fetch('http://localhost:8080/toggle', {
@@ -56,6 +66,7 @@ function SwitchContainer() {
     }
   };
 
+
   const openModal = (id) => {
     setSelectedSwitchId(id);
     setModalOpen(true);
@@ -92,6 +103,8 @@ function SwitchContainer() {
               description={toggle.description}
               deleteCallback={() => deleteSwitch(toggle.id)}
               shareCallback={() => openModal(toggle.id)}
+              turnOnCallback={() => turnOnSwitch(toggle.id)}
+              turnOffCallback={() => turnOffSwitch(toggle.id)}
               name={toggle.name}
               state={toggle.state}
               date={toggle.date}

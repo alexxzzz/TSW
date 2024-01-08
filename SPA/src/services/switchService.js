@@ -47,7 +47,53 @@ const switchService = {
             console.error('Error al agregar el elemento:', error.message);
             throw error;
         }
-    }
+    },
+
+    turnOnSwitch: async (id, credentials) => {
+        try {
+            const response = await fetch(`http://localhost:8080/onUser/${id}`, {
+                method: 'PUT',
+                headers: {
+                    'Authorization': `Basic ${credentials}`,
+                },
+            });
+
+            if (!response.ok) {
+                throw new Error(`Error encendiendo el elemento con ID ${id}`);
+            }
+
+            const data = await response.json();
+            console.log('Elemento encendido con éxito:', data);
+
+            return data;
+        } catch (error) {
+            console.error('Error al encender el elemento:', error.message);
+            throw error;
+        }
+    },
+
+    turnOffSwitch: async (id, credentials) => {
+        try {
+            const response = await fetch(`http://localhost:8080/offUser/${id}`, {
+                method: 'PUT',
+                headers: {
+                    'Authorization': `Basic ${credentials}`,
+                },
+            });
+
+            if (!response.ok) {
+                throw new Error(`Error al apagar el elemento con ID ${id}`);
+            }
+
+            const data = await response.json();
+            console.log('Elemento apagado con éxito:', data);
+
+            return data;
+        } catch (error) {
+            console.error('Error al apagar el elemento:', error.message);
+            throw error;
+        }
+    },
 };
 
 export default switchService;
