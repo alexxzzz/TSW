@@ -567,7 +567,6 @@ input:checked + .slider:before {
 
 
 
-
 /* Estilos login para dispositivos móviles */
 @media (max-width: 480px) {
   body {
@@ -675,3 +674,4 @@ input:checked + .slider:before {
   }
 
 }
+
