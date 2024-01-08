@@ -3,12 +3,15 @@ import Switch from './Switch';
 import { useAuth } from '../context/AuthContext';
 import switchService from '../services/switchService';
 import Modal from './switchModalInfo';
+import ModalAddSwitch from './switchModalAdd';
 
 function SwitchContainer() {
   const [ switches, setSwitches ] = useState([]);
   const { getAuthCredentials } = useAuth();
   const [selectedSwitchId, setSelectedSwitchId] = useState(null);
   const [modalOpen, setModalOpen] = useState(false);
+  const [modalAddOpen, setModalAddOpen] = useState(false);
+
 
   const deleteSwitch = async (id) => {
     switchService.deleteItem(id, getAuthCredentials());
@@ -37,6 +40,22 @@ function SwitchContainer() {
     }
   };
 
+  const handleAddSwitch = async (newSwitchData) => {
+    try {
+      const response = await switchService.addItem(newSwitchData, getAuthCredentials());
+
+      if (!response.ok) {
+        throw new Error('Error al agregar el switch');
+      }
+
+      fetchSwitches();
+    } catch (error) {
+      console.error('Error al agregar el switch:', error);
+    } finally {
+      closeAddModal(); 
+    }
+  };
+
   const openModal = (id) => {
     setSelectedSwitchId(id);
     setModalOpen(true);
@@ -47,12 +66,21 @@ function SwitchContainer() {
     setSelectedSwitchId(null);
   };
 
+  const openAddModal = () => {
+    setModalAddOpen(true);
+  };
+
+  const closeAddModal = () => {
+    setModalAddOpen(false);
+  };
+
   useEffect(() => {
     fetchSwitches();
   }, []);
 
   return (
     <div>
+      <button className="add-button" onClick={openAddModal}>Agregar Switch</button>
       <div className="switchContainer">
         {switches.length === 0 ? (
           <h1>No hay switches disponibles</h1>
@@ -72,6 +100,7 @@ function SwitchContainer() {
         )}
       </div>
       <Modal isOpen={modalOpen} onClose={closeModal} switchId={selectedSwitchId} />
+      <ModalAddSwitch isOpen={modalAddOpen} onClose={closeAddModal} onAdd={handleAddSwitch} />
     </div>
   );
 }

@@ -24,6 +24,30 @@ const switchService = {
             throw error;
         }
     },
+
+    addItem: async (switchData, credentials) => {
+        try {
+            const response = await fetch(`http://localhost:8080/toggle`, {
+                method: 'POST',
+                body: JSON.stringify(switchData),
+                headers: {
+                    'Authorization': `Basic ${credentials}`,
+                    'Content-Type': 'application/json'
+                },
+            });
+
+            if (!response.ok) {
+                throw new Error(``);
+            }
+
+            console.log('Elemento agregado con éxito:', switchData.name);
+
+            return {ok: true}
+        } catch (error) {
+            console.error('Error al agregar el elemento:', error.message);
+            throw error;
+        }
+    }
 };
 
 export default switchService;

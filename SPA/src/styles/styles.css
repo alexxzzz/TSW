@@ -676,7 +676,7 @@
   
   }
 
-  .modalSwitch {
+  .modalSwitch, .addmodal{
     display: none;
     position: absolute;
     top: 0;
@@ -687,11 +687,11 @@
     align-items: center;
   }
   
-  .modalSwitch.open {
+  .modalSwitch.open, .addmodal.open{
     display: flex;
   }
   
-  .modalSwitch-overlay {
+  .modalSwitch-overlay, .addmodal-overlay {
     position: fixed;
     top: 0;
     left: 0;
@@ -701,11 +701,82 @@
     z-index: 1000; 
   }
   
-  .modalSwitch-content {
+  .modalSwitch-content{
     background: #fff;
     padding: 20px;
     border-radius: 8px;
     text-align: center;
     z-index: 1001; 
+  }
+
+  .addmodal-content {
+    display: flex;
+    flex-direction: column;
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    z-index: 1001; 
+  }
+
+  .add-button {
+    background-color: #1a8f68; 
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+
+  .add-button:hover {
+    background-color: #0c6845; 
+  }
+
+  .addmodal h2 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+  }
+  
+  .addmodal label {
+    display: block;
+    margin-bottom: 10px;
+  }
+  
+  .addmodal input,
+  .addmodal textarea {
+    width: 100%;
+    padding: 8px;
+    margin-top: 4px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  
+  .addmodal input[type="checkbox"] {
+    margin-top: 0;
+  }
+  
+  .addmodal button {
+    background-color: #1a8f68;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    cursor: pointer;
+  }
+  
+  .addmodal button:hover {
+    background-color: #0c6845;
+  }
+  
+  .addmodal button + button {
+    background-color:  #ab3202;
+  }
+
+  .addmodal button + button:hover {
+    background-color: #cc4b1b;
   }
   
