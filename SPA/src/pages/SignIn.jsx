@@ -2,30 +2,32 @@ import { useState } from 'react';
 import Footer from '../components/footer';
 import '../styles/styles.css';
 import {useNavigate, Link}  from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 
 function SignIn() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
+  const { setAuthCredentials, getAuthCredentials } = useAuth();
+
+
 
   const handleSignIn = async (e) => {
     e.preventDefault();
-
+    const basicAuth = btoa(`${username}:${password}`);
+    setAuthCredentials(username, password);
+  
     try {
-      const response = await fetch('/user/username', {
+      const response = await fetch(`http://localhost:8080/user/${username}`, {
         method: 'GET',
         headers: {
-          'Content-Type': 'application/json',
+          'Authorization': `Basic ${basicAuth}`,
         },
-        body: JSON.stringify({
-          username,
-          password,
-        }),
       });
-
+  
       if (response.ok) {
-        navigate.push('/dashboard');
+        navigate('/dashboard');
       } else {
         // Manejar errores de inicio de sesión
         const errorData = await response.json();
@@ -36,6 +38,7 @@ function SignIn() {
       setError('Error al intentar iniciar sesión');
     }
   };
+  
 
   return (
     <div className="signUpIn">

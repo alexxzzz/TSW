@@ -19,7 +19,7 @@ function Register() {
     };
 
     try {
-      const response = await fetch("/user", {
+      const response = await fetch("http://localhost:8080/user", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -28,7 +28,7 @@ function Register() {
       });
 
       if (response.ok) {
-        navigate.push('/login')
+        navigate('/')
         console.log("Usuario registrado correctamente");
       } else {
         // Manejar errores de registro

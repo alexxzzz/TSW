@@ -23,7 +23,7 @@ class ToggleRest extends BaseRest {
         foreach($toggles as $toggle) {
             array_push($toggle_array, array(
                 "name" => $toggle->getToggleName(),
-                "date" => $toggle->getTuronOnDate(),
+                "date" => $toggle->getTurnOnDate(),
                 "description"=>$toggle->getDescription(),
                 "state"=>$toggle->getState()
             ));
@@ -32,7 +32,7 @@ class ToggleRest extends BaseRest {
         // Transform toggle data to JSON
         header($_SERVER['SERVER_PROTOCOL'].' 200 Ok');
         header('Content-Type: application/json');
-        return json_encode($toggle_array);
+        echo json_encode($toggle_array);
     }
 
     function add($data) {

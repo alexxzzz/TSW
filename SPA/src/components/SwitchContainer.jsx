@@ -1,8 +1,10 @@
 import { useState, useEffect } from 'react';
 import Switch from './Switch';
+import { useAuth } from '../context/AuthContext';
 
 function SwitchContainer() {
   const [switches, setSwitches] = useState([]);
+  const { getAuthCredentials } = useAuth();
 
   useEffect(() => {
     fetchSwitches();
@@ -10,29 +12,39 @@ function SwitchContainer() {
 
   const fetchSwitches = async () => {
     try {
-      const response = await fetch('/toggle'); // Reemplaza con la ruta correcta
+      const response = await fetch('http://localhost:8080/toggle', {
+        headers: {
+          'Authorization': `Basic ${getAuthCredentials()}`,
+        },
+      });
+
       if (!response.ok) {
         throw new Error('Error al obtener los switches');
       }
+
       const switchesData = await response.json();
       setSwitches(switchesData);
     } catch (error) {
       console.error('Error:', error);
-      // Maneja el error, muestra un mensaje al usuario, etc.
     }
   };
 
   return (
     <div className="switchContainer">
-      {switches.map((toggle) => (
-        <Switch
-          key={toggle.id}
-          id={toggle.id}
-          name={toggle.name}
-          state={toggle.state}
-          date={toggle.date}
-        />
-      ))}
+      {switches.length === 0 ? (
+        <h1>No hay switches disponibles</h1>
+      ) : (
+        switches.map((toggle) => (
+          <Switch
+            key={toggle.id}
+            id={toggle.id}
+            description={toggle.description}
+            name={toggle.name}
+            state={toggle.state}
+            date={toggle.date}
+          />
+        ))
+      )}
     </div>
   );
 }

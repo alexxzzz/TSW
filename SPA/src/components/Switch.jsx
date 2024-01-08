@@ -1,4 +1,4 @@
-function Switch({ name, date }) {
+function Switch({ name, date, description }) {
   return (
     <div className="switchBox">
       <label className="switch">
@@ -8,6 +8,7 @@ function Switch({ name, date }) {
       <div className="switchText">
         <h3>{name}</h3>
         <h3>{date}</h3>
+        <p>{description}</p>
       </div>
       <div className="switchIcons">
          {/* <FontAwesomeIcon icon={faTrashAlt} className="fa-regular fa-trash-can" />

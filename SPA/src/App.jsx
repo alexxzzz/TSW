@@ -3,10 +3,11 @@ import Dashboard from './pages/dashboard';
 import Register from './pages/Register'
 import PasswordRecovery from './pages/PasswordRecovery'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-
+import { AuthProvider } from './context/AuthContext';
 
 function App() {
   return (
+    <AuthProvider>
     <Router>
       <Routes>
         <Route path="/" element={<SignIn />} />
@@ -15,6 +16,7 @@ function App() {
         <Route path="/sign-up" element={<Register />} />
       </Routes>
     </Router>
+    </AuthProvider>
   );
 }
 
