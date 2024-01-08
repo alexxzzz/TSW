@@ -25,7 +25,8 @@ class ToggleRest extends BaseRest {
                 "name" => $toggle->getToggleName(),
                 "date" => $toggle->getTurnOnDate(),
                 "description"=>$toggle->getDescription(),
-                "state"=>$toggle->getState()
+                "state"=>$toggle->getState(),
+                "id" =>$toggle->getPublicId()
             ));
         }
         

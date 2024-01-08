@@ -1,6 +1,9 @@
 import { AiOutlineDelete, AiOutlineEdit, AiOutlineShareAlt } from 'react-icons/ai';
 
-function Switch({ name, date, description }) {
+
+
+function Switch({ name, date, description, deleteCallback }) {
+
   return (
     <div className="switchBox">
       <label className="switch">
@@ -13,7 +16,7 @@ function Switch({ name, date, description }) {
         <p>{description}</p>
       </div>
       <div className="switchIcons">
-        <AiOutlineDelete className="fa-regular fa-trash-can" size={24} />
+        <AiOutlineDelete className="fa-regular fa-trash-can" onClick={deleteCallback} size={24} />
         <AiOutlineEdit className="fa-regular fa-pen-to-square" size={24} />
         <AiOutlineShareAlt className="fa-regular fa-share-from-square" size={24} />
       </div>

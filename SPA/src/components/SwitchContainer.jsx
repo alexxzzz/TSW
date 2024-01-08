@@ -1,14 +1,16 @@
 import { useState, useEffect } from 'react';
 import Switch from './Switch';
 import { useAuth } from '../context/AuthContext';
+import switchService from '../services/switchService';
 
 function SwitchContainer() {
-  const [switches, setSwitches] = useState([]);
+  const [ switches, setSwitches ] = useState([]);
   const { getAuthCredentials } = useAuth();
 
-  useEffect(() => {
-    fetchSwitches();
-  },);
+  const deleteSwitch = async (id) => {
+    switchService.deleteItem(id, getAuthCredentials());
+    setSwitches((switches) => switches.filter((sw) => sw.id !== id));
+  }
 
   const fetchSwitches = async () => {
     try {
@@ -29,6 +31,10 @@ function SwitchContainer() {
     }
   };
 
+  useEffect(() => {
+    fetchSwitches();
+  }, []);
+
   return (
     <div className="switchContainer">
       {switches.length === 0 ? (
@@ -39,6 +45,7 @@ function SwitchContainer() {
             key={toggle.id}
             id={toggle.id}
             description={toggle.description}
+            deleteCallback={() => deleteSwitch(toggle.id)}
             name={toggle.name}
             state={toggle.state}
             date={toggle.date}

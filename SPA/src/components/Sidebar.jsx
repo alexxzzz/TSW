@@ -16,7 +16,7 @@ function Sidebar() {
         <a href="#">Mis switches</a>
         <a href="#">Suscritos</a>
         <div className="sidebarFooter">
-          <a href="./signIn.html" className="logout">Logout</a>
+          <a href="./" className="logout">Logout</a>
           <div className="socialNetworks">
             <a href="https://instagram.com" target="_blank" rel="noreferrer">
               <FaInstagram size={24} />
