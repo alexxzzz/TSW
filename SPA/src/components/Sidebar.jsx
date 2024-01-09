@@ -1,6 +1,11 @@
+import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { FaInstagram, FaTwitter, FaLinkedin, FaGithub } from 'react-icons/fa';
+import LanguageSwitch from './LanguageSwitch';
 
 function Sidebar() {
+  const { t } = useTranslation();
+
   return (
     <sidebar>
       <i className="fa-solid fa-x closeIcon"></i>
@@ -13,10 +18,11 @@ function Sidebar() {
         <h1>N</h1>
       </div>
       <ul>
-        <a href="#">Mis switches</a>
-        <a href="#">Suscritos</a>
+        <a href="#">{t('sidebar.mySwitches')}</a>
+        <a href="#">{t('sidebar.subscribed')}</a>
         <div className="sidebarFooter">
-          <a href="./" className="logout">Logout</a>
+        <LanguageSwitch />
+          <a href="./" className="logout">{t('sidebar.logout')}</a>
           <div className="socialNetworks">
             <a href="https://instagram.com" target="_blank" rel="noreferrer">
               <FaInstagram size={24} />
@@ -33,6 +39,7 @@ function Sidebar() {
           </div>
         </div>
       </ul>
+      
     </sidebar>
   );
 }

@@ -1,8 +1,8 @@
-// ModalAddSwitch.js
-
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 function ModalAddSwitch({ isOpen, onClose, onAdd }) {
+  const { t } = useTranslation();
   const [newSwitchData, setNewSwitchData] = useState({
     name: '',
     description: '',
@@ -26,22 +26,22 @@ function ModalAddSwitch({ isOpen, onClose, onAdd }) {
     <div className={`addmodal ${isOpen ? 'open' : ''}`}>
       <div className="addmodal-overlay" onClick={onClose}></div>
       <div className="addmodal-content">
-        <h2>Agregar Switch</h2>
+        <h2>{t('modalAddSwitch.addSwitch')}</h2>
         <label>
-          Nombre:
+          {t('modalAddSwitch.name')}:
           <input type="text" name="name" value={newSwitchData.name} onChange={handleInputChange} />
         </label>
         <label>
-          Descripción:
+          {t('modalAddSwitch.description')}:
           <textarea name="description" value={newSwitchData.description} onChange={handleInputChange} />
         </label>
         <label>
-          Encendido:
+          {t('modalAddSwitch.isOn')}:
           <input type="checkbox" name="namestate" checked={newSwitchData.namestate} onChange={handleInputChange} />
         </label>
         {newSwitchData.isOn && (
           <label>
-            Fecha de apagado:
+            {t('modalAddSwitch.shutdownDate')}:
             <input
               type="datetime-local"
               name="shutdown_date"
@@ -52,9 +52,9 @@ function ModalAddSwitch({ isOpen, onClose, onAdd }) {
           </label>
         )}
         <button onClick={handleAdd}>
-          Agregar
+          {t('modalAddSwitch.addButton')}
         </button>
-        <button onClick={onClose}>Cancelar</button>
+        <button onClick={onClose}>{t('modalAddSwitch.cancelButton')}</button>
       </div>
     </div>
   );

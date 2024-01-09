@@ -1,11 +1,17 @@
+import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { FaInstagram, FaTwitter, FaLinkedin, FaGithub } from 'react-icons/fa';
 import '../styles/styles.css';
+import LanguageSwitch from './../components/LanguageSwitch';
 
 function Footer() {
+  const { t } = useTranslation();
+
   return (
     <footer>
+      
       <div className="footerContainer">
-        <h4 className="inferior__titulo">Siguenos</h4>
+        <h4 className="inferior__titulo">{t('footer.followUs')}</h4>
         <a href="https://instagram.com" target="_blank" rel="noreferrer">
           <FaInstagram color='white' size={24} />
         </a>
@@ -18,7 +24,8 @@ function Footer() {
         <a href="https://github.com" target="_blank" rel="noreferrer">
           <FaGithub color='white' size={24} />
         </a>
-        <p>Todos los derechos reservados 2023</p>
+        <LanguageSwitch />
+        <p>{t('footer.allRightsReserved')}</p>
       </div>
     </footer>
   );

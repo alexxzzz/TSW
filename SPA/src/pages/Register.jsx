@@ -1,8 +1,10 @@
+import React, { useState } from "react";
+import { useNavigate, Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import Footer from "../components/footer";
-import { useState } from "react";
-import {useNavigate, Link}  from 'react-router-dom';
 
 function Register() {
+  const { t } = useTranslation();
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -28,7 +30,7 @@ function Register() {
       });
 
       if (response.ok) {
-        navigate('/')
+        navigate("/");
         console.log("Usuario registrado correctamente");
       } else {
         // Manejar errores de registro
@@ -46,7 +48,9 @@ function Register() {
         <div className="formContainer">
           <div className="registerContainer">
             <div className="logo">
-              <h1><Link to="/">Iam</Link></h1>
+              <h1>
+                <Link to="/">{t("register.register")}</Link>
+              </h1>
               <label className="switchLogo">
                 <input type="checkbox" />
                 <span className="slider round"></span>
@@ -58,7 +62,7 @@ function Register() {
             <input
               id="name"
               type="text"
-              placeholder="usuario"
+              placeholder={t("register.username")}
               value={username}
               onChange={(e) => setUsername(e.target.value)}
               required
@@ -66,22 +70,22 @@ function Register() {
             <input
               id="email"
               type="email"
-              placeholder="email"
+              placeholder={t("register.email")}
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
             <input
               id="password"
               type="password"
-              placeholder="contraseña"
+              placeholder={t("register.password")}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
             />
             <button className="submitButton" type="submit">
-              <span>Registrarse</span>
+              <span>{t("register.registerButton")}</span>
             </button>
-            <Link to="/">Volver</Link>
+            <Link to="/">{t("register.backLink")}</Link>
           </form>
         </div>
       </div>

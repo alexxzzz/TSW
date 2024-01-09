@@ -1,7 +1,11 @@
+import React from "react";
+import { Link } from "react-router-dom";
 import Footer from "../components/footer";
-import { Link } from 'react-router-dom';
+import { useTranslation } from "react-i18next";
 
 function PasswordRecovery() {
+  const { t } = useTranslation();
+
   return (
     <div className="signUpIn">
       <div className="container">
@@ -17,16 +21,11 @@ function PasswordRecovery() {
             </div>
           </div>
           <form className="loginForm">
-            <input
-              id="email"
-              type="email"
-              placeholder="email"
-              required
-            />
+            <input id="email" type="email" placeholder={t("register.email")} required />
             <button className="submitButton" type="submit">
-              <span>Recuperar Contraseña</span>
+              <span>{t("passwordRecovery.recoverPassword")}</span>
             </button>
-            <Link to="/">Volver a la página principal</Link>
+            <Link to="/">{t("passwordRecovery.goBackToHomePage")}</Link>
           </form>
         </div>
       </div>
