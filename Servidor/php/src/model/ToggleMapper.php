@@ -103,7 +103,7 @@ class ToggleMapper {
             $suscribedToggle->setPublicId($suscribedToggle_db["public_id"]);
             $suscribedToggle->setState($state);
             $suscribedToggle->setShutdownDate($suscribedToggle_db["shutdown_date"]);
-            $suscribedToggle->setUsername($suscribedToggle_db["username"]);
+            /*$suscribedToggle->setUsername($suscribedToggle_db["username"]);*/
             $suscribedToggle->setDescription($suscribedToggle_db["toggle_description"]);
             $suscribedToggle->setToggleId($suscribedToggle_db["toggle_id"]);
             $suscribedToggle->setTurnOnDate($suscribedToggle_db["turn_on_date"]);

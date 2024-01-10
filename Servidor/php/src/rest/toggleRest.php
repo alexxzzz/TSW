@@ -117,7 +117,7 @@ class ToggleRest extends BaseRest {
                 "shutdown_date" => $toggle->getShutdownDate(),
                 "toggle_description" => $toggle->getDescription(),
                 "toggle_id" => $toggle->getToggleId(),
-                "username" => $toggle->getUsername()
+                /*"username" => $toggle->getUsername()*/
 			));
         }
 
@@ -129,8 +129,6 @@ class ToggleRest extends BaseRest {
     }
 
     function getInformation($toggleURI) {
-        $currentUser = parent::authenticateUser();
-        $currentUserId = $this->userMapper->getUserIdByUsername($currentUser->getUsername());
 
         $toggle = $this->toggleMapper->findByPublicOrPrivateURI($toggleURI);
 
@@ -146,7 +144,8 @@ class ToggleRest extends BaseRest {
             "toggle_state" => $toggle['toggle_state'],
             "turn_on_date" => $toggle['turn_on_date'],
             "toggle_description" => $toggle['toggle_description'],
-            "public_id" => $toggle['public_id']
+            "public_id" => $toggle['public_id'],
+            "toggle_id" => $toggle['toggle_id'],
         );
 
         header($_SERVER['SERVER_PROTOCOL'] . ' 200 OK');

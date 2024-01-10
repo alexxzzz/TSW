@@ -1,18 +1,17 @@
 import DashboardNav from "../components/DasboardNav";
 import Sidebar from "../components/Sidebar";
-import SwitchContainer from "../components/SwitchContainer";
+import SubscribedSwitchContainer from "../components/SubscribedSwitchContainer";
 
-
-function Dashboard() {
+function DashboardSubscribed() {
     return (
         <div className="dashboard">
             <Sidebar />
             <div className="container">
                 <DashboardNav />
-                <SwitchContainer />
+                <SubscribedSwitchContainer />
             </div>
         </div>
     )
 }
 
-export default Dashboard;
+export default DashboardSubscribed;

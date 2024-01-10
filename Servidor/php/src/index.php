@@ -1,6 +1,5 @@
 <?php
 // Simple REST router
-
 try{
 	require_once(dirname(__FILE__)."/rest/URIDispatcher.php");
 

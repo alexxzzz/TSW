@@ -1,7 +1,7 @@
-import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { FaInstagram, FaTwitter, FaLinkedin, FaGithub } from 'react-icons/fa';
 import LanguageSwitch from './LanguageSwitch';
+import { Link } from 'react-router-dom';
 
 function Sidebar() {
   const { t } = useTranslation();
@@ -18,8 +18,8 @@ function Sidebar() {
         <h1>N</h1>
       </div>
       <ul>
-        <a href="#">{t('sidebar.mySwitches')}</a>
-        <a href="#">{t('sidebar.subscribed')}</a>
+      <Link to="/dashboard">{t("sidebar.mySwitches")}</Link>
+      <Link to="/subscribed">{t("sidebar.subscribed")}</Link>
         <div className="sidebarFooter">
         <LanguageSwitch />
           <a href="./" className="logout">{t('sidebar.logout')}</a>

@@ -418,6 +418,7 @@
     margin-right: 5rem;
     display: grid;
     gap: 5rem;
+    margin-left: 25rem;
     margin-top: 5rem;
   }
   
@@ -431,8 +432,21 @@
     box-shadow: rgba(0, 0, 0, 0.18) 0px 2px 4px;
     border-radius: 2rem;
     background-color: var(--color-blanco);
+    width: 100%
   }
-  
+
+  .switchBoxUnique {
+    display: flex;
+    flex-direction: row;
+    gap: 3rem;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    box-shadow: rgba(0, 0, 0, 0.18) 0px 2px 4px;
+    border-radius: 2rem;
+    background-color: var(--color-blanco);
+    width: 30%
+  }
   
   .switchBox h3 {
     font-weight: 300;
@@ -724,6 +738,7 @@
     color: white;
     padding: 10px 20px;
     border: none;
+    margin-left: 20rem;
     border-radius: 5px;
     cursor: pointer;
   }

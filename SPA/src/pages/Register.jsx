@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import Footer from "../components/footer";
@@ -21,7 +21,7 @@ function Register() {
     };
 
     try {
-      const response = await fetch("http://localhost:8080/user", {
+      const response = await fetch("http://localhost:8080/user",{
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -49,7 +49,7 @@ function Register() {
           <div className="registerContainer">
             <div className="logo">
               <h1>
-                <Link to="/">{t("register.register")}</Link>
+                <Link to="/">{t("register.name")}</Link>
               </h1>
               <label className="switchLogo">
                 <input type="checkbox" />
