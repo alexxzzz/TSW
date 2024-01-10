@@ -78,6 +78,7 @@ function SwitchInfo() {
       <div className="switchText">
         <h3>name: {switchData.toggle_name}</h3>
         <p>Description: {switchData.toggle_description}</p>
+        <p>Date: {switchData.turn_on_date}</p>
       </div>
       <div className="switchIcons">
         {isUserAuthenticated && (
