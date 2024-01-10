@@ -384,35 +384,25 @@
     margin-top: 3rem;
   }
   
-  @media (min-width: 768px) {
+  
+  @media (min-width: 1240px) {
     .switchContainer {
       grid-template-columns: repeat(2, 1fr);
     }
   }
   
-  @media (min-width: 1240px) {
+  @media (min-width: 1920px) {
     .switchContainer {
       grid-template-columns: repeat(3, 1fr);
     }
   }
   
-  @media (min-width: 1920px) {
+  @media (min-width: 2500px) {
     .switchContainer {
       grid-template-columns: repeat(4, 1fr);
     }
   }
   
-  @media (min-width: 2500px) {
-    .switchContainer {
-      grid-template-columns: repeat(5, 1fr);
-    }
-  }
-  
-  @media (min-width: 2900px) {
-    .switchContainer {
-      grid-template-columns: repeat(6, 1fr);
-    }
-  }
   
   .switchContainer {
     margin-right: 5rem;
@@ -445,9 +435,16 @@
     box-shadow: rgba(0, 0, 0, 0.18) 0px 2px 4px;
     border-radius: 2rem;
     background-color: var(--color-blanco);
-    width: 30%
+    width: 80%
   }
-  
+
+
+  @media (min-width: 1600px) {
+    .switchBoxUnique {
+      width: 40%;
+    }
+  }
+
   .switchBox h3 {
     font-weight: 300;
     font-size: 1.4rem;
@@ -738,7 +735,7 @@
     color: white;
     padding: 10px 20px;
     border: none;
-    margin-left: 20rem;
+    margin-left: 25rem;
     border-radius: 5px;
     cursor: pointer;
   }

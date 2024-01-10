@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { AiOutlineDelete} from 'react-icons/ai';
+import { IoAddCircleOutline } from "react-icons/io5";
 import switchService from '../services/switchService';
 
 function SwitchInfo() {
@@ -54,10 +54,6 @@ function SwitchInfo() {
     setSwitchData(updatedSwitchData);
   };
 
-  
-
-
-
   if (!switchData) {
     return <div>Loading...</div>;
   }
@@ -82,7 +78,7 @@ function SwitchInfo() {
       </div>
       <div className="switchIcons">
         {isUserAuthenticated && (
-          <AiOutlineDelete className="fa-regular fa-trash-can" onClick={handleSubscribe} size={24} />
+          <IoAddCircleOutline onClick={handleSubscribe} size={24} />
         )}
       </div>
     </div>
