@@ -10,8 +10,8 @@ class ToggleMapper {
 	}
 
     public function save($toggle) {
-        $query = "INSERT INTO toggles (public_id, private_id, toggle_name, toggle_state, shutdown_date, user_id, toggle_description) 
-                  VALUES (:public_id, :private_id, :toggle_name, :toggle_state, :shutdown_date, :user_id, :toggle_description)";
+        $query = "INSERT INTO toggles (public_id, private_id, toggle_name, toggle_state, shutdown_date, turn_on_date, user_id, toggle_description) 
+                  VALUES (:public_id, :private_id, :toggle_name, :toggle_state, :shutdown_date, :turn_on_date, :user_id, :toggle_description)";
         $stmt = $this->db->prepare($query);
 
         $stmt->bindParam(':public_id', $toggle->getPublicId(), PDO::PARAM_STR);
@@ -19,6 +19,7 @@ class ToggleMapper {
         $stmt->bindParam(':toggle_name', $toggle->getToggleName(), PDO::PARAM_STR);
         $stmt->bindParam(':toggle_state', $toggle->getState(), PDO::PARAM_BOOL);
         $stmt->bindParam(':shutdown_date', $toggle->getShutdownDate());
+        $stmt->bindParam(':turn_on_date', $toggle->getTurnOnDate());
         $stmt->bindParam(':user_id', $toggle->getUserId(), PDO::PARAM_INT);
         $stmt->bindParam(':toggle_description', $toggle->getDescription(), PDO::PARAM_STR);
         

@@ -75,6 +75,10 @@ class Toggle {
     }
 
     public function setTurnOnDate($turn_on_date) {
+        // Si no se proporciona $turn_on_date, establecer la fecha y hora actuales
+        if ($turn_on_date === null) {
+            $turn_on_date = date('Y-m-d H:i:s');
+        }
         $this->turn_on_date = $turn_on_date;
     }
 

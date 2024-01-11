@@ -1,17 +1,19 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import Switch from './Switch';
 import { useAuth } from '../context/AuthContext';
 import switchService from '../services/switchService';
-import Modal from './switchModalInfo';
+/*import Modal from './switchModalInfo';*/
 import ModalAddSwitch from './switchModalAdd';
+import { useNavigate } from 'react-router-dom';
 
 function SwitchContainer() {
   const { t } = useTranslation();
+  const navigate = useNavigate();
   const [switches, setSwitches] = useState([]);
   const { getAuthCredentials } = useAuth();
-  const [selectedSwitchId, setSelectedSwitchId] = useState(null);
-  const [modalOpen, setModalOpen] = useState(false);
+  /*const [selectedSwitchId, setSelectedSwitchId] = useState(null);*/
+ /*const [modalOpen, setModalOpen] = useState(false);*/
   const [modalAddOpen, setModalAddOpen] = useState(false);
 
   const deleteSwitch = async (id) => {
@@ -68,14 +70,16 @@ function SwitchContainer() {
   };
 
   const openModal = (id) => {
-    setSelectedSwitchId(id);
-    setModalOpen(true);
+    /*setSelectedSwitchId(id);
+    setModalOpen(true);*/
+    navigate(`/toggle/${id}`);
   };
 
+  /*
   const closeModal = () => {
     setModalOpen(false);
     setSelectedSwitchId(null);
-  };
+  };*/
 
   const openAddModal = () => {
     setModalAddOpen(true);
@@ -112,7 +116,7 @@ function SwitchContainer() {
           ))
         )}
       </div>
-      <Modal isOpen={modalOpen} onClose={closeModal} switchId={selectedSwitchId} />
+      {/*<Modal isOpen={modalOpen} onClose={closeModal} switchId={selectedSwitchId} />*/}
       <ModalAddSwitch isOpen={modalAddOpen} onClose={closeAddModal} onAdd={handleAddSwitch} />
     </div>
   );

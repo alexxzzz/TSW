@@ -54,7 +54,8 @@ class ToggleRest extends BaseRest {
 
         // Set the shutdown date if the state is 'on' and it's provided in the request
         if ($toggle->getState()) {
-            $shutdownDate = !empty($data->shutdown_date) ? $data-shutdown_date : $toggle->defaultShutdownDate();
+            $toggle->setTurnOnDate(null);
+            $shutdownDate = !empty($data->shutdown_date) ? $data->shutdown_date : $toggle->defaultShutdownDate();
         } else {
             $shutdownDate = NULL;
         }
@@ -174,6 +175,7 @@ class ToggleRest extends BaseRest {
         
         $toggle->setState(true);
         $toggle->setShutdownDate($toggle->defaultShutdownDate());
+        $toggle->setTurnOnDate(null);
 
         $this->toggleMapper->turnOnUser($toggle);
         header($_SERVER['SERVER_PROTOCOL'] . ' 200 OK');
@@ -202,6 +204,7 @@ class ToggleRest extends BaseRest {
 
         $toggle->setState(true);
         $toggle->setShutdownDate($toggle->defaultShutdownDate());
+        $toggle->setTurnOnDate(null);
 
         $this->toggleMapper->turnOnUser($toggle);
         header($_SERVER['SERVER_PROTOCOL'] . ' 200 OK');
