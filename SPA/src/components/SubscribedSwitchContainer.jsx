@@ -3,12 +3,14 @@ import { useTranslation } from 'react-i18next';
 import SubscribedSwitch from './SubscribedSwitch';
 import { useAuth } from '../context/AuthContext';
 import switchService from '../services/switchService';
+import Search from './Search';
 
 
 function SubscribedSwitchContainer() {
     const { t } = useTranslation();
     const [switches, setSwitches] = useState([]);
     const { getAuthCredentials } = useAuth();
+    const [modalAddOpen, setModalAddOpen] = useState(false);
 
     const unsubscribe = async (id) => {
       switchService.unsubsribe(id, getAuthCredentials());
@@ -41,8 +43,17 @@ function SubscribedSwitchContainer() {
         }
       };
 
+      const openAddModal = () => {
+        setModalAddOpen(true);
+      };
+    
+      const closeAddModal = () => {
+        setModalAddOpen(false);
+      };
+
       return (
         <div className="switchContainer">
+          <button className="add-button" onClick={openAddModal}>{t('switchContainer.addSwitch')}</button>
           {switches.length === 0 ? (
             <h1>{t('switchContainer.noSwitchesAvailable')}</h1>
           ) : (
@@ -58,6 +69,7 @@ function SubscribedSwitchContainer() {
               />
             ))
           )}
+          <Search isOpen={modalAddOpen} onClose={closeAddModal} />
         </div>   
       )
       

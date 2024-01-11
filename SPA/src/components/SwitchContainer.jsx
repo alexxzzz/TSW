@@ -75,6 +75,12 @@ function SwitchContainer() {
     navigate(`/toggle/${id}`);
   };
 
+  const openPrivateModal = (id) => {
+    /*setSelectedSwitchId(id);
+    setModalOpen(true);*/
+    navigate(`/toggle/${id}`);
+  };
+
   /*
   const closeModal = () => {
     setModalOpen(false);
@@ -107,6 +113,7 @@ function SwitchContainer() {
               description={toggle.description}
               deleteCallback={() => deleteSwitch(toggle.id)}
               shareCallback={() => openModal(toggle.id)}
+              privateShareCallback={() => openPrivateModal(toggle.private_id)}
               turnOnCallback={() => turnOnSwitch(toggle.id)}
               turnOffCallback={() => turnOffSwitch(toggle.id)}
               name={toggle.name}

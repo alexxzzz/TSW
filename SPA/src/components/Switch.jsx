@@ -1,9 +1,12 @@
 import { AiOutlineDelete, AiOutlineEdit, AiOutlineShareAlt } from 'react-icons/ai';
-import switchService from '../services/switchService';
+import { useTranslation } from "react-i18next";
+import { MdLockOutline } from "react-icons/md";
 
 
 
-function Switch({ name, date, description, deleteCallback, shareCallback, state, turnOnCallback, turnOffCallback }) {
+
+function Switch({ name, date, description, deleteCallback, shareCallback, state, turnOnCallback, turnOffCallback, privateShareCallback }) {
+  const {t} = useTranslation();
   return (
     <div className="switchBox">
       <label className="switch">
@@ -11,14 +14,14 @@ function Switch({ name, date, description, deleteCallback, shareCallback, state,
         <span className="slider round"></span>
       </label>
       <div className="switchText">
-        <h3>{name}</h3>
-        <h3>{date}</h3>
-        <p>{description}</p>
+        <h3>{t("modalAddSwitch.name")}: {name}</h3>
+        <h3>{t("modalAddSwitch.turndate")}: {date}</h3>
+        <p>{t("modalAddSwitch.description")}: {description}</p>
       </div>
       <div className="switchIcons">
-        <AiOutlineDelete className="fa-regular fa-trash-can" onClick={deleteCallback} size={24} />
-        <AiOutlineEdit className="fa-regular fa-pen-to-square"  size={24} />
-        <AiOutlineShareAlt className="fa-regular fa-share-from-square" onClick={shareCallback} size={24} />
+        <AiOutlineDelete onClick={deleteCallback} size={24} />
+        <AiOutlineShareAlt  onClick={shareCallback} size={24} />
+        <MdLockOutline  onClick={privateShareCallback} size={24} />
       </div>
     </div>
   );

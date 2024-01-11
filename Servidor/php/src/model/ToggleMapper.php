@@ -65,6 +65,7 @@ class ToggleMapper {
             $toggle->setShutdownDate($toggle_db["shutdown_date"]);
             $toggle->setDescription($toggle_db["toggle_description"]);
             $toggle->setToggleId($toggle_db["toggle_id"]);
+            $toggle->setTurnOnDate($toggle_db["turn_on_date"]);
             array_push($toggles, $toggle);
         }
         

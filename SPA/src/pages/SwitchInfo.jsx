@@ -4,15 +4,15 @@ import { useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { IoAddCircleOutline } from "react-icons/io5";
 import switchService from '../services/switchService';
+import { useNavigate } from 'react-router-dom';
+
 
 function SwitchInfo() {
   const { t } = useTranslation();
   const { isUserAuthenticated, getAuthCredentials } = useAuth();
   const [switchData, setSwitchData] = useState(null);
   const { toggleURI } = useParams();
-
-
-  console.log({toggleURI});
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (toggleURI) {
@@ -21,8 +21,12 @@ function SwitchInfo() {
   }, [toggleURI]);
 
   const fetchSwitches = async () => {
+    console.log(getAuthCredentials());
     try {
       const response = await fetch(`http://localhost:8080/toggle/${toggleURI}`, {
+        headers: {
+          'Authorization': `Basic ${getAuthCredentials()}`,
+        },
       });
 
       if (!response.ok) {
@@ -36,9 +40,9 @@ function SwitchInfo() {
     }
   };
 
-  const handleSubscribe = async (toggleURI) => {
+  const handleSubscribe = async () => {
     await switchService.subscribe(toggleURI, getAuthCredentials());
-    fetchSwitches();
+    navigate('/subscribed')
   };
   
 
@@ -72,12 +76,12 @@ function SwitchInfo() {
         <span className="slider round"></span>
       </label>
       <div className="switchText">
-        <h3>name: {switchData.toggle_name}</h3>
-        <p>Description: {switchData.toggle_description}</p>
-        <p>Date: {switchData.turn_on_date}</p>
+        <h3>{t("modalAddSwitch.name")}: {switchData.toggle_name}</h3>
+        <p>{t("modalAddSwitch.description")}: {switchData.toggle_description}</p>
+        <p>{t("modalAddSwitch.turndate")}: {switchData.turn_on_date}</p>
       </div>
       <div className="switchIcons">
-        {isUserAuthenticated && (
+        {getAuthCredentials()!=null && (
           <IoAddCircleOutline onClick={handleSubscribe} size={24} />
         )}
       </div>

@@ -35,6 +35,9 @@ i18n
             shutdownDate: 'Shutdown Date',
             addButton: 'Add',
             cancelButton: 'Cancel',
+            search: 'Search',
+            publicUri: 'Public URI',
+            turndate: 'Turn Date',
           },
           sidebar: {
             mySwitches: 'My Switches',
@@ -97,6 +100,9 @@ i18n
             shutdownDate: 'Fecha de apagado',
             addButton: 'Agregar',
             cancelButton: 'Cancelar',
+            search: 'Buscar',
+            publicUri: 'URI pública',
+            turndate: 'Fecha de encendido',
           },
           sidebar: {
             mySwitches: 'Mis switches',
