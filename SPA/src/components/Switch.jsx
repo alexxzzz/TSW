@@ -1,4 +1,4 @@
-import { AiOutlineDelete, AiOutlineEdit, AiOutlineShareAlt } from 'react-icons/ai';
+import { AiOutlineDelete, AiOutlineShareAlt } from 'react-icons/ai';
 import { useTranslation } from "react-i18next";
 import { MdLockOutline } from "react-icons/md";
 
